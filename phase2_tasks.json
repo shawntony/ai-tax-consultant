@@ -1,0 +1,730 @@
+{
+  "project": "AI Tax Consultant - Phase 2",
+  "version": "1.0.0",
+  "duration": "3 months (12 weeks)",
+  "target": "2025 Q1",
+  "critical_path": ["M2.1", "M2.2", "M2.5", "M2.6", "M2.7"],
+  "parallel_execution": {
+    "track_1": ["M2.1", "M2.4"],
+    "track_2": ["M2.3"]
+  },
+  "milestones": [
+    {
+      "id": "M2.1",
+      "name": "세법 DB 구축",
+      "duration": "6 weeks",
+      "priority": "P0",
+      "dependencies": [],
+      "tasks": [
+        {
+          "id": "M2.1.1",
+          "name": "세율 테이블 데이터 수집 - 상속세",
+          "description": "1억~30억 초과, 5단계 누진세율 데이터 수집",
+          "priority": "P0",
+          "estimated_hours": 8,
+          "assignee": "Backend Developer",
+          "acceptance_criteria": [
+            "5단계 세율 구간 정확히 정의",
+            "누진공제액 포함",
+            "2024년 기준 법령 확인"
+          ]
+        },
+        {
+          "id": "M2.1.2",
+          "name": "세율 테이블 데이터 수집 - 증여세",
+          "description": "상속세와 동일한 누진세율 적용",
+          "priority": "P0",
+          "estimated_hours": 4,
+          "assignee": "Backend Developer",
+          "acceptance_criteria": [
+            "상속세와 동일한 5단계 구조",
+            "관계별 공제 한도 추가"
+          ]
+        },
+        {
+          "id": "M2.1.3",
+          "name": "세율 테이블 데이터 수집 - 양도소득세",
+          "description": "기본세율 + 중과세율 데이터 수집",
+          "priority": "P1",
+          "estimated_hours": 12,
+          "assignee": "Backend Developer",
+          "acceptance_criteria": [
+            "기본세율 6-45% 구간",
+            "다주택자 중과세율 10-20% 추가",
+            "보유기간별 장기보유특별공제"
+          ]
+        },
+        {
+          "id": "M2.1.4",
+          "name": "공제 한도 데이터 수집 - 상속세",
+          "description": "기초공제 2억, 배우자 5-30억, 자녀 5천만/인",
+          "priority": "P0",
+          "estimated_hours": 6,
+          "assignee": "Backend Developer",
+          "acceptance_criteria": [
+            "기초공제 2억원",
+            "배우자공제 공식 구현",
+            "자녀공제 1인당 5천만원",
+            "일괄공제 최소 5억 보장"
+          ]
+        },
+        {
+          "id": "M2.1.5",
+          "name": "공제 한도 데이터 수집 - 증여세",
+          "description": "관계별 10년 합산 공제 한도",
+          "priority": "P0",
+          "estimated_hours": 6,
+          "assignee": "Backend Developer",
+          "acceptance_criteria": [
+            "배우자 6억",
+            "직계존속(성년) 5천만",
+            "직계존속(미성년) 2천만",
+            "직계비속 5천만",
+            "기타친족 1천만"
+          ]
+        },
+        {
+          "id": "M2.1.6",
+          "name": "공제 한도 데이터 수집 - 양도소득세",
+          "description": "장기보유특별공제, 1세대1주택 비과세 요건",
+          "priority": "P1",
+          "estimated_hours": 10,
+          "assignee": "Backend Developer",
+          "acceptance_criteria": [
+            "보유기간별 공제율 (3년~15년)",
+            "1세대1주택 비과세 요건 정리",
+            "9억 비과세 한도"
+          ]
+        },
+        {
+          "id": "M2.1.7",
+          "name": "세법 DB 스키마 설계",
+          "description": "constants/taxRates.js 구조 정의",
+          "priority": "P0",
+          "estimated_hours": 8,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.1.1", "M2.1.2", "M2.1.3"],
+          "acceptance_criteria": [
+            "JavaScript 객체 구조 설계",
+            "세율/공제 분리 구조",
+            "버전 관리 가능한 구조",
+            "확장 가능한 설계"
+          ]
+        },
+        {
+          "id": "M2.1.8",
+          "name": "taxRates.js 파일 작성",
+          "description": "상속세/증여세/양도소득세 세율 데이터 구현",
+          "priority": "P0",
+          "estimated_hours": 12,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.1.7"],
+          "acceptance_criteria": [
+            "모든 세율 테이블 구현",
+            "JSDoc 주석 작성",
+            "Unit 테스트 작성"
+          ]
+        },
+        {
+          "id": "M2.1.9",
+          "name": "deductions.js 파일 작성",
+          "description": "모든 세목의 공제 한도 데이터 구현",
+          "priority": "P0",
+          "estimated_hours": 12,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.1.7"],
+          "acceptance_criteria": [
+            "모든 공제 한도 구현",
+            "계산 로직 분리",
+            "Unit 테스트 작성"
+          ]
+        },
+        {
+          "id": "M2.1.10",
+          "name": "자동 업데이트 시스템 조사",
+          "description": "국세청 API 또는 크롤링 방안 검토",
+          "priority": "P1",
+          "estimated_hours": 16,
+          "assignee": "Backend Developer",
+          "acceptance_criteria": [
+            "국세청 OpenAPI 가용성 확인",
+            "웹 크롤링 가능성 검토",
+            "법적 이슈 확인",
+            "업데이트 알림 시스템 설계"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M2.2",
+      "name": "양도소득세 계산 추가",
+      "duration": "6 weeks",
+      "priority": "P0",
+      "dependencies": ["M2.1"],
+      "tasks": [
+        {
+          "id": "M2.2.1",
+          "name": "FR-3.5 요구사항 분석",
+          "description": "양도소득세 계산 로직 상세 분석",
+          "priority": "P0",
+          "estimated_hours": 12,
+          "assignee": "Product Manager",
+          "acceptance_criteria": [
+            "PRD FR-3.5 섹션 상세 분석",
+            "계산 플로우 다이어그램 작성",
+            "엣지 케이스 정리"
+          ]
+        },
+        {
+          "id": "M2.2.2",
+          "name": "1세대1주택 비과세 요건 정리",
+          "description": "비과세 요건 로직 설계",
+          "priority": "P0",
+          "estimated_hours": 8,
+          "assignee": "Backend Developer",
+          "dependencies": ["M2.2.1"],
+          "acceptance_criteria": [
+            "보유기간 2년 이상",
+            "거주기간 검증",
+            "9억 한도 적용",
+            "예외 사항 정리"
+          ]
+        },
+        {
+          "id": "M2.2.3",
+          "name": "장기보유특별공제 계산 로직 설계",
+          "description": "보유기간별 공제율 적용",
+          "priority": "P0",
+          "estimated_hours": 10,
+          "assignee": "Backend Developer",
+          "dependencies": ["M2.2.1"],
+          "acceptance_criteria": [
+            "3년~15년 구간별 공제율",
+            "1세대1주택 vs 다주택 구분",
+            "공제 한도 계산"
+          ]
+        },
+        {
+          "id": "M2.2.4",
+          "name": "다주택자 중과세율 적용 로직 설계",
+          "description": "중과세율 10-20% 추가 적용",
+          "priority": "P1",
+          "estimated_hours": 12,
+          "assignee": "Backend Developer",
+          "dependencies": ["M2.2.1"],
+          "acceptance_criteria": [
+            "2주택 vs 3주택 이상 구분",
+            "조정대상지역 판단",
+            "중과배제 요건 확인"
+          ]
+        },
+        {
+          "id": "M2.2.5",
+          "name": "양도소득세 계산 엔진 구현",
+          "description": "utils/taxCalculator.js 확장",
+          "priority": "P0",
+          "estimated_hours": 24,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.2.2", "M2.2.3", "M2.2.4"],
+          "acceptance_criteria": [
+            "양도차익 계산",
+            "장기보유특별공제 적용",
+            "세율 적용 (기본 + 중과)",
+            "비과세 여부 판단",
+            "Unit 테스트 커버리지 >90%"
+          ]
+        },
+        {
+          "id": "M2.2.6",
+          "name": "양도소득세 UI 컴포넌트 개발",
+          "description": "NumericalInput.jsx 확장",
+          "priority": "P0",
+          "estimated_hours": 20,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.2.1"],
+          "parallel_with": ["M2.2.5"],
+          "acceptance_criteria": [
+            "취득가액/양도가액 입력",
+            "보유기간 자동 계산",
+            "주택 수 선택",
+            "조정대상지역 체크",
+            "실시간 계산 결과 표시"
+          ]
+        },
+        {
+          "id": "M2.2.7",
+          "name": "양도소득세 테스트 케이스 작성",
+          "description": "TC-005~008 시나리오 테스트",
+          "priority": "P1",
+          "estimated_hours": 16,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.2.5", "M2.2.6"],
+          "acceptance_criteria": [
+            "1세대1주택 비과세 시나리오",
+            "장기보유특별공제 시나리오",
+            "다주택자 중과 시나리오",
+            "복합 시나리오"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M2.3",
+      "name": "PDF 보고서 생성",
+      "duration": "6 weeks",
+      "priority": "P1",
+      "dependencies": [],
+      "parallel_with": ["M2.1", "M2.2"],
+      "tasks": [
+        {
+          "id": "M2.3.1",
+          "name": "PDF 보고서 템플릿 디자인",
+          "description": "레이아웃 설계 (헤더, 사례요약, 비교표, 차트, 권고사항)",
+          "priority": "P1",
+          "estimated_hours": 16,
+          "assignee": "Designer",
+          "acceptance_criteria": [
+            "A4 세로 레이아웃",
+            "회사 로고 영역",
+            "섹션별 구조 설계",
+            "컬러 스킴 정의",
+            "Figma 디자인 파일"
+          ]
+        },
+        {
+          "id": "M2.3.2",
+          "name": "jsPDF + html2canvas 라이브러리 설치",
+          "description": "PDF 생성 라이브러리 초기 설정",
+          "priority": "P1",
+          "estimated_hours": 4,
+          "assignee": "Full-stack Developer",
+          "dependencies": [],
+          "acceptance_criteria": [
+            "npm install jspdf html2canvas",
+            "기본 PDF 생성 테스트",
+            "한글 폰트 설정"
+          ]
+        },
+        {
+          "id": "M2.3.3",
+          "name": "utils/pdfGenerator.js 구현",
+          "description": "FR-5.3 PDF 보고서 기본 구조 생성",
+          "priority": "P1",
+          "estimated_hours": 24,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.3.1", "M2.3.2"],
+          "acceptance_criteria": [
+            "헤더 생성 함수",
+            "사례 요약 섹션",
+            "시나리오 비교표",
+            "권고사항 섹션",
+            "페이지 번호"
+          ]
+        },
+        {
+          "id": "M2.3.4",
+          "name": "Chart.js 통합 - 막대 그래프",
+          "description": "시나리오 비교 막대 그래프 생성",
+          "priority": "P1",
+          "estimated_hours": 12,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.3.2"],
+          "parallel_with": ["M2.3.3"],
+          "acceptance_criteria": [
+            "npm install chart.js",
+            "시나리오별 세액 비교 차트",
+            "PDF 삽입 가능한 이미지 변환",
+            "반응형 크기 조절"
+          ]
+        },
+        {
+          "id": "M2.3.5",
+          "name": "Chart.js 통합 - 원형 차트",
+          "description": "세목 구성비 원형 차트 생성",
+          "priority": "P1",
+          "estimated_hours": 10,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.3.4"],
+          "acceptance_criteria": [
+            "상속세/증여세/양도소득세 구성비",
+            "퍼센트 레이블",
+            "컬러 코딩",
+            "PDF 삽입 최적화"
+          ]
+        },
+        {
+          "id": "M2.3.6",
+          "name": "PDF 다운로드 버튼 UI 추가",
+          "description": "Step 4에 다운로드 기능 연동",
+          "priority": "P1",
+          "estimated_hours": 8,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.3.3", "M2.3.5"],
+          "acceptance_criteria": [
+            "다운로드 버튼 UI",
+            "로딩 인디케이터",
+            "파일명 자동 생성",
+            "에러 처리"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M2.4",
+      "name": "보안 및 UX 개선",
+      "duration": "4 weeks",
+      "priority": "P1",
+      "dependencies": [],
+      "parallel_with": ["M2.1"],
+      "tasks": [
+        {
+          "id": "M2.4.1",
+          "name": "API 키 관리 UI 구현",
+          "description": "FR-6.1 설정 페이지 개발",
+          "priority": "P1",
+          "estimated_hours": 16,
+          "assignee": "Frontend Developer",
+          "acceptance_criteria": [
+            "설정 페이지 라우팅",
+            "API 키 입력 폼 (3개 AI)",
+            "마스킹 처리",
+            "키 유효성 테스트 버튼",
+            "저장/삭제 기능"
+          ]
+        },
+        {
+          "id": "M2.4.2",
+          "name": "localStorage 암호화 구현",
+          "description": "AES-256 암호화 (crypto-js)",
+          "priority": "P0",
+          "estimated_hours": 12,
+          "assignee": "Full-stack Developer",
+          "acceptance_criteria": [
+            "npm install crypto-js",
+            "AES-256-GCM 암호화",
+            "암호화 키 관리",
+            "암호화/복호화 유틸 함수",
+            "Unit 테스트"
+          ]
+        },
+        {
+          "id": "M2.4.3",
+          "name": "사용자 친화적 에러 메시지 시스템",
+          "description": "FR-8.1 개선",
+          "priority": "P1",
+          "estimated_hours": 10,
+          "assignee": "Frontend Developer",
+          "acceptance_criteria": [
+            "에러 타입별 메시지 정의",
+            "Toast 알림 컴포넌트",
+            "해결 방법 제시",
+            "재시도 버튼",
+            "에러 로깅"
+          ]
+        },
+        {
+          "id": "M2.4.4",
+          "name": "온보딩 튜토리얼 구현",
+          "description": "FR-7.1 첫 사용자 가이드",
+          "priority": "P1",
+          "estimated_hours": 20,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.4.1"],
+          "acceptance_criteria": [
+            "4단계 워크플로우 설명",
+            "API 키 설정 가이드",
+            "샘플 케이스 제공",
+            "건너뛰기 옵션",
+            "다시 보지 않기 저장"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M2.5",
+      "name": "품질 보증 및 테스팅",
+      "duration": "4 weeks",
+      "priority": "P0",
+      "dependencies": ["M2.2"],
+      "tasks": [
+        {
+          "id": "M2.5.1",
+          "name": "성능 최적화",
+          "description": "번들 사이즈 <500KB 달성",
+          "priority": "P1",
+          "estimated_hours": 16,
+          "assignee": "Full-stack Developer",
+          "acceptance_criteria": [
+            "Webpack Bundle Analyzer 실행",
+            "Code splitting 적용",
+            "Tree shaking 최적화",
+            "Lazy loading 구현",
+            "번들 사이즈 <500KB"
+          ]
+        },
+        {
+          "id": "M2.5.2",
+          "name": "Unit 테스트 작성",
+          "description": "Jest 커버리지 >80%",
+          "priority": "P0",
+          "estimated_hours": 40,
+          "assignee": "QA Engineer",
+          "acceptance_criteria": [
+            "taxCalculator.js 테스트",
+            "promptGenerator.js 테스트",
+            "validators.js 테스트",
+            "React 컴포넌트 테스트",
+            "커버리지 리포트 >80%"
+          ]
+        },
+        {
+          "id": "M2.5.3",
+          "name": "Integration 테스트 - AI API",
+          "description": "AI API 연동 테스트 (모킹 포함)",
+          "priority": "P0",
+          "estimated_hours": 20,
+          "assignee": "QA Engineer",
+          "acceptance_criteria": [
+            "Mock AI 응답 생성",
+            "API 호출 플로우 테스트",
+            "에러 처리 테스트",
+            "재시도 로직 검증"
+          ]
+        },
+        {
+          "id": "M2.5.4",
+          "name": "Integration 테스트 - 암호화",
+          "description": "localStorage 암호화 검증",
+          "priority": "P1",
+          "estimated_hours": 8,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.4.2"],
+          "acceptance_criteria": [
+            "암호화/복호화 검증",
+            "키 변경 시나리오",
+            "브라우저 재시작 테스트"
+          ]
+        },
+        {
+          "id": "M2.5.5",
+          "name": "E2E 테스트 - 전체 워크플로우",
+          "description": "Playwright Step 1-4 테스트",
+          "priority": "P0",
+          "estimated_hours": 24,
+          "assignee": "QA Engineer",
+          "acceptance_criteria": [
+            "사례 입력 → AI 분석 → 계산 → 비교",
+            "여러 시나리오 생성",
+            "JSON 다운로드",
+            "에러 복구 시나리오"
+          ]
+        },
+        {
+          "id": "M2.5.6",
+          "name": "E2E 테스트 - 양도소득세",
+          "description": "양도소득세 계산 플로우 테스트",
+          "priority": "P1",
+          "estimated_hours": 16,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.2.5"],
+          "acceptance_criteria": [
+            "1세대1주택 시나리오",
+            "다주택자 시나리오",
+            "장기보유특별공제 적용"
+          ]
+        },
+        {
+          "id": "M2.5.7",
+          "name": "E2E 테스트 - PDF 다운로드",
+          "description": "PDF 생성 및 다운로드 검증",
+          "priority": "P1",
+          "estimated_hours": 12,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.3.6"],
+          "acceptance_criteria": [
+            "PDF 파일 생성 확인",
+            "파일 크기 검증",
+            "차트 포함 여부",
+            "다운로드 성공률 100%"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M2.6",
+      "name": "배포 및 운영",
+      "duration": "2 weeks",
+      "priority": "P0",
+      "dependencies": ["M2.5"],
+      "tasks": [
+        {
+          "id": "M2.6.1",
+          "name": "CI/CD 파이프라인 구축",
+          "description": "GitHub Actions (ESLint, Jest, Build)",
+          "priority": "P0",
+          "estimated_hours": 16,
+          "assignee": "DevOps Engineer",
+          "acceptance_criteria": [
+            ".github/workflows/ci.yml 작성",
+            "ESLint 자동 검사",
+            "Jest 테스트 자동 실행",
+            "빌드 성공 검증",
+            "PR 체크 강제화"
+          ]
+        },
+        {
+          "id": "M2.6.2",
+          "name": "Vercel 배포 설정",
+          "description": "환경 변수 구성 (API 키 암호화)",
+          "priority": "P0",
+          "estimated_hours": 8,
+          "assignee": "DevOps Engineer",
+          "dependencies": ["M2.6.1"],
+          "acceptance_criteria": [
+            "Vercel 프로젝트 연결",
+            "환경 변수 설정",
+            "자동 배포 활성화",
+            "Preview 배포 확인",
+            "Production 도메인 설정"
+          ]
+        },
+        {
+          "id": "M2.6.3",
+          "name": "Google Analytics 통합",
+          "description": "DAU/MAU 추적",
+          "priority": "P1",
+          "estimated_hours": 6,
+          "assignee": "Full-stack Developer",
+          "acceptance_criteria": [
+            "GA4 계정 생성",
+            "추적 코드 삽입",
+            "이벤트 트래킹 설정",
+            "대시보드 구성"
+          ]
+        },
+        {
+          "id": "M2.6.4",
+          "name": "Lighthouse 성능 모니터링",
+          "description": "Core Web Vitals (<2.5s LCP)",
+          "priority": "P1",
+          "estimated_hours": 12,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.5.1"],
+          "acceptance_criteria": [
+            "Lighthouse CI 설정",
+            "Performance > 90점",
+            "Accessibility > 95점",
+            "Best Practices > 95점",
+            "SEO > 90점"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M2.7",
+      "name": "사용자 확보 및 피드백",
+      "duration": "12 weeks (전체 기간 병행)",
+      "priority": "P1",
+      "dependencies": ["M2.6"],
+      "tasks": [
+        {
+          "id": "M2.7.1",
+          "name": "베타 테스트 계획 수립",
+          "description": "목표 100명 사용자",
+          "priority": "P1",
+          "estimated_hours": 12,
+          "assignee": "Product Manager",
+          "acceptance_criteria": [
+            "타겟 사용자 정의",
+            "모집 채널 계획",
+            "테스트 기간 설정",
+            "피드백 수집 방법"
+          ]
+        },
+        {
+          "id": "M2.7.2",
+          "name": "사용자 피드백 수집 시스템 구축",
+          "description": "Google Forms 또는 TypeForm",
+          "priority": "P1",
+          "estimated_hours": 8,
+          "assignee": "Product Manager",
+          "acceptance_criteria": [
+            "피드백 폼 생성",
+            "앱 내 링크 통합",
+            "응답 자동 수집",
+            "주간 리포트 자동화"
+          ]
+        },
+        {
+          "id": "M2.7.3",
+          "name": "사용자 가이드 문서 작성",
+          "description": "주요 기능 설명",
+          "priority": "P1",
+          "estimated_hours": 16,
+          "assignee": "Technical Writer",
+          "acceptance_criteria": [
+            "시작하기 가이드",
+            "기능별 사용법",
+            "FAQ 섹션",
+            "스크린샷 포함"
+          ]
+        },
+        {
+          "id": "M2.7.4",
+          "name": "API 키 설정 가이드 작성",
+          "description": "Claude/ChatGPT/Perplexity",
+          "priority": "P0",
+          "estimated_hours": 8,
+          "assignee": "Technical Writer",
+          "acceptance_criteria": [
+            "AI별 API 키 발급 방법",
+            "요금제 안내",
+            "보안 주의사항",
+            "문제 해결 가이드"
+          ]
+        },
+        {
+          "id": "M2.7.5",
+          "name": "Phase 2 완료 검증",
+          "description": "마일스톤 달성 확인",
+          "priority": "P0",
+          "estimated_hours": 8,
+          "assignee": "Product Manager",
+          "dependencies": ["M2.1", "M2.2", "M2.3", "M2.4", "M2.5", "M2.6"],
+          "acceptance_criteria": [
+            "100명 이상 베타 사용자 확보",
+            "월 500건 이상 처리",
+            "NPS > 50 달성",
+            "모든 기능 정상 작동",
+            "Phase 3 계획 수립"
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_tasks": 51,
+    "by_priority": {
+      "P0": 18,
+      "P1": 33
+    },
+    "estimated_hours": 982,
+    "estimated_weeks": 24.55,
+    "team_allocation": {
+      "full_stack_developer": 2,
+      "backend_developer": 1,
+      "frontend_developer": 1,
+      "qa_engineer": 1,
+      "product_manager": 0.5,
+      "designer": 0.3,
+      "devops_engineer": 0.5,
+      "technical_writer": 0.3
+    }
+  },
+  "success_metrics": {
+    "users": "100+ 베타 사용자",
+    "processing": "월 500건 이상",
+    "nps": "> 50",
+    "uptime": "> 99.5%"
+  }
+}

@@ -1,0 +1,396 @@
+{
+  "metadata": {
+    "dataType": "giftTaxRates",
+    "taxCategory": "증여세 (Gift Tax)",
+    "fiscalYear": 2024,
+    "collectedDate": "2025-10-17",
+    "source": "상속세 및 증여세법 제53조, 제55조",
+    "legalReference": {
+      "law": "상속세 및 증여세법",
+      "article": "제53조 (증여세 과세), 제55조 (세율)",
+      "lastRevision": "2024-01-01",
+      "url": "https://www.law.go.kr"
+    },
+    "validPeriod": {
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "notes": "2024년 과세기간 기준"
+    },
+    "collectedBy": "AI Tax Consultant Project - Phase 2",
+    "version": "1.0.0"
+  },
+  "taxRateStructure": {
+    "type": "progressive",
+    "description": "5단계 누진세율 구조 (상속세와 동일) - 5-bracket progressive tax rate (same as inheritance tax)",
+    "sameAsInheritanceTax": true,
+    "reference": "PRD.md line 474: '세율 적용 (상속세와 동일한 누진세율)'",
+    "currency": "KRW",
+    "unit": "원 (Korean Won)",
+    "brackets": [
+      {
+        "bracketNumber": 1,
+        "taxBaseMin": 0,
+        "taxBaseMax": 100000000,
+        "taxBaseDescription": "1억원 이하",
+        "taxRate": 0.10,
+        "taxRatePercent": "10%",
+        "progressiveDeduction": 0,
+        "progressiveDeductionDescription": "0원",
+        "formula": "과세표준 × 10%",
+        "example": {
+          "taxBase": 80000000,
+          "calculation": "80,000,000 × 10% - 0",
+          "taxAmount": 8000000,
+          "effectiveRate": 0.10
+        }
+      },
+      {
+        "bracketNumber": 2,
+        "taxBaseMin": 100000001,
+        "taxBaseMax": 500000000,
+        "taxBaseDescription": "1억원 초과 5억원 이하",
+        "taxRate": 0.20,
+        "taxRatePercent": "20%",
+        "progressiveDeduction": 10000000,
+        "progressiveDeductionDescription": "1천만원",
+        "formula": "과세표준 × 20% - 1천만원",
+        "example": {
+          "taxBase": 250000000,
+          "calculation": "250,000,000 × 20% - 10,000,000",
+          "taxAmount": 40000000,
+          "effectiveRate": 0.16
+        }
+      },
+      {
+        "bracketNumber": 3,
+        "taxBaseMin": 500000001,
+        "taxBaseMax": 1000000000,
+        "taxBaseDescription": "5억원 초과 10억원 이하",
+        "taxRate": 0.30,
+        "taxRatePercent": "30%",
+        "progressiveDeduction": 60000000,
+        "progressiveDeductionDescription": "6천만원",
+        "formula": "과세표준 × 30% - 6천만원",
+        "example": {
+          "taxBase": 700000000,
+          "calculation": "700,000,000 × 30% - 60,000,000",
+          "taxAmount": 150000000,
+          "effectiveRate": 0.214
+        }
+      },
+      {
+        "bracketNumber": 4,
+        "taxBaseMin": 1000000001,
+        "taxBaseMax": 3000000000,
+        "taxBaseDescription": "10억원 초과 30억원 이하",
+        "taxRate": 0.40,
+        "taxRatePercent": "40%",
+        "progressiveDeduction": 160000000,
+        "progressiveDeductionDescription": "1억6천만원",
+        "formula": "과세표준 × 40% - 1억6천만원",
+        "example": {
+          "taxBase": 1500000000,
+          "calculation": "1,500,000,000 × 40% - 160,000,000",
+          "taxAmount": 440000000,
+          "effectiveRate": 0.293
+        }
+      },
+      {
+        "bracketNumber": 5,
+        "taxBaseMin": 3000000001,
+        "taxBaseMax": null,
+        "taxBaseDescription": "30억원 초과",
+        "taxRate": 0.50,
+        "taxRatePercent": "50%",
+        "progressiveDeduction": 460000000,
+        "progressiveDeductionDescription": "4억6천만원",
+        "formula": "과세표준 × 50% - 4억6천만원",
+        "example": {
+          "taxBase": 10000000000,
+          "calculation": "10,000,000,000 × 50% - 460,000,000",
+          "taxAmount": 4540000000,
+          "effectiveRate": 0.454
+        },
+        "notes": "상한 없음 (No upper limit)"
+      }
+    ]
+  },
+  "calculationFormula": {
+    "general": "산출세액 = 과세표준 × 세율 - 누진공제액",
+    "english": "Tax Amount = Tax Base × Tax Rate - Progressive Deduction",
+    "steps": [
+      "1. 10년 이내 증여재산 합산 (Sum gifts within 10 years)",
+      "2. 과세표준 계산 = 증여재산가액 - 관계별공제 (Calculate tax base)",
+      "3. 해당 구간의 세율 및 누진공제액 확인 (Find applicable bracket)",
+      "4. 과세표준 × 세율 계산 (Multiply tax base by rate)",
+      "5. 누진공제액 차감 (Subtract progressive deduction)",
+      "6. 최종 산출세액 도출 (Calculate final tax amount)"
+    ],
+    "keyDifferences": {
+      "from_inheritance_tax": [
+        "10년 합산 규정: 동일인으로부터 10년 이내 증여받은 재산 합산",
+        "관계별 공제: 배우자(6억), 직계존속 성년(5천만), 직계존속 미성년(2천만), 직계비속(5천만), 기타친족(1천만)",
+        "증여시기: 증여일 기준으로 과세 (상속은 사망일 기준)"
+      ]
+    }
+  },
+  "relatedDeductions": {
+    "note": "공제액 계산은 별도 수집 필요 (M2.1.5)",
+    "tenYearRule": {
+      "description": "동일인으로부터 10년 이내 증여받은 재산을 합산하여 증여세 계산",
+      "example": "2020년 1억 증여 + 2024년 2억 증여 = 3억 합산 과세"
+    },
+    "deductionsByRelationship": {
+      "spouse": {
+        "name": "배우자",
+        "amount": 600000000,
+        "description": "6억원"
+      },
+      "linealAscendant_adult": {
+        "name": "직계존속 (성년)",
+        "amount": 50000000,
+        "description": "5천만원 (부모→자녀, 자녀가 성년)"
+      },
+      "linealAscendant_minor": {
+        "name": "직계존속 (미성년)",
+        "amount": 20000000,
+        "description": "2천만원 (부모→자녀, 자녀가 미성년)"
+      },
+      "linealDescendant": {
+        "name": "직계비속",
+        "amount": 50000000,
+        "description": "5천만원 (자녀→부모)"
+      },
+      "otherRelatives": {
+        "name": "기타친족",
+        "amount": 10000000,
+        "description": "1천만원"
+      }
+    }
+  },
+  "specialCases": {
+    "tenYearCumulation": {
+      "description": "10년 합산 증여세 계산",
+      "steps": [
+        "1. 10년 이내 증여재산 모두 합산",
+        "2. 합산 증여재산 - 관계별공제 = 과세표준",
+        "3. 과세표준에 세율 적용하여 세액 계산",
+        "4. 기납부 증여세액 공제"
+      ],
+      "example": {
+        "scenario": "부모가 성년 자녀에게 2020년 5천만원, 2024년 3억원 증여",
+        "calculation": {
+          "totalGift": 350000000,
+          "deduction": 50000000,
+          "taxBase": 300000000,
+          "applicableBracket": 2,
+          "taxRate": 0.20,
+          "progressiveDeduction": 10000000,
+          "totalTax": 50000000,
+          "previousTaxPaid": 0,
+          "currentTaxDue": 50000000
+        }
+      }
+    },
+    "previousTaxCredit": {
+      "description": "기납부 증여세액 공제",
+      "formula": "현재 산출세액 - 이전 납부세액",
+      "notes": "10년 이내 동일인으로부터 증여받아 이미 납부한 증여세는 공제"
+    }
+  },
+  "comparisonWithInheritanceTax": {
+    "similarities": [
+      "동일한 5단계 누진세율 구조 (10%, 20%, 30%, 40%, 50%)",
+      "동일한 누진공제액 (0, 1천만, 6천만, 1억6천만, 4억6천만)",
+      "과세표준 계산 후 세율 적용하는 방식 동일"
+    ],
+    "differences": [
+      {
+        "aspect": "과세시점",
+        "inheritanceTax": "피상속인 사망일",
+        "giftTax": "증여일"
+      },
+      {
+        "aspect": "합산규정",
+        "inheritanceTax": "상속개시일 기준 전체 상속재산",
+        "giftTax": "10년 이내 동일인 증여재산 합산"
+      },
+      {
+        "aspect": "공제항목",
+        "inheritanceTax": "기초공제(2억), 배우자공제(5억~30억), 자녀공제(5천만/인), 일괄공제(5억)",
+        "giftTax": "관계별공제 (배우자 6억, 직계존속 성년 5천만, 미성년 2천만, 직계비속 5천만, 기타 1천만)"
+      },
+      {
+        "aspect": "납세의무자",
+        "inheritanceTax": "상속인 또는 수유자",
+        "giftTax": "수증자 (증여받는 사람)"
+      }
+    ]
+  },
+  "usageGuidelines": {
+    "implementationPath": "src/constants/taxRates.js",
+    "functionName": "calculateGiftTax(taxBase, previousGifts, relationship)",
+    "inputValidation": [
+      "taxBase must be >= 0",
+      "taxBase should be integer (no decimals)",
+      "previousGifts: array of {date, amount, taxPaid} within 10 years",
+      "relationship: 'spouse' | 'lineal_ascendant' | 'lineal_descendant' | 'other'"
+    ],
+    "outputFormat": {
+      "taxAmount": "number (integer)",
+      "effectiveTaxRate": "number (decimal, 0-1)",
+      "applicableBracket": "number (1-5)",
+      "taxRate": "number (decimal)",
+      "progressiveDeduction": "number (integer)",
+      "previousTaxCredit": "number (integer)",
+      "netTaxDue": "number (integer)"
+    },
+    "testCases": [
+      {
+        "testId": "TC-GT-001",
+        "description": "최소 구간 단일 증여 (배우자)",
+        "input": {
+          "giftAmount": 650000000,
+          "relationship": "spouse",
+          "previousGifts": []
+        },
+        "calculation": {
+          "giftAmount": 650000000,
+          "deduction": 600000000,
+          "taxBase": 50000000,
+          "bracket": 1,
+          "rate": 0.10,
+          "progressiveDeduction": 0,
+          "taxAmount": 5000000
+        },
+        "expectedOutput": {
+          "taxAmount": 5000000,
+          "netTaxDue": 5000000
+        }
+      },
+      {
+        "testId": "TC-GT-002",
+        "description": "10년 합산 증여 (직계존속 성년)",
+        "input": {
+          "currentGift": 300000000,
+          "previousGifts": [
+            { "date": "2020-01-01", "amount": 50000000, "taxPaid": 0 }
+          ],
+          "relationship": "lineal_ascendant_adult"
+        },
+        "calculation": {
+          "totalGifts": 350000000,
+          "deduction": 50000000,
+          "taxBase": 300000000,
+          "bracket": 2,
+          "rate": 0.20,
+          "progressiveDeduction": 10000000,
+          "totalTax": 50000000,
+          "previousTaxPaid": 0,
+          "netTaxDue": 50000000
+        },
+        "expectedOutput": {
+          "taxAmount": 50000000,
+          "previousTaxCredit": 0,
+          "netTaxDue": 50000000
+        }
+      },
+      {
+        "testId": "TC-GT-003",
+        "description": "고액 증여 (직계비속)",
+        "input": {
+          "giftAmount": 2000000000,
+          "relationship": "lineal_descendant",
+          "previousGifts": []
+        },
+        "calculation": {
+          "giftAmount": 2000000000,
+          "deduction": 50000000,
+          "taxBase": 1950000000,
+          "bracket": 4,
+          "rate": 0.40,
+          "progressiveDeduction": 160000000,
+          "taxAmount": 620000000
+        },
+        "expectedOutput": {
+          "taxAmount": 620000000,
+          "netTaxDue": 620000000
+        }
+      },
+      {
+        "testId": "TC-GT-004",
+        "description": "미성년 자녀 증여",
+        "input": {
+          "giftAmount": 50000000,
+          "relationship": "lineal_ascendant_minor",
+          "previousGifts": []
+        },
+        "calculation": {
+          "giftAmount": 50000000,
+          "deduction": 20000000,
+          "taxBase": 30000000,
+          "bracket": 1,
+          "rate": 0.10,
+          "progressiveDeduction": 0,
+          "taxAmount": 3000000
+        },
+        "expectedOutput": {
+          "taxAmount": 3000000,
+          "netTaxDue": 3000000
+        }
+      },
+      {
+        "testId": "TC-GT-005",
+        "description": "기타 친족 증여",
+        "input": {
+          "giftAmount": 100000000,
+          "relationship": "other",
+          "previousGifts": []
+        },
+        "calculation": {
+          "giftAmount": 100000000,
+          "deduction": 10000000,
+          "taxBase": 90000000,
+          "bracket": 1,
+          "rate": 0.10,
+          "progressiveDeduction": 0,
+          "taxAmount": 9000000
+        },
+        "expectedOutput": {
+          "taxAmount": 9000000,
+          "netTaxDue": 9000000
+        }
+      }
+    ]
+  },
+  "integrationNotes": {
+    "phase2Tasks": [
+      "M2.1.1: 상속세 세율 데이터 수집 ✅",
+      "M2.1.2: 증여세 세율 데이터 수집 ✅ (현재 작업)",
+      "M2.1.5: 증여세 공제 한도 데이터 수집 (관계별 공제 상세)",
+      "M2.1.7: 세법 DB 스키마 설계 (10년 합산 규정 포함)",
+      "M2.1.8: taxRates.js 파일 작성 (증여세 계산 함수 포함)"
+    ],
+    "implementationConsiderations": [
+      "10년 합산 규정: 이전 증여 이력을 데이터베이스에 저장 필요",
+      "관계별 공제: 수증자와 증여자 관계 정보 필수",
+      "기납부 증여세액: 이전 납부 내역 추적 필요",
+      "증여시기 검증: 10년 이내 여부 판단 로직 필요"
+    ],
+    "nextSteps": [
+      "1. 이 JSON 데이터를 검증",
+      "2. 양도소득세 세율 데이터 수집 (M2.1.3)",
+      "3. 증여세 공제 한도 상세 데이터 수집 (M2.1.5)",
+      "4. 10년 합산 규정을 포함한 DB 스키마 설계"
+    ]
+  },
+  "qualityAssurance": {
+    "dataAccuracy": "PRD.md lines 468-474 기준으로 정확히 수집됨",
+    "rateStructure": "상속세와 동일한 5단계 누진세율 확인됨",
+    "completeness": "10년 합산 규정, 관계별 공제 모두 포함",
+    "structuredFormat": "JSON 형식으로 구조화 완료",
+    "documentation": "출처, 유효기간, 계산 예시, 상속세와의 차이점 모두 포함",
+    "testCoverage": "5개 테스트 케이스 (배우자, 직계존속 성년/미성년, 직계비속, 기타친족) 정의",
+    "implementation": "10년 합산 계산 로직 및 사용 예시 포함"
+  }
+}

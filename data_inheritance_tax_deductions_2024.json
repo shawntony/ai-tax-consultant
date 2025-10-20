@@ -1,0 +1,466 @@
+{
+  "metadata": {
+    "dataType": "inheritanceTaxDeductions",
+    "taxCategory": "상속세 공제 (Inheritance Tax Deductions)",
+    "fiscalYear": 2024,
+    "collectedDate": "2025-10-17",
+    "source": "상속세 및 증여세법 제18조~제24조",
+    "legalReference": {
+      "law": "상속세 및 증여세법",
+      "articles": [
+        "제18조 (과세가액 계산의 원칙)",
+        "제19조 (기초공제)",
+        "제19조의2 (가업상속공제)",
+        "제20조 (배우자상속공제)",
+        "제21조 (그 밖의 인적공제)",
+        "제22조 (일괄공제)",
+        "제23조 (금융재산상속공제)",
+        "제24조 (재해손실공제)"
+      ],
+      "lastRevision": "2024-01-01",
+      "url": "https://www.law.go.kr"
+    },
+    "validPeriod": {
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "notes": "2024년 과세기간 기준"
+    },
+    "collectedBy": "AI Tax Consultant Project - Phase 2",
+    "version": "1.0.0"
+  },
+  "deductionCategories": {
+    "basicDeduction": {
+      "name": "기초공제",
+      "legalBasis": "상속세 및 증여세법 제19조 제1항",
+      "amount": 200000000,
+      "description": "2억원",
+      "applicability": "모든 상속인에게 적용",
+      "mandatory": true,
+      "notes": [
+        "상속인이 없는 경우에도 적용",
+        "일괄공제 선택 시 적용 제외"
+      ],
+      "example": {
+        "scenario": "상속재산 10억원, 상속인 존재",
+        "deductionAmount": 200000000,
+        "calculation": "기초공제 2억원 자동 적용"
+      }
+    },
+    "spouseDeduction": {
+      "name": "배우자상속공제",
+      "legalBasis": "상속세 및 증여세법 제20조",
+      "formula": "min(max(실제 상속받은 금액, 5억), min(상속재산 × 0.3, 30억))",
+      "minimumAmount": 500000000,
+      "maximumAmount": 3000000000,
+      "description": "최소 5억원 ~ 최대 30억원",
+      "calculationMethod": {
+        "step1": "배우자가 실제로 상속받은 금액 확인",
+        "step2": "상속재산 × 30% 계산 (최대 30억 한도)",
+        "step3": "실제 상속액과 법정공제액 비교하여 큰 금액 적용",
+        "step4": "최소 5억원 보장"
+      },
+      "examples": [
+        {
+          "scenario": "상속재산 10억, 배우자 실제 상속 7억",
+          "calculation": {
+            "inheritanceAmount": 1000000000,
+            "spouseActualInheritance": 700000000,
+            "calculatedDeduction": 300000000,
+            "finalDeduction": 700000000,
+            "reason": "실제 상속액이 법정공제액(3억)보다 큼"
+          }
+        },
+        {
+          "scenario": "상속재산 20억, 배우자 실제 상속 3억",
+          "calculation": {
+            "inheritanceAmount": 2000000000,
+            "spouseActualInheritance": 300000000,
+            "calculatedDeduction": 600000000,
+            "finalDeduction": 600000000,
+            "reason": "법정공제액(6억)이 실제 상속액(3억)보다 크지만 최소 5억 적용"
+          }
+        },
+        {
+          "scenario": "상속재산 100억, 배우자 실제 상속 50억",
+          "calculation": {
+            "inheritanceAmount": 10000000000,
+            "spouseActualInheritance": 5000000000,
+            "calculatedDeduction": 3000000000,
+            "finalDeduction": 3000000000,
+            "reason": "법정공제액 30억 한도 적용"
+          }
+        },
+        {
+          "scenario": "상속재산 5억, 배우자 실제 상속 2억",
+          "calculation": {
+            "inheritanceAmount": 500000000,
+            "spouseActualInheritance": 200000000,
+            "calculatedDeduction": 150000000,
+            "finalDeduction": 500000000,
+            "reason": "최소 5억원 보장"
+          }
+        }
+      ],
+      "notes": [
+        "배우자가 없는 경우 적용 불가",
+        "사실혼 배우자는 제외",
+        "법률혼 배우자만 적용",
+        "일괄공제 선택 시 적용 제외"
+      ]
+    },
+    "childDeduction": {
+      "name": "자녀공제",
+      "legalBasis": "상속세 및 증여세법 제21조 제1항",
+      "amountPerChild": 50000000,
+      "description": "자녀 1인당 5천만원",
+      "applicability": "자녀 수에 비례",
+      "notes": [
+        "미성년자/성년자 구분 없음",
+        "양자/입양자 포함",
+        "일괄공제 선택 시 적용 제외"
+      ],
+      "examples": [
+        {
+          "scenario": "자녀 2명",
+          "calculation": {
+            "numberOfChildren": 2,
+            "deductionPerChild": 50000000,
+            "totalDeduction": 100000000
+          }
+        },
+        {
+          "scenario": "자녀 5명",
+          "calculation": {
+            "numberOfChildren": 5,
+            "deductionPerChild": 50000000,
+            "totalDeduction": 250000000
+          }
+        }
+      ]
+    },
+    "elderlyDeduction": {
+      "name": "연로자공제",
+      "legalBasis": "상속세 및 증여세법 제21조 제2항",
+      "amount": 50000000,
+      "description": "만 65세 이상인 자 1인당 5천만원",
+      "ageRequirement": "만 65세 이상",
+      "notes": [
+        "상속인 또는 동거가족",
+        "일괄공제 선택 시 적용 제외"
+      ],
+      "example": {
+        "scenario": "부모님(70세, 68세) 생존",
+        "calculation": {
+          "numberOfElderly": 2,
+          "deductionPerElderly": 50000000,
+          "totalDeduction": 100000000
+        }
+      }
+    },
+    "disabilityDeduction": {
+      "name": "장애인공제",
+      "legalBasis": "상속세 및 증여세법 제21조 제3항",
+      "formula": "1천만원 × (기대여명 - 실제나이)",
+      "amountPerYear": 10000000,
+      "description": "연령별 기대여명까지 1년당 1천만원",
+      "applicability": "장애인복지법상 장애인",
+      "notes": [
+        "등록 장애인만 해당",
+        "기대여명은 통계청 생명표 사용",
+        "일괄공제 선택 시 적용 제외"
+      ],
+      "examples": [
+        {
+          "scenario": "40세 장애인 (기대여명 80세)",
+          "calculation": {
+            "currentAge": 40,
+            "lifeExpectancy": 80,
+            "yearsRemaining": 40,
+            "deductionPerYear": 10000000,
+            "totalDeduction": 400000000
+          }
+        },
+        {
+          "scenario": "30세 장애인 (기대여명 85세)",
+          "calculation": {
+            "currentAge": 30,
+            "lifeExpectancy": 85,
+            "yearsRemaining": 55,
+            "deductionPerYear": 10000000,
+            "totalDeduction": 550000000
+          }
+        }
+      ]
+    },
+    "bulkDeduction": {
+      "name": "일괄공제",
+      "legalBasis": "상속세 및 증여세법 제22조",
+      "amount": 500000000,
+      "description": "5억원 (기초공제 + 인적공제 대신 선택)",
+      "applicability": "기초공제 + 모든 인적공제를 포기하고 선택",
+      "comparisonRequired": true,
+      "notes": [
+        "배우자공제는 별도 적용 가능",
+        "기초공제, 자녀공제, 연로자공제, 장애인공제 대신 일괄 적용",
+        "개별 공제 합계가 5억 미만일 때 유리"
+      ],
+      "decisionLogic": {
+        "individualDeductions": "기초공제(2억) + 자녀공제 + 연로자공제 + 장애인공제",
+        "bulkDeduction": "5억원",
+        "recommendation": "max(개별공제 합계, 5억) 선택"
+      },
+      "examples": [
+        {
+          "scenario": "자녀 1명, 연로자 없음",
+          "calculation": {
+            "basicDeduction": 200000000,
+            "childDeduction": 50000000,
+            "elderlyDeduction": 0,
+            "disabilityDeduction": 0,
+            "individualTotal": 250000000,
+            "bulkDeduction": 500000000,
+            "recommendation": "일괄공제 선택 (5억 > 2.5억)",
+            "savings": 250000000
+          }
+        },
+        {
+          "scenario": "자녀 5명, 연로자 2명, 장애인 1명(40세)",
+          "calculation": {
+            "basicDeduction": 200000000,
+            "childDeduction": 250000000,
+            "elderlyDeduction": 100000000,
+            "disabilityDeduction": 400000000,
+            "individualTotal": 950000000,
+            "bulkDeduction": 500000000,
+            "recommendation": "개별공제 선택 (9.5억 > 5억)",
+            "savings": 450000000
+          }
+        }
+      ]
+    },
+    "financialAssetDeduction": {
+      "name": "금융재산상속공제",
+      "legalBasis": "상속세 및 증여세법 제23조",
+      "formula": "min(금융재산 가액 × 공제율, 최대공제한도)",
+      "deductionRates": [
+        {
+          "financialAssetRange": "2천만원 이하",
+          "deductionRate": 1.0,
+          "description": "100% 공제"
+        },
+        {
+          "financialAssetRange": "2천만원 초과 1억원 이하",
+          "deductionRate": 0.8,
+          "description": "80% 공제"
+        },
+        {
+          "financialAssetRange": "1억원 초과",
+          "deductionRate": 0.8,
+          "description": "80% 공제",
+          "maximumDeduction": 2000000000,
+          "notes": "최대 20억원 한도"
+        }
+      ],
+      "notes": [
+        "예금, 적금, 주식, 채권 등 금융재산",
+        "부동산은 제외",
+        "최대 공제액 20억원"
+      ],
+      "examples": [
+        {
+          "scenario": "금융재산 1천만원",
+          "calculation": {
+            "financialAssets": 10000000,
+            "deductionRate": 1.0,
+            "deduction": 10000000,
+            "reason": "2천만원 이하 100% 공제"
+          }
+        },
+        {
+          "scenario": "금융재산 5천만원",
+          "calculation": {
+            "financialAssets": 50000000,
+            "deductionRate": 0.8,
+            "deduction": 40000000,
+            "reason": "2천만원 초과 80% 공제"
+          }
+        },
+        {
+          "scenario": "금융재산 30억원",
+          "calculation": {
+            "financialAssets": 3000000000,
+            "calculatedDeduction": 2400000000,
+            "actualDeduction": 2000000000,
+            "reason": "20억원 한도 적용"
+          }
+        }
+      ]
+    },
+    "disasterLossDeduction": {
+      "name": "재해손실공제",
+      "legalBasis": "상속세 및 증여세법 제24조",
+      "description": "상속재산이 재해로 멸실/훼손된 경우 손실액 공제",
+      "applicability": "상속개시일로부터 6개월 이내 재해 발생",
+      "deductionAmount": "실제 손실액",
+      "notes": [
+        "화재, 천재지변 등 재해",
+        "손실액 증빙 필요",
+        "보험금 수령액 차감"
+      ],
+      "example": {
+        "scenario": "상속 부동산이 화재로 3억원 손실",
+        "calculation": {
+          "totalLoss": 300000000,
+          "insuranceReceived": 50000000,
+          "actualDeduction": 250000000,
+          "reason": "손실액에서 보험금 차감"
+        }
+      }
+    },
+    "businessSuccessionDeduction": {
+      "name": "가업상속공제",
+      "legalBasis": "상속세 및 증여세법 제18조의2",
+      "description": "중소·중견기업 가업 상속 시 공제",
+      "maximumDeduction": {
+        "smallBusiness": 50000000000,
+        "mediumBusiness": 40000000000,
+        "generalBusiness": 30000000000
+      },
+      "requirements": [
+        "피상속인이 10년 이상 계속하여 경영",
+        "상속인이 상속세 신고기한까지 대표이사 취임",
+        "업종 제한 있음 (제조업, 광업 등)"
+      ],
+      "notes": [
+        "복잡한 요건 충족 필요",
+        "사후관리 의무 있음 (7년)",
+        "별도 상세 분석 필요"
+      ]
+    }
+  },
+  "deductionCalculationOrder": {
+    "step1": "배우자상속공제 계산",
+    "step2": "개별공제 합계 vs 일괄공제 비교",
+    "step3": "선택한 공제 적용 (개별 또는 일괄)",
+    "step4": "금융재산상속공제 적용",
+    "step5": "재해손실공제 적용 (해당 시)",
+    "step6": "가업상속공제 적용 (해당 시)",
+    "formula": "총 공제액 = 배우자공제 + max(개별공제합, 일괄공제) + 금융재산공제 + 재해손실공제 + 가업상속공제"
+  },
+  "usageGuidelines": {
+    "implementationPath": "src/constants/deductions.js",
+    "functionName": "calculateInheritanceDeductions(inheritanceAmount, heirs, financialAssets)",
+    "inputValidation": [
+      "inheritanceAmount must be > 0",
+      "heirs: { spouse?, children?, elderly?, disabled? }",
+      "financialAssets: number (optional)"
+    ],
+    "outputFormat": {
+      "basicDeduction": "number",
+      "spouseDeduction": "number",
+      "childDeduction": "number",
+      "elderlyDeduction": "number",
+      "disabilityDeduction": "number",
+      "bulkDeductionAmount": "number",
+      "selectedDeduction": "'individual' | 'bulk'",
+      "financialAssetDeduction": "number",
+      "totalDeduction": "number",
+      "recommendation": "string (개별 vs 일괄 추천 이유)"
+    },
+    "testCases": [
+      {
+        "testId": "TC-ID-001",
+        "description": "기본 케이스 (배우자, 자녀 2명)",
+        "input": {
+          "inheritanceAmount": 1000000000,
+          "spouse": true,
+          "children": 2,
+          "elderly": 0,
+          "disabled": 0,
+          "financialAssets": 0
+        },
+        "expectedOutput": {
+          "basicDeduction": 200000000,
+          "spouseDeduction": 500000000,
+          "childDeduction": 100000000,
+          "individualTotal": 300000000,
+          "bulkDeduction": 500000000,
+          "selectedDeduction": "bulk",
+          "totalDeduction": 1000000000
+        }
+      },
+      {
+        "testId": "TC-ID-002",
+        "description": "대가족 케이스 (자녀 5명, 연로자 2명)",
+        "input": {
+          "inheritanceAmount": 2000000000,
+          "spouse": true,
+          "children": 5,
+          "elderly": 2,
+          "disabled": 0,
+          "financialAssets": 0
+        },
+        "expectedOutput": {
+          "basicDeduction": 200000000,
+          "spouseDeduction": 600000000,
+          "childDeduction": 250000000,
+          "elderlyDeduction": 100000000,
+          "individualTotal": 550000000,
+          "selectedDeduction": "individual",
+          "totalDeduction": 1150000000
+        }
+      },
+      {
+        "testId": "TC-ID-003",
+        "description": "금융재산 많은 케이스",
+        "input": {
+          "inheritanceAmount": 3000000000,
+          "spouse": false,
+          "children": 1,
+          "elderly": 0,
+          "disabled": 0,
+          "financialAssets": 1000000000
+        },
+        "expectedOutput": {
+          "basicDeduction": 200000000,
+          "spouseDeduction": 0,
+          "childDeduction": 50000000,
+          "individualTotal": 250000000,
+          "bulkDeduction": 500000000,
+          "selectedDeduction": "bulk",
+          "financialAssetDeduction": 800000000,
+          "totalDeduction": 1300000000
+        }
+      }
+    ]
+  },
+  "integrationNotes": {
+    "phase2Tasks": [
+      "M2.1.1: 상속세 세율 데이터 수집 ✅",
+      "M2.1.4: 상속세 공제 한도 데이터 수집 ✅ (현재 작업)",
+      "M2.1.7: 세법 DB 스키마 설계 (공제 계산 로직 포함)",
+      "M2.1.9: deductions.js 파일 작성"
+    ],
+    "calculationFlow": {
+      "step1": "상속재산가액 확인",
+      "step2": "공제액 계산 (이 데이터 사용)",
+      "step3": "과세표준 = 상속재산 - 공제액",
+      "step4": "세율 적용 (data_inheritance_tax_rates_2024.json 사용)",
+      "step5": "산출세액 계산"
+    },
+    "nextSteps": [
+      "1. 이 JSON 데이터를 검증",
+      "2. 증여세 공제 데이터와 통합",
+      "3. deductions.js 구현 시 이 구조 활용",
+      "4. 개별공제 vs 일괄공제 자동 비교 로직 구현"
+    ]
+  },
+  "qualityAssurance": {
+    "dataAccuracy": "상속세 및 증여세법 제18조~제24조 기준으로 정확히 수집됨",
+    "completeness": "모든 주요 공제 항목 포함 (기초, 배우자, 자녀, 연로자, 장애인, 일괄, 금융재산, 재해손실)",
+    "structuredFormat": "JSON 형식으로 구조화 완료",
+    "documentation": "출처, 유효기간, 계산 예시, 법적 근거 모두 포함",
+    "testCoverage": "3개 테스트 케이스 (기본, 대가족, 금융재산) 정의",
+    "implementation": "계산 순서, 비교 로직, 입력 검증 포함"
+  }
+}

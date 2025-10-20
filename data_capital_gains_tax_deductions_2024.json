@@ -1,0 +1,578 @@
+{
+  "metadata": {
+    "dataType": "capitalGainsTaxDeductions",
+    "taxCategory": "양도소득세 공제 (Capital Gains Tax Deductions)",
+    "fiscalYear": 2024,
+    "collectedDate": "2025-10-17",
+    "source": "소득세법 제95조 (장기보유특별공제), 제97조 (양도소득기본공제)",
+    "legalReference": {
+      "law": "소득세법",
+      "articles": [
+        "제95조 (장기보유특별공제)",
+        "제97조 (양도소득기본공제)",
+        "제98조 (필요경비 계산)"
+      ],
+      "lastRevision": "2024-01-01",
+      "url": "https://www.law.go.kr"
+    },
+    "validPeriod": {
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "notes": "2024년 과세기간 기준"
+    },
+    "collectedBy": "AI Tax Consultant Project - Phase 2",
+    "version": "1.0.0"
+  },
+  "longTermHoldingDeduction": {
+    "name": "장기보유특별공제",
+    "description": "3년 이상 보유한 부동산 양도 시 보유기간에 따라 양도차익 공제",
+    "legalBasis": "소득세법 제95조",
+    "minimumHoldingPeriod": "3년",
+    "applicableTo": ["부동산", "부동산에 관한 권리"],
+    "deductionRates": {
+      "oneHouseOneHousehold": {
+        "name": "1세대1주택",
+        "description": "보유기간 + 거주기간 합산",
+        "calculationMethod": "양도차익 × 공제율",
+        "rates": [
+          {
+            "years": "3년 이상 4년 미만",
+            "totalYears": 3,
+            "deductionRate": 0.12,
+            "deductionPercent": "12%",
+            "example": {
+              "capitalGain": 100000000,
+              "deduction": 12000000
+            }
+          },
+          {
+            "years": "4년 이상 5년 미만",
+            "totalYears": 4,
+            "deductionRate": 0.16,
+            "deductionPercent": "16%"
+          },
+          {
+            "years": "5년 이상 6년 미만",
+            "totalYears": 5,
+            "deductionRate": 0.20,
+            "deductionPercent": "20%"
+          },
+          {
+            "years": "6년 이상 7년 미만",
+            "totalYears": 6,
+            "deductionRate": 0.24,
+            "deductionPercent": "24%"
+          },
+          {
+            "years": "7년 이상 8년 미만",
+            "totalYears": 7,
+            "deductionRate": 0.28,
+            "deductionPercent": "28%"
+          },
+          {
+            "years": "8년 이상 9년 미만",
+            "totalYears": 8,
+            "deductionRate": 0.32,
+            "deductionPercent": "32%"
+          },
+          {
+            "years": "9년 이상 10년 미만",
+            "totalYears": 9,
+            "deductionRate": 0.36,
+            "deductionPercent": "36%"
+          },
+          {
+            "years": "10년 이상 11년 미만",
+            "totalYears": 10,
+            "deductionRate": 0.40,
+            "deductionPercent": "40%"
+          },
+          {
+            "years": "11년 이상 12년 미만",
+            "totalYears": 11,
+            "deductionRate": 0.48,
+            "deductionPercent": "48%"
+          },
+          {
+            "years": "12년 이상 13년 미만",
+            "totalYears": 12,
+            "deductionRate": 0.56,
+            "deductionPercent": "56%"
+          },
+          {
+            "years": "13년 이상 14년 미만",
+            "totalYears": 13,
+            "deductionRate": 0.64,
+            "deductionPercent": "64%"
+          },
+          {
+            "years": "14년 이상 15년 미만",
+            "totalYears": 14,
+            "deductionRate": 0.72,
+            "deductionPercent": "72%"
+          },
+          {
+            "years": "15년 이상",
+            "totalYears": 15,
+            "deductionRate": 0.80,
+            "deductionPercent": "80%",
+            "notes": "최대 공제율"
+          }
+        ],
+        "maxDeductionRate": 0.80,
+        "notes": [
+          "보유기간 + 거주기간 합산하여 적용",
+          "거주기간 2년 이상 필요 (비조정대상지역 기준)",
+          "조정대상지역: 거주기간 별도 요건 있음"
+        ],
+        "example": {
+          "scenario": "보유 5년 + 거주 5년 = 총 10년",
+          "capitalGain": 200000000,
+          "applicableRate": 0.40,
+          "deduction": 80000000,
+          "taxableGain": 120000000
+        }
+      },
+      "generalRealEstate": {
+        "name": "일반 부동산",
+        "description": "보유기간만 적용 (거주기간 불포함)",
+        "calculationMethod": "양도차익 × 공제율",
+        "rates": [
+          {
+            "years": "3년 이상 4년 미만",
+            "totalYears": 3,
+            "deductionRate": 0.06,
+            "deductionPercent": "6%"
+          },
+          {
+            "years": "4년 이상 5년 미만",
+            "totalYears": 4,
+            "deductionRate": 0.08,
+            "deductionPercent": "8%"
+          },
+          {
+            "years": "5년 이상 6년 미만",
+            "totalYears": 5,
+            "deductionRate": 0.10,
+            "deductionPercent": "10%"
+          },
+          {
+            "years": "6년 이상 7년 미만",
+            "totalYears": 6,
+            "deductionRate": 0.12,
+            "deductionPercent": "12%"
+          },
+          {
+            "years": "7년 이상 8년 미만",
+            "totalYears": 7,
+            "deductionRate": 0.14,
+            "deductionPercent": "14%"
+          },
+          {
+            "years": "8년 이상 9년 미만",
+            "totalYears": 8,
+            "deductionRate": 0.16,
+            "deductionPercent": "16%"
+          },
+          {
+            "years": "9년 이상 10년 미만",
+            "totalYears": 9,
+            "deductionRate": 0.18,
+            "deductionPercent": "18%"
+          },
+          {
+            "years": "10년 이상 11년 미만",
+            "totalYears": 10,
+            "deductionRate": 0.20,
+            "deductionPercent": "20%"
+          },
+          {
+            "years": "11년 이상 12년 미만",
+            "totalYears": 11,
+            "deductionRate": 0.24,
+            "deductionPercent": "24%"
+          },
+          {
+            "years": "12년 이상 13년 미만",
+            "totalYears": 12,
+            "deductionRate": 0.28,
+            "deductionPercent": "28%"
+          },
+          {
+            "years": "13년 이상 14년 미만",
+            "totalYears": 13,
+            "deductionRate": 0.32,
+            "deductionPercent": "32%"
+          },
+          {
+            "years": "14년 이상 15년 미만",
+            "totalYears": 14,
+            "deductionRate": 0.36,
+            "deductionPercent": "36%"
+          },
+          {
+            "years": "15년 이상",
+            "totalYears": 15,
+            "deductionRate": 0.40,
+            "deductionPercent": "40%",
+            "notes": "최대 공제율"
+          }
+        ],
+        "maxDeductionRate": 0.40,
+        "notes": [
+          "보유기간만 계산 (거주기간 불포함)",
+          "1세대1주택이 아닌 모든 부동산에 적용",
+          "상업용 부동산, 토지, 다주택 등"
+        ],
+        "example": {
+          "scenario": "보유 10년 (일반 부동산)",
+          "capitalGain": 150000000,
+          "applicableRate": 0.20,
+          "deduction": 30000000,
+          "taxableGain": 120000000
+        }
+      }
+    }
+  },
+  "basicDeduction": {
+    "name": "양도소득기본공제",
+    "legalBasis": "소득세법 제97조",
+    "amount": 2500000,
+    "description": "250만원",
+    "applicability": "연 1회",
+    "notes": [
+      "1년에 1번만 적용 (1월 1일 ~ 12월 31일)",
+      "여러 건 양도 시 합산하여 1회만 공제",
+      "과세표준에서 차감"
+    ],
+    "examples": [
+      {
+        "scenario": "1년에 1건 양도",
+        "taxBase": 100000000,
+        "basicDeduction": 2500000,
+        "finalTaxBase": 97500000
+      },
+      {
+        "scenario": "1년에 3건 양도 (각 5천만원씩 과세표준)",
+        "transfer1": {
+          "taxBase": 50000000,
+          "basicDeduction": 2500000,
+          "note": "첫 번째 양도에서 공제"
+        },
+        "transfer2": {
+          "taxBase": 50000000,
+          "basicDeduction": 0,
+          "note": "이미 사용됨"
+        },
+        "transfer3": {
+          "taxBase": 50000000,
+          "basicDeduction": 0,
+          "note": "이미 사용됨"
+        },
+        "totalDeduction": 2500000
+      }
+    ]
+  },
+  "necessaryExpenses": {
+    "name": "필요경비",
+    "description": "양도차익 계산 시 차감할 수 있는 비용",
+    "legalBasis": "소득세법 제97조, 제98조",
+    "formula": "양도차익 = 양도가액 - (취득가액 + 필요경비)",
+    "categories": {
+      "acquisitionCosts": {
+        "name": "취득 시 필요경비",
+        "description": "부동산 취득 시 발생한 비용",
+        "items": [
+          {
+            "name": "취득세",
+            "description": "부동산 취득 시 납부한 취득세",
+            "deductible": true,
+            "notes": "실제 납부액 전액 공제"
+          },
+          {
+            "name": "등록세/등록면허세",
+            "description": "소유권 이전 등기 시 납부",
+            "deductible": true,
+            "notes": "2011년부터 취득세에 통합"
+          },
+          {
+            "name": "부동산 중개수수료",
+            "description": "취득 시 중개사에 지급한 수수료",
+            "deductible": true,
+            "rateLimit": "법정 요율 내 금액",
+            "notes": "영수증 필요"
+          },
+          {
+            "name": "법무사 수수료",
+            "description": "등기 대행 수수료",
+            "deductible": true,
+            "notes": "영수증 필요"
+          },
+          {
+            "name": "인지대",
+            "description": "계약서 작성 시 납부한 인지세",
+            "deductible": true
+          }
+        ],
+        "example": {
+          "acquisitionPrice": 500000000,
+          "acquisitionTax": 12500000,
+          "brokerageFee": 3000000,
+          "legalFee": 500000,
+          "stampDuty": 150000,
+          "totalAcquisitionCost": 516150000
+        }
+      },
+      "improvementCosts": {
+        "name": "자본적 지출",
+        "description": "부동산 가치를 증가시키는 지출",
+        "deductible": true,
+        "items": [
+          {
+            "name": "증축",
+            "description": "건물 면적 증가",
+            "deductible": true,
+            "notes": "건축 허가 필요"
+          },
+          {
+            "name": "개축",
+            "description": "구조 변경, 리모델링",
+            "deductible": true,
+            "notes": "자재비, 인건비 포함"
+          },
+          {
+            "name": "대수선",
+            "description": "주요 구조부 수선",
+            "deductible": true
+          },
+          {
+            "name": "설비 증설",
+            "description": "엘리베이터, 냉난방 시설 등",
+            "deductible": true
+          }
+        ],
+        "nonDeductible": [
+          {
+            "name": "유지/보수",
+            "description": "일상적인 수선 및 관리",
+            "reason": "가치 증가가 아닌 유지 목적"
+          },
+          {
+            "name": "소모품",
+            "description": "전구, 페인트 등 소비성 자재",
+            "reason": "자본적 지출이 아님"
+          }
+        ],
+        "notes": [
+          "영수증 또는 세금계산서 필수",
+          "자본적 지출과 수선비 구분 중요",
+          "3년 이내 300만원 이상 지출 시 자본적 지출로 인정"
+        ],
+        "example": {
+          "remodeling": 50000000,
+          "airConditioner": 10000000,
+          "totalImprovementCost": 60000000
+        }
+      },
+      "transferCosts": {
+        "name": "양도 시 필요경비",
+        "description": "부동산 양도 시 발생한 비용",
+        "items": [
+          {
+            "name": "부동산 중개수수료",
+            "description": "양도 시 중개사에 지급한 수수료",
+            "deductible": true,
+            "rateLimit": "법정 요율 내 금액"
+          },
+          {
+            "name": "법무사 수수료",
+            "description": "소유권 이전 등기 대행료",
+            "deductible": true
+          },
+          {
+            "name": "인지대",
+            "description": "매매계약서 인지세",
+            "deductible": true
+          },
+          {
+            "name": "소개료",
+            "description": "매수자 소개 대가",
+            "deductible": false,
+            "reason": "법정 필요경비 아님"
+          }
+        ],
+        "example": {
+          "brokerageFee": 4000000,
+          "legalFee": 500000,
+          "stampDuty": 150000,
+          "totalTransferCost": 4650000
+        }
+      }
+    },
+    "totalCalculation": {
+      "formula": "총 필요경비 = 취득경비 + 자본적지출 + 양도경비",
+      "example": {
+        "acquisitionCosts": 16150000,
+        "improvementCosts": 60000000,
+        "transferCosts": 4650000,
+        "totalNecessaryExpenses": 80800000
+      }
+    }
+  },
+  "calculationExample": {
+    "scenario": "1세대1주택 10년 보유, 5년 거주",
+    "transferPrice": 1000000000,
+    "acquisitionPrice": 600000000,
+    "necessaryExpenses": {
+      "acquisitionCosts": 18000000,
+      "improvementCosts": 20000000,
+      "transferCosts": 5000000,
+      "total": 43000000
+    },
+    "capitalGain": 357000000,
+    "longTermDeduction": {
+      "holdingYears": 10,
+      "residenceYears": 5,
+      "totalYears": 15,
+      "deductionRate": 0.80,
+      "deductionAmount": 285600000
+    },
+    "taxBase": 68900000,
+    "basicDeduction": 2500000,
+    "finalTaxBase": 66400000,
+    "calculation": {
+      "step1": "양도차익 = 양도가액(10억) - 취득가액(6억) - 필요경비(0.43억) = 3.57억",
+      "step2": "장기보유특별공제 = 3.57억 × 80% = 2.856억",
+      "step3": "과세표준 = 3.57억 - 2.856억 = 0.714억",
+      "step4": "기본공제 = 0.714억 - 0.025억 = 0.689억",
+      "step5": "세율 적용 (35% - 1,544만원)",
+      "step6": "산출세액 = 0.689억 × 35% - 1,544만원 = 0.868억"
+    }
+  },
+  "usageGuidelines": {
+    "implementationPath": "src/constants/deductions.js",
+    "functionName": "calculateCapitalGainsDeductions(transferPrice, acquisitionPrice, holdingYears, residenceYears, isOneHouse, necessaryExpenses)",
+    "inputValidation": [
+      "transferPrice must be > 0",
+      "acquisitionPrice must be > 0",
+      "holdingYears must be >= 0",
+      "residenceYears must be >= 0 (for 1세대1주택)",
+      "isOneHouse: boolean",
+      "necessaryExpenses: { acquisition, improvement, transfer }"
+    ],
+    "outputFormat": {
+      "capitalGain": "number (양도차익)",
+      "longTermDeductionRate": "number (공제율)",
+      "longTermDeduction": "number (장기보유특별공제)",
+      "taxableGain": "number (공제 후 양도차익)",
+      "basicDeduction": "number (기본공제 250만원)",
+      "finalTaxBase": "number (최종 과세표준)",
+      "totalNecessaryExpenses": "number (총 필요경비)"
+    },
+    "testCases": [
+      {
+        "testId": "TC-CGD-001",
+        "description": "1세대1주택 15년 보유+거주",
+        "input": {
+          "transferPrice": 1000000000,
+          "acquisitionPrice": 600000000,
+          "holdingYears": 15,
+          "residenceYears": 15,
+          "isOneHouse": true,
+          "necessaryExpenses": {
+            "acquisition": 18000000,
+            "improvement": 20000000,
+            "transfer": 5000000
+          }
+        },
+        "expectedOutput": {
+          "capitalGain": 357000000,
+          "longTermDeductionRate": 0.80,
+          "longTermDeduction": 285600000,
+          "taxableGain": 71400000,
+          "basicDeduction": 2500000,
+          "finalTaxBase": 68900000
+        }
+      },
+      {
+        "testId": "TC-CGD-002",
+        "description": "일반 부동산 5년 보유",
+        "input": {
+          "transferPrice": 500000000,
+          "acquisitionPrice": 300000000,
+          "holdingYears": 5,
+          "residenceYears": 0,
+          "isOneHouse": false,
+          "necessaryExpenses": {
+            "acquisition": 9000000,
+            "improvement": 0,
+            "transfer": 3000000
+          }
+        },
+        "expectedOutput": {
+          "capitalGain": 188000000,
+          "longTermDeductionRate": 0.10,
+          "longTermDeduction": 18800000,
+          "taxableGain": 169200000,
+          "basicDeduction": 2500000,
+          "finalTaxBase": 166700000
+        }
+      },
+      {
+        "testId": "TC-CGD-003",
+        "description": "단기 보유 (3년 미만)",
+        "input": {
+          "transferPrice": 800000000,
+          "acquisitionPrice": 700000000,
+          "holdingYears": 2,
+          "residenceYears": 0,
+          "isOneHouse": false,
+          "necessaryExpenses": {
+            "acquisition": 21000000,
+            "improvement": 0,
+            "transfer": 4000000
+          }
+        },
+        "expectedOutput": {
+          "capitalGain": 75000000,
+          "longTermDeductionRate": 0,
+          "longTermDeduction": 0,
+          "taxableGain": 75000000,
+          "basicDeduction": 2500000,
+          "finalTaxBase": 72500000,
+          "notes": "3년 미만 보유로 장기보유특별공제 없음"
+        }
+      }
+    ]
+  },
+  "integrationNotes": {
+    "phase2Tasks": [
+      "M2.1.3: 양도소득세 세율 데이터 수집 ✅",
+      "M2.1.6: 양도소득세 공제 데이터 수집 ✅ (현재 작업)",
+      "M2.2.5: 양도소득세 계산 엔진 구현",
+      "M2.1.9: deductions.js 파일 작성"
+    ],
+    "calculationFlow": {
+      "step1": "양도가액, 취득가액 입력",
+      "step2": "필요경비 계산 (이 데이터 사용)",
+      "step3": "양도차익 = 양도가액 - 취득가액 - 필요경비",
+      "step4": "장기보유특별공제 계산 (이 데이터 사용)",
+      "step5": "과세표준 = 양도차익 - 장기보유특별공제 - 기본공제",
+      "step6": "세율 적용 (data_capital_gains_tax_rates_2024.json 사용)"
+    },
+    "nextSteps": [
+      "1. 이 JSON 데이터를 검증",
+      "2. deductions.js에 장기보유특별공제 함수 구현",
+      "3. 필요경비 입력 폼 설계",
+      "4. 보유기간/거주기간 자동 계산 로직"
+    ]
+  },
+  "qualityAssurance": {
+    "dataAccuracy": "소득세법 제95조, 제97조 기준으로 정확히 수집됨",
+    "completeness": "장기보유특별공제 (13단계), 기본공제, 필요경비 모두 포함",
+    "structuredFormat": "JSON 형식으로 구조화 완료",
+    "documentation": "출처, 유효기간, 계산 예시, 법적 근거 모두 포함",
+    "testCoverage": "3개 테스트 케이스 (1세대1주택 15년, 일반 5년, 단기 2년) 정의",
+    "implementation": "보유기간별 공제율, 필요경비 항목, 계산 로직 포함"
+  }
+}

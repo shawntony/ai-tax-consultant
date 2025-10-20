@@ -1,0 +1,259 @@
+{
+  "metadata": {
+    "dataType": "inheritanceTaxRates",
+    "taxCategory": "상속세 (Inheritance Tax)",
+    "fiscalYear": 2024,
+    "collectedDate": "2025-10-17",
+    "source": "상속세 및 증여세법 제26조, 제27조",
+    "legalReference": {
+      "law": "상속세 및 증여세법",
+      "article": "제26조 (세율), 제27조 (세액공제)",
+      "lastRevision": "2024-01-01",
+      "url": "https://www.law.go.kr"
+    },
+    "validPeriod": {
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "notes": "2024년 과세기간 기준"
+    },
+    "collectedBy": "AI Tax Consultant Project - Phase 2",
+    "version": "1.0.0"
+  },
+  "taxRateStructure": {
+    "type": "progressive",
+    "description": "5단계 누진세율 구조 (5-bracket progressive tax rate)",
+    "currency": "KRW",
+    "unit": "원 (Korean Won)",
+    "brackets": [
+      {
+        "bracketNumber": 1,
+        "taxBaseMin": 0,
+        "taxBaseMax": 100000000,
+        "taxBaseDescription": "1억원 이하",
+        "taxRate": 0.10,
+        "taxRatePercent": "10%",
+        "progressiveDeduction": 0,
+        "progressiveDeductionDescription": "0원",
+        "formula": "과세표준 × 10%",
+        "example": {
+          "taxBase": 50000000,
+          "calculation": "50,000,000 × 10% - 0",
+          "taxAmount": 5000000,
+          "effectiveRate": 0.10
+        }
+      },
+      {
+        "bracketNumber": 2,
+        "taxBaseMin": 100000001,
+        "taxBaseMax": 500000000,
+        "taxBaseDescription": "1억원 초과 5억원 이하",
+        "taxRate": 0.20,
+        "taxRatePercent": "20%",
+        "progressiveDeduction": 10000000,
+        "progressiveDeductionDescription": "1천만원",
+        "formula": "과세표준 × 20% - 1천만원",
+        "example": {
+          "taxBase": 300000000,
+          "calculation": "300,000,000 × 20% - 10,000,000",
+          "taxAmount": 50000000,
+          "effectiveRate": 0.1667
+        }
+      },
+      {
+        "bracketNumber": 3,
+        "taxBaseMin": 500000001,
+        "taxBaseMax": 1000000000,
+        "taxBaseDescription": "5억원 초과 10억원 이하",
+        "taxRate": 0.30,
+        "taxRatePercent": "30%",
+        "progressiveDeduction": 60000000,
+        "progressiveDeductionDescription": "6천만원",
+        "formula": "과세표준 × 30% - 6천만원",
+        "example": {
+          "taxBase": 800000000,
+          "calculation": "800,000,000 × 30% - 60,000,000",
+          "taxAmount": 180000000,
+          "effectiveRate": 0.225
+        }
+      },
+      {
+        "bracketNumber": 4,
+        "taxBaseMin": 1000000001,
+        "taxBaseMax": 3000000000,
+        "taxBaseDescription": "10억원 초과 30억원 이하",
+        "taxRate": 0.40,
+        "taxRatePercent": "40%",
+        "progressiveDeduction": 160000000,
+        "progressiveDeductionDescription": "1억6천만원",
+        "formula": "과세표준 × 40% - 1억6천만원",
+        "example": {
+          "taxBase": 2000000000,
+          "calculation": "2,000,000,000 × 40% - 160,000,000",
+          "taxAmount": 640000000,
+          "effectiveRate": 0.32
+        }
+      },
+      {
+        "bracketNumber": 5,
+        "taxBaseMin": 3000000001,
+        "taxBaseMax": null,
+        "taxBaseDescription": "30억원 초과",
+        "taxRate": 0.50,
+        "taxRatePercent": "50%",
+        "progressiveDeduction": 460000000,
+        "progressiveDeductionDescription": "4억6천만원",
+        "formula": "과세표준 × 50% - 4억6천만원",
+        "example": {
+          "taxBase": 5000000000,
+          "calculation": "5,000,000,000 × 50% - 460,000,000",
+          "taxAmount": 2040000000,
+          "effectiveRate": 0.408
+        },
+        "notes": "상한 없음 (No upper limit)"
+      }
+    ]
+  },
+  "calculationFormula": {
+    "general": "산출세액 = 과세표준 × 세율 - 누진공제액",
+    "english": "Tax Amount = Tax Base × Tax Rate - Progressive Deduction",
+    "steps": [
+      "1. 과세표준 확인 (Determine Tax Base)",
+      "2. 해당 구간의 세율 및 누진공제액 확인 (Find applicable bracket)",
+      "3. 과세표준 × 세율 계산 (Multiply tax base by rate)",
+      "4. 누진공제액 차감 (Subtract progressive deduction)",
+      "5. 최종 산출세액 도출 (Calculate final tax amount)"
+    ],
+    "implementationNotes": [
+      "과세표준이 여러 구간에 걸치지 않음 - 해당 구간의 세율과 누진공제액만 사용",
+      "누진공제액은 이미 하위 구간 세금을 반영하므로 단순 계산 가능",
+      "최소 과세표준: 0원 (음수 불가)",
+      "반올림: 원 단위 (소수점 처리 불필요)"
+    ]
+  },
+  "relatedDeductions": {
+    "note": "공제액 계산은 별도 수집 필요 (M2.1.4)",
+    "basicDeduction": {
+      "name": "기초공제",
+      "amount": 200000000,
+      "description": "2억원"
+    },
+    "spouseDeduction": {
+      "name": "배우자공제",
+      "minAmount": 500000000,
+      "maxAmount": 3000000000,
+      "description": "5억~30억 (상속재산의 30%, 최소 5억 보장)"
+    },
+    "childDeduction": {
+      "name": "자녀공제",
+      "amountPerChild": 50000000,
+      "description": "1인당 5천만원"
+    },
+    "bulkDeduction": {
+      "name": "일괄공제",
+      "amount": 500000000,
+      "description": "5억원 (기초공제 + 인적공제 대신 선택 가능)"
+    }
+  },
+  "usageGuidelines": {
+    "implementationPath": "src/constants/taxRates.js",
+    "functionName": "calculateInheritanceTax(taxBase)",
+    "inputValidation": [
+      "taxBase must be >= 0",
+      "taxBase should be integer (no decimals)",
+      "taxBase in Korean Won (KRW)"
+    ],
+    "outputFormat": {
+      "taxAmount": "number (integer)",
+      "effectiveTaxRate": "number (decimal, 0-1)",
+      "applicableBracket": "number (1-5)",
+      "taxRate": "number (decimal)",
+      "progressiveDeduction": "number (integer)"
+    },
+    "testCases": [
+      {
+        "testId": "TC-IR-001",
+        "description": "최소 구간 (1억원 이하)",
+        "input": { "taxBase": 50000000 },
+        "expectedOutput": {
+          "taxAmount": 5000000,
+          "bracket": 1,
+          "rate": 0.10,
+          "progressiveDeduction": 0
+        }
+      },
+      {
+        "testId": "TC-IR-002",
+        "description": "구간 경계값 (정확히 1억원)",
+        "input": { "taxBase": 100000000 },
+        "expectedOutput": {
+          "taxAmount": 10000000,
+          "bracket": 1,
+          "rate": 0.10,
+          "progressiveDeduction": 0
+        }
+      },
+      {
+        "testId": "TC-IR-003",
+        "description": "2구간 (1억 초과 5억 이하)",
+        "input": { "taxBase": 300000000 },
+        "expectedOutput": {
+          "taxAmount": 50000000,
+          "bracket": 2,
+          "rate": 0.20,
+          "progressiveDeduction": 10000000
+        }
+      },
+      {
+        "testId": "TC-IR-004",
+        "description": "최고 구간 (30억 초과)",
+        "input": { "taxBase": 5000000000 },
+        "expectedOutput": {
+          "taxAmount": 2040000000,
+          "bracket": 5,
+          "rate": 0.50,
+          "progressiveDeduction": 460000000
+        }
+      },
+      {
+        "testId": "TC-IR-005",
+        "description": "0원 (과세표준 없음)",
+        "input": { "taxBase": 0 },
+        "expectedOutput": {
+          "taxAmount": 0,
+          "bracket": 1,
+          "rate": 0.10,
+          "progressiveDeduction": 0
+        }
+      }
+    ]
+  },
+  "comparisonWithGiftTax": {
+    "note": "증여세도 동일한 누진세율 구조 사용",
+    "reference": "PRD.md line 474: '세율 적용 (상속세와 동일한 누진세율)'",
+    "difference": "공제 항목 및 한도가 상이함 (10년 합산 규정 등)",
+    "relatedTask": "M2.1.2 - 증여세 세율 데이터 수집"
+  },
+  "integrationNotes": {
+    "phase2Tasks": [
+      "M2.1.1: 상속세 세율 데이터 수집 ✅ (현재 작업)",
+      "M2.1.2: 증여세 세율 데이터 수집 (동일 구조 사용 가능)",
+      "M2.1.7: 세법 DB 스키마 설계 (이 구조를 스키마에 반영)",
+      "M2.1.8: taxRates.js 파일 작성 (이 데이터를 JavaScript로 변환)",
+      "M2.2.3: 세율 적용 로직 구현 (이 데이터를 활용한 계산 엔진)"
+    ],
+    "nextSteps": [
+      "1. 이 JSON 데이터를 검증",
+      "2. 증여세 세율 데이터 수집 (M2.1.2)",
+      "3. 양도소득세 세율 데이터 수집 (M2.1.3)",
+      "4. 모든 세율 데이터를 통합하여 DB 스키마 설계"
+    ]
+  },
+  "qualityAssurance": {
+    "dataAccuracy": "PRD.md lines 450-457 기준으로 정확히 수집됨",
+    "completeness": "5단계 누진세율 구조 완전히 포함",
+    "structuredFormat": "JSON 형식으로 구조화 완료",
+    "documentation": "출처, 유효기간, 계산 예시 모두 포함",
+    "testCoverage": "5개 테스트 케이스 정의",
+    "implementation": "구현 가이드라인 및 사용 예시 포함"
+  }
+}

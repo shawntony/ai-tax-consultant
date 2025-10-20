@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Production build
+/build
+/dist
+
+# Testing
+/coverage
+/test-results
+/playwright-report
+/playwright/.cache
+/.playwright
+*.spec.js-snapshots/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# OS files
+Thumbs.db
+desktop.ini
+
+# React
+.eslintcache
+
+# Misc
+.sass-cache/
+connect.lock
+typings/
+
+# Windows special files
+nul
+NUL

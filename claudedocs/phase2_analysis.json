@@ -1,0 +1,1173 @@
+{
+  "phase2_structure": {
+    "overview": {
+      "phase_name": "Phase 2: Early Adoption",
+      "duration": "3개월 (12주)",
+      "target_period": "2025 Q1",
+      "total_milestones": 7,
+      "estimated_total_tasks": 51
+    },
+    "milestones": [
+      {
+        "id": "M2.1",
+        "name": "세법 DB 구축",
+        "duration": "6주",
+        "priority": "P0",
+        "dependencies": [],
+        "parallel_tracks": [
+          "데이터 수집",
+          "스키마 설계"
+        ],
+        "description": "세율 테이블, 공제 한도 등 세법 관련 데이터를 체계적으로 관리하는 데이터베이스 시스템 구축",
+        "tasks": [
+          {
+            "id": "M2.1.1",
+            "name": "세율 테이블 데이터 수집",
+            "estimated_time": "1주",
+            "priority": "P0",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.1.1.1",
+                "name": "상속세 세율표 수집 (2024년 기준)",
+                "details": "1억 이하 10%, 5억 이하 20%, 10억 이하 30%, 30억 이하 40%, 30억 초과 50%",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.1.1.2",
+                "name": "증여세 세율표 수집",
+                "details": "상속세와 동일한 누진세율 구조",
+                "estimated_hours": 2
+              },
+              {
+                "id": "M2.1.1.3",
+                "name": "양도소득세 세율표 수집",
+                "details": "다주택자 중과세율 포함",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.1.1.4",
+                "name": "공제 한도 데이터 수집",
+                "details": "기초공제, 배우자공제, 자녀공제, 관계별 공제 등",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.1.1.5",
+                "name": "국세청 세법 개정 이력 조사",
+                "details": "최근 3년간 세법 개정 사항 정리",
+                "estimated_hours": 8
+              }
+            ]
+          },
+          {
+            "id": "M2.1.2",
+            "name": "DB 스키마 설계 및 구현",
+            "estimated_time": "2주",
+            "priority": "P0",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.1.2.1",
+                "name": "ERD 설계",
+                "details": "세율 테이블, 공제 테이블, 세법 개정 이력 테이블 등",
+                "estimated_hours": 12
+              },
+              {
+                "id": "M2.1.2.2",
+                "name": "PostgreSQL 스키마 생성",
+                "details": "테이블, 인덱스, 제약조건 정의",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.1.2.3",
+                "name": "초기 데이터 마이그레이션 스크립트 작성",
+                "details": "수집한 데이터를 DB에 로드",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.1.2.4",
+                "name": "데이터 검증 로직 구현",
+                "details": "데이터 무결성 검증 및 유효성 체크",
+                "estimated_hours": 6
+              }
+            ]
+          },
+          {
+            "id": "M2.1.3",
+            "name": "자동 업데이트 시스템 구축",
+            "estimated_time": "2주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.1.3.1",
+                "name": "국세청 공고 크롤러 개발",
+                "details": "세법 개정 공고를 자동으로 수집",
+                "estimated_hours": 16
+              },
+              {
+                "id": "M2.1.3.2",
+                "name": "변경 사항 알림 시스템 구축",
+                "details": "세법 개정 시 관리자에게 이메일/슬랙 알림",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.1.3.3",
+                "name": "버전 관리 시스템 구현",
+                "details": "세법 데이터의 유효 기간 관리",
+                "estimated_hours": 10
+              },
+              {
+                "id": "M2.1.3.4",
+                "name": "자동 업데이트 테스트",
+                "details": "크롤러 및 알림 시스템 통합 테스트",
+                "estimated_hours": 6
+              }
+            ]
+          },
+          {
+            "id": "M2.1.4",
+            "name": "API 엔드포인트 개발",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.1.4.1",
+                "name": "세율 조회 API 구현",
+                "details": "GET /api/v1/tax-rates?category={상속세|증여세|양도소득세}",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.1.4.2",
+                "name": "공제 한도 조회 API 구현",
+                "details": "GET /api/v1/deductions?type={기초|배우자|자녀}",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.1.4.3",
+                "name": "세법 개정 이력 API 구현",
+                "details": "GET /api/v1/law-changes?from={date}&to={date}",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.1.4.4",
+                "name": "API 문서화 (Swagger/OpenAPI)",
+                "details": "API 스펙 문서 작성",
+                "estimated_hours": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "M2.2",
+        "name": "양도소득세 계산 추가",
+        "duration": "6주",
+        "priority": "P1",
+        "dependencies": [
+          "M2.1.1.3"
+        ],
+        "parallel_tracks": [
+          "로직 구현",
+          "UI 개발"
+        ],
+        "description": "부동산 및 주식 양도소득세 계산 기능 추가",
+        "tasks": [
+          {
+            "id": "M2.2.1",
+            "name": "요구사항 분석 및 설계",
+            "estimated_time": "2주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.2.1.1",
+                "name": "양도소득세 계산 로직 분석",
+                "details": "1세대1주택 비과세, 장기보유특별공제, 다주택자 중과세율",
+                "estimated_hours": 12
+              },
+              {
+                "id": "M2.2.1.2",
+                "name": "사용자 시나리오 정의",
+                "details": "부동산/주식 양도 시 필요한 입력 항목 및 계산 플로우",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.2.1.3",
+                "name": "데이터 모델 설계",
+                "details": "양도소득세 계산을 위한 데이터 구조 설계",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.2.1.4",
+                "name": "AI 프롬프트 템플릿 설계",
+                "details": "양도소득세 분석을 위한 AI 프롬프트 작성",
+                "estimated_hours": 4
+              }
+            ]
+          },
+          {
+            "id": "M2.2.2",
+            "name": "계산 엔진 구현",
+            "estimated_time": "2주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.2.2.1",
+                "name": "부동산 양도소득세 계산 함수 구현",
+                "details": "양도가액, 취득가액, 필요경비, 특별공제 계산",
+                "estimated_hours": 16
+              },
+              {
+                "id": "M2.2.2.2",
+                "name": "주식 양도소득세 계산 함수 구현",
+                "details": "대주주 여부, 장외거래 등 고려",
+                "estimated_hours": 12
+              },
+              {
+                "id": "M2.2.2.3",
+                "name": "1세대1주택 비과세 검토 로직",
+                "details": "보유 기간, 거주 기간 등 조건 체크",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.2.2.4",
+                "name": "장기보유특별공제 계산",
+                "details": "보유 기간에 따른 공제율 적용",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.2.2.5",
+                "name": "다주택자 중과세율 적용",
+                "details": "주택 수에 따른 세율 차등 적용",
+                "estimated_hours": 8
+              }
+            ]
+          },
+          {
+            "id": "M2.2.3",
+            "name": "UI 통합",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.2.3.1",
+                "name": "양도소득세 입력 폼 개발",
+                "details": "React 컴포넌트 개발 (양도가액, 취득가액, 보유기간 등)",
+                "estimated_hours": 12
+              },
+              {
+                "id": "M2.2.3.2",
+                "name": "계산 결과 표시 UI",
+                "details": "양도차익, 과세표준, 산출세액 표시",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.2.3.3",
+                "name": "시나리오 비교 UI 업데이트",
+                "details": "양도소득세 포함 비교표 수정",
+                "estimated_hours": 6
+              }
+            ]
+          },
+          {
+            "id": "M2.2.4",
+            "name": "테스트 및 검증",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.2.4.1",
+                "name": "Unit Test 작성",
+                "details": "계산 로직 각 함수별 테스트 케이스",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.2.4.2",
+                "name": "Integration Test",
+                "details": "전체 플로우 테스트",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.2.4.3",
+                "name": "실제 사례 검증",
+                "details": "세무사 협력하여 실제 사례로 계산 정확도 검증",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.2.4.4",
+                "name": "사용자 매뉴얼 작성",
+                "details": "양도소득세 사용 가이드",
+                "estimated_hours": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "M2.3",
+        "name": "PDF 보고서 생성",
+        "duration": "6주",
+        "priority": "P1",
+        "dependencies": [
+          "M2.2"
+        ],
+        "parallel_tracks": [
+          "템플릿 디자인",
+          "PDF 라이브러리 통합"
+        ],
+        "description": "전문적인 PDF 보고서 자동 생성 기능 구현",
+        "tasks": [
+          {
+            "id": "M2.3.1",
+            "name": "템플릿 디자인",
+            "estimated_time": "2주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.3.1.1",
+                "name": "보고서 레이아웃 설계",
+                "details": "표지, 목차, 본문, 부록 구조 설계",
+                "estimated_hours": 12
+              },
+              {
+                "id": "M2.3.1.2",
+                "name": "회사 로고 및 헤더/푸터 디자인",
+                "details": "브랜딩 요소 반영",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.3.1.3",
+                "name": "시나리오 비교표 디자인",
+                "details": "시각적으로 명확한 테이블 디자인",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.3.1.4",
+                "name": "차트 디자인 가이드라인",
+                "details": "막대 그래프, 원형 차트 등 시각화 스타일 정의",
+                "estimated_hours": 6
+              }
+            ]
+          },
+          {
+            "id": "M2.3.2",
+            "name": "jsPDF 통합",
+            "estimated_time": "2주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.3.2.1",
+                "name": "jsPDF 라이브러리 설치 및 설정",
+                "details": "npm install jspdf jspdf-autotable",
+                "estimated_hours": 2
+              },
+              {
+                "id": "M2.3.2.2",
+                "name": "PDF 생성 기본 함수 구현",
+                "details": "페이지 설정, 폰트, 여백 등",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.3.2.3",
+                "name": "한글 폰트 임베딩",
+                "details": "Pretendard 또는 나눔고딕 폰트 임베딩",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.3.2.4",
+                "name": "테이블 렌더링 구현",
+                "details": "jspdf-autotable 활용",
+                "estimated_hours": 10
+              },
+              {
+                "id": "M2.3.2.5",
+                "name": "이미지 임베딩 (로고, 차트)",
+                "details": "html2canvas 통합",
+                "estimated_hours": 8
+              }
+            ]
+          },
+          {
+            "id": "M2.3.3",
+            "name": "차트 생성 및 통합",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.3.3.1",
+                "name": "Chart.js 설치 및 설정",
+                "details": "npm install chart.js react-chartjs-2",
+                "estimated_hours": 2
+              },
+              {
+                "id": "M2.3.3.2",
+                "name": "시나리오 비교 막대 그래프",
+                "details": "세목별 세액을 막대 그래프로 표현",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.3.3.3",
+                "name": "세목 구성비 원형 차트",
+                "details": "상속세, 증여세, 양도소득세 비율",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.3.3.4",
+                "name": "차트 → 이미지 변환",
+                "details": "차트를 PNG로 변환하여 PDF에 삽입",
+                "estimated_hours": 6
+              }
+            ]
+          },
+          {
+            "id": "M2.3.4",
+            "name": "최적화 및 테스트",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.3.4.1",
+                "name": "PDF 생성 속도 최적화",
+                "details": "대용량 데이터 처리 최적화",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.3.4.2",
+                "name": "다양한 시나리오 테스트",
+                "details": "1~10개 시나리오 PDF 생성 테스트",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.3.4.3",
+                "name": "인쇄 품질 검증",
+                "details": "실제 인쇄 시 품질 확인",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.3.4.4",
+                "name": "브라우저 호환성 테스트",
+                "details": "Chrome, Firefox, Safari에서 테스트",
+                "estimated_hours": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "M2.4",
+        "name": "보안 및 UX 개선",
+        "duration": "4주",
+        "priority": "P0",
+        "dependencies": [],
+        "parallel_tracks": [
+          "보안 강화",
+          "UX 개선"
+        ],
+        "description": "API 키 관리, 데이터 암호화, 사용자 경험 향상",
+        "tasks": [
+          {
+            "id": "M2.4.1",
+            "name": "API 키 보안 관리",
+            "estimated_time": "1주",
+            "priority": "P0",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.4.1.1",
+                "name": "AES-256 암호화 구현",
+                "details": "localStorage에 저장되는 API 키 암호화",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.4.1.2",
+                "name": "키 유효성 테스트 기능",
+                "details": "사용자가 입력한 API 키를 실제로 테스트",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.4.1.3",
+                "name": "키 마스킹 UI",
+                "details": "API 키 표시 시 ••••••로 마스킹",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.4.1.4",
+                "name": "로그에서 키 제거",
+                "details": "콘솔 로그 및 에러 로그에서 API 키 노출 방지",
+                "estimated_hours": 4
+              }
+            ]
+          },
+          {
+            "id": "M2.4.2",
+            "name": "데이터 암호화",
+            "estimated_time": "1주",
+            "priority": "P0",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.4.2.1",
+                "name": "민감 데이터 식별",
+                "details": "고객 정보, 재산 정보 등 보호 대상 데이터 분류",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.4.2.2",
+                "name": "전송 중 암호화 (HTTPS 강제)",
+                "details": "모든 API 호출 HTTPS 강제",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.4.2.3",
+                "name": "저장 시 암호화",
+                "details": "localStorage 데이터 암호화",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.4.2.4",
+                "name": "암호화 키 관리",
+                "details": "암호화 키 생성 및 안전한 관리",
+                "estimated_hours": 6
+              }
+            ]
+          },
+          {
+            "id": "M2.4.3",
+            "name": "에러 처리 개선",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.4.3.1",
+                "name": "사용자 친화적 에러 메시지",
+                "details": "에러 타입별 명확한 메시지 및 해결 방법",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.4.3.2",
+                "name": "에러 복구 로직 강화",
+                "details": "자동 재시도, 다른 AI로 전환 등",
+                "estimated_hours": 10
+              },
+              {
+                "id": "M2.4.3.3",
+                "name": "에러 로깅 시스템",
+                "details": "개발자를 위한 상세 로그",
+                "estimated_hours": 6
+              }
+            ]
+          },
+          {
+            "id": "M2.4.4",
+            "name": "온보딩 개선",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.4.4.1",
+                "name": "첫 사용자 튜토리얼 개발",
+                "details": "Intro.js 또는 Shepherd.js 활용",
+                "estimated_hours": 12
+              },
+              {
+                "id": "M2.4.4.2",
+                "name": "샘플 데이터 제공",
+                "details": "'예시 불러오기' 기능 구현",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.4.4.3",
+                "name": "인라인 도움말 추가",
+                "details": "각 입력 필드에 툴팁 추가",
+                "estimated_hours": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "M2.5",
+        "name": "품질 보증 및 테스팅",
+        "duration": "4주",
+        "priority": "P0",
+        "dependencies": [
+          "M2.2",
+          "M2.3",
+          "M2.4"
+        ],
+        "parallel_tracks": [
+          "성능 최적화",
+          "자동화 테스트"
+        ],
+        "description": "성능 최적화 및 포괄적인 테스트 수행",
+        "tasks": [
+          {
+            "id": "M2.5.1",
+            "name": "성능 최적화",
+            "estimated_time": "1주",
+            "priority": "P0",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.5.1.1",
+                "name": "번들 크기 최적화",
+                "details": "Code splitting, lazy loading",
+                "estimated_hours": 10
+              },
+              {
+                "id": "M2.5.1.2",
+                "name": "렌더링 최적화",
+                "details": "React.memo, useMemo 적용",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.5.1.3",
+                "name": "이미지 최적화",
+                "details": "WebP 포맷, lazy loading",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.5.1.4",
+                "name": "Lighthouse 점수 개선",
+                "details": "Performance, Accessibility, SEO 90점 이상",
+                "estimated_hours": 8
+              }
+            ]
+          },
+          {
+            "id": "M2.5.2",
+            "name": "Unit Test 작성",
+            "estimated_time": "1주",
+            "priority": "P0",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.5.2.1",
+                "name": "세금 계산 로직 테스트",
+                "details": "상속세, 증여세, 양도소득세 계산 함수",
+                "estimated_hours": 12
+              },
+              {
+                "id": "M2.5.2.2",
+                "name": "유틸리티 함수 테스트",
+                "details": "promptGenerator, validators 등",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.5.2.3",
+                "name": "React 컴포넌트 테스트",
+                "details": "React Testing Library 활용",
+                "estimated_hours": 10
+              }
+            ]
+          },
+          {
+            "id": "M2.5.3",
+            "name": "Integration Test",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.5.3.1",
+                "name": "AI API 통합 테스트",
+                "details": "Claude, ChatGPT, Perplexity 연동 테스트",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.5.3.2",
+                "name": "워크플로우 통합 테스트",
+                "details": "Step 1~4 전체 플로우",
+                "estimated_hours": 10
+              },
+              {
+                "id": "M2.5.3.3",
+                "name": "데이터 저장/로드 테스트",
+                "details": "localStorage, JSON 다운로드/업로드",
+                "estimated_hours": 6
+              }
+            ]
+          },
+          {
+            "id": "M2.5.4",
+            "name": "E2E Test",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.5.4.1",
+                "name": "Playwright 설정",
+                "details": "E2E 테스트 환경 구축",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.5.4.2",
+                "name": "주요 사용자 플로우 테스트 작성",
+                "details": "상속세 계산, 시나리오 비교, PDF 다운로드",
+                "estimated_hours": 12
+              },
+              {
+                "id": "M2.5.4.3",
+                "name": "크로스 브라우저 테스트",
+                "details": "Chrome, Firefox, Safari, Edge",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.5.4.4",
+                "name": "모바일 반응형 테스트",
+                "details": "다양한 디바이스 크기 테스트",
+                "estimated_hours": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "M2.6",
+        "name": "배포 및 운영",
+        "duration": "2주",
+        "priority": "P0",
+        "dependencies": [
+          "M2.5"
+        ],
+        "parallel_tracks": [
+          "CI/CD 구축",
+          "모니터링 설정"
+        ],
+        "description": "자동화된 배포 파이프라인 구축 및 운영 체계 수립",
+        "tasks": [
+          {
+            "id": "M2.6.1",
+            "name": "CI/CD 파이프라인 구축",
+            "estimated_time": "1주",
+            "priority": "P0",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.6.1.1",
+                "name": "GitHub Actions 워크플로우 설정",
+                "details": "Lint, Test, Build 자동화",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.6.1.2",
+                "name": "Vercel 배포 설정",
+                "details": "Production 및 Preview 환경",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.6.1.3",
+                "name": "환경 변수 관리",
+                "details": "Vercel 환경 변수 설정",
+                "estimated_hours": 2
+              },
+              {
+                "id": "M2.6.1.4",
+                "name": "배포 알림 설정",
+                "details": "슬랙 또는 이메일 알림",
+                "estimated_hours": 2
+              }
+            ]
+          },
+          {
+            "id": "M2.6.2",
+            "name": "Analytics 및 모니터링",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.6.2.1",
+                "name": "Google Analytics 설정",
+                "details": "GA4 통합 및 이벤트 추적",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.6.2.2",
+                "name": "Mixpanel 통합 (선택)",
+                "details": "사용자 행동 분석",
+                "estimated_hours": 6
+              },
+              {
+                "id": "M2.6.2.3",
+                "name": "Sentry 에러 트래킹",
+                "details": "실시간 에러 모니터링",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.6.2.4",
+                "name": "모니터링 대시보드 구축",
+                "details": "주요 메트릭 대시보드",
+                "estimated_hours": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "M2.7",
+        "name": "사용자 확보 및 피드백",
+        "duration": "12주 (전체 Phase 2 기간)",
+        "priority": "P0",
+        "dependencies": [
+          "M2.6"
+        ],
+        "parallel_tracks": [
+          "베타 테스트",
+          "마케팅"
+        ],
+        "description": "100명 베타 사용자 확보 및 피드백 수집 시스템 구축",
+        "tasks": [
+          {
+            "id": "M2.7.1",
+            "name": "베타 테스트 프로그램",
+            "estimated_time": "12주",
+            "priority": "P0",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.7.1.1",
+                "name": "베타 테스터 모집 (목표: 100명)",
+                "details": "세무사, 세무법인, 기업 경리팀 대상",
+                "estimated_hours": 40
+              },
+              {
+                "id": "M2.7.1.2",
+                "name": "온보딩 가이드 제공",
+                "details": "초기 설정 및 사용법 안내",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.7.1.3",
+                "name": "주간 사용 현황 리포트",
+                "details": "베타 테스터별 사용 현황 분석",
+                "estimated_hours": 24
+              },
+              {
+                "id": "M2.7.1.4",
+                "name": "베타 테스터 인터뷰",
+                "details": "월 2회 심층 인터뷰",
+                "estimated_hours": 32
+              }
+            ]
+          },
+          {
+            "id": "M2.7.2",
+            "name": "피드백 시스템 구축",
+            "estimated_time": "1주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.7.2.1",
+                "name": "앱 내 피드백 버튼",
+                "details": "사용자가 쉽게 피드백 제출",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.7.2.2",
+                "name": "피드백 수집 폼 (Typeform/Google Forms)",
+                "details": "구조화된 피드백 수집",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.7.2.3",
+                "name": "피드백 관리 시스템",
+                "details": "Notion 또는 Airtable로 피드백 관리",
+                "estimated_hours": 4
+              },
+              {
+                "id": "M2.7.2.4",
+                "name": "NPS 설문 시스템",
+                "details": "Net Promoter Score 측정",
+                "estimated_hours": 4
+              }
+            ]
+          },
+          {
+            "id": "M2.7.3",
+            "name": "문서화 및 지원",
+            "estimated_time": "2주",
+            "priority": "P1",
+            "assignable": true,
+            "subtasks": [
+              {
+                "id": "M2.7.3.1",
+                "name": "사용자 가이드 업데이트",
+                "details": "양도소득세, PDF 보고서 등 신기능 반영",
+                "estimated_hours": 12
+              },
+              {
+                "id": "M2.7.3.2",
+                "name": "FAQ 페이지 구축",
+                "details": "자주 묻는 질문 정리",
+                "estimated_hours": 8
+              },
+              {
+                "id": "M2.7.3.3",
+                "name": "비디오 튜토리얼 제작",
+                "details": "주요 기능별 2-3분 영상",
+                "estimated_hours": 16
+              },
+              {
+                "id": "M2.7.3.4",
+                "name": "이메일 지원 시스템",
+                "details": "support@ 이메일 설정 및 응답 템플릿",
+                "estimated_hours": 4
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "critical_path": [
+      "M2.1 (세법 DB 구축)",
+      "M2.2 (양도소득세 계산 추가)",
+      "M2.5 (품질 보증 및 테스팅)",
+      "M2.6 (배포 및 운영)",
+      "M2.7 (사용자 확보)"
+    ],
+    "parallel_execution": [
+      {
+        "group": "초기 단계 (Week 1-6)",
+        "parallel_milestones": [
+          "M2.1 (세법 DB 구축)",
+          "M2.4 (보안 및 UX 개선)"
+        ]
+      },
+      {
+        "group": "중기 단계 (Week 7-12)",
+        "parallel_milestones": [
+          "M2.2 (양도소득세 계산)",
+          "M2.3 (PDF 보고서 생성)"
+        ]
+      },
+      {
+        "group": "전체 기간 (Week 1-12)",
+        "parallel_milestones": [
+          "M2.7 (사용자 확보 및 피드백)"
+        ]
+      }
+    ],
+    "task_summary": {
+      "total_tasks": 51,
+      "p0_tasks": 18,
+      "p1_tasks": 33,
+      "p2_tasks": 0,
+      "estimated_total_hours": 982,
+      "estimated_total_weeks": 24.55
+    },
+    "dependency_graph": {
+      "M2.1": {
+        "depends_on": [],
+        "blocks": [
+          "M2.2"
+        ]
+      },
+      "M2.2": {
+        "depends_on": [
+          "M2.1.1.3"
+        ],
+        "blocks": [
+          "M2.3",
+          "M2.5"
+        ]
+      },
+      "M2.3": {
+        "depends_on": [
+          "M2.2"
+        ],
+        "blocks": [
+          "M2.5"
+        ]
+      },
+      "M2.4": {
+        "depends_on": [],
+        "blocks": [
+          "M2.5"
+        ]
+      },
+      "M2.5": {
+        "depends_on": [
+          "M2.2",
+          "M2.3",
+          "M2.4"
+        ],
+        "blocks": [
+          "M2.6"
+        ]
+      },
+      "M2.6": {
+        "depends_on": [
+          "M2.5"
+        ],
+        "blocks": [
+          "M2.7"
+        ]
+      },
+      "M2.7": {
+        "depends_on": [
+          "M2.6"
+        ],
+        "blocks": []
+      }
+    },
+    "resource_allocation": {
+      "roles_needed": [
+        {
+          "role": "Full-stack Developer",
+          "count": 2,
+          "allocation": "100%"
+        },
+        {
+          "role": "Backend Developer",
+          "count": 1,
+          "allocation": "100%"
+        },
+        {
+          "role": "Frontend Developer",
+          "count": 1,
+          "allocation": "100%"
+        },
+        {
+          "role": "QA Engineer",
+          "count": 1,
+          "allocation": "100%"
+        },
+        {
+          "role": "Product Manager",
+          "count": 1,
+          "allocation": "50%"
+        },
+        {
+          "role": "Designer",
+          "count": 1,
+          "allocation": "30%"
+        }
+      ],
+      "estimated_cost": {
+        "personnel": "₩75M (3개월)",
+        "infrastructure": "₩5M",
+        "ai_api": "₩7.5M",
+        "total": "₩87.5M"
+      }
+    },
+    "risk_assessment": [
+      {
+        "risk": "세법 데이터 수집 지연",
+        "probability": "Medium",
+        "impact": "High",
+        "mitigation": "전문 세무사와 파트너십 체결, 국세청 공식 자료 활용"
+      },
+      {
+        "risk": "양도소득세 계산 로직 복잡도",
+        "probability": "High",
+        "impact": "High",
+        "mitigation": "철저한 요구사항 분석, 단계적 구현, 세무 전문가 검증"
+      },
+      {
+        "risk": "PDF 생성 성능 이슈",
+        "probability": "Medium",
+        "impact": "Medium",
+        "mitigation": "백그라운드 처리, 캐싱, 점진적 렌더링"
+      },
+      {
+        "risk": "베타 테스터 확보 실패",
+        "probability": "Medium",
+        "impact": "Critical",
+        "mitigation": "초기 무료 제공, 세무사 네트워크 활용, 인센티브 제공"
+      }
+    ],
+    "success_metrics": {
+      "quantitative": [
+        {
+          "metric": "베타 사용자 수",
+          "target": "100명 이상",
+          "measurement": "사용자 등록 데이터"
+        },
+        {
+          "metric": "월 처리 건수",
+          "target": "500건 이상",
+          "measurement": "백엔드 Analytics"
+        },
+        {
+          "metric": "사용자 만족도 (NPS)",
+          "target": "50 이상",
+          "measurement": "사용자 설문"
+        },
+        {
+          "metric": "시스템 가동률",
+          "target": "99% 이상",
+          "measurement": "모니터링 도구"
+        }
+      ],
+      "qualitative": [
+        {
+          "metric": "사용자 피드백 품질",
+          "target": "구체적이고 실행 가능한 피드백 수집",
+          "measurement": "피드백 분석"
+        },
+        {
+          "metric": "세법 DB 정확성",
+          "target": "세무 전문가 검증 완료",
+          "measurement": "전문가 리뷰"
+        },
+        {
+          "metric": "PDF 보고서 전문성",
+          "target": "실무에서 사용 가능한 수준",
+          "measurement": "세무사 평가"
+        }
+      ]
+    },
+    "implementation_notes": {
+      "task_master_ai_integration": [
+        {
+          "note": "각 마일스톤은 task-master-ai에서 독립적인 프로젝트로 관리 가능",
+          "recommendation": "마일스톤별 task-master-ai 프로젝트 생성"
+        },
+        {
+          "note": "병렬 수행 가능한 작업은 별도 워커에 할당",
+          "recommendation": "M2.1과 M2.4는 동시 착수 가능"
+        },
+        {
+          "note": "의존성이 있는 작업은 선행 작업 완료 대기",
+          "recommendation": "M2.2는 M2.1.1.3 완료 후 시작"
+        },
+        {
+          "note": "우선순위(P0) 작업 먼저 배정",
+          "recommendation": "P0 작업에 리소스 우선 배분"
+        }
+      ],
+      "optimization_opportunities": [
+        {
+          "area": "세법 DB 구축",
+          "optimization": "데이터 수집과 스키마 설계 병렬 진행"
+        },
+        {
+          "area": "양도소득세 계산",
+          "optimization": "로직 구현과 UI 개발 병렬 진행"
+        },
+        {
+          "area": "PDF 보고서",
+          "optimization": "템플릿 디자인과 jsPDF 통합 병렬 진행"
+        },
+        {
+          "area": "보안 및 UX",
+          "optimization": "보안 강화와 UX 개선 병렬 진행"
+        }
+      ]
+    }
+  }
+}

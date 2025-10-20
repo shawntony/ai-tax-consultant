@@ -1,0 +1,698 @@
+{
+  "project": "AI Tax Consultant - Phase 2 (Refined)",
+  "version": "1.1.0",
+  "refinement_date": "2025-10-17",
+  "refinement_reason": "High/Very High 복잡도 작업을 Medium 수준으로 세분화",
+  "original_tasks": 51,
+  "refined_tasks": 82,
+  "added_subtasks": 31,
+
+  "refinement_summary": {
+    "very_high_tasks_refined": 3,
+    "high_tasks_refined": 8,
+    "new_subtasks_created": 31,
+    "average_complexity_before": 3.8,
+    "average_complexity_after": 2.4,
+    "max_task_hours_before": 40,
+    "max_task_hours_after": 10
+  },
+
+  "refined_tasks": [
+    {
+      "original_id": "M2.2.5",
+      "original_name": "양도소득세 계산 엔진 구현",
+      "original_complexity": "🔴 4.8 (Very High)",
+      "original_hours": 24,
+      "refinement_strategy": "기능별 4단계로 분리",
+      "subtasks": [
+        {
+          "id": "M2.2.5.1",
+          "name": "양도차익 계산 모듈 구현",
+          "description": "취득가액, 양도가액, 필요경비 계산",
+          "complexity": "🟡 2.8 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.2.2", "M2.2.3", "M2.2.4"],
+          "acceptance_criteria": [
+            "양도가액 - 취득가액 - 필요경비 = 양도차익",
+            "필요경비 자동 계산 (취득세, 복비 등)",
+            "음수 처리 (양도손실)",
+            "Unit 테스트 커버리지 >90%"
+          ]
+        },
+        {
+          "id": "M2.2.5.2",
+          "name": "장기보유특별공제 적용 모듈",
+          "description": "보유기간 계산 및 공제율 적용",
+          "complexity": "🟡 2.9 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.2.5.1"],
+          "acceptance_criteria": [
+            "보유기간 자동 계산 (년 단위)",
+            "3년~15년 구간별 공제율 적용",
+            "1세대1주택 vs 다주택 공제율 차등",
+            "공제 후 양도차익 계산",
+            "Unit 테스트 작성"
+          ]
+        },
+        {
+          "id": "M2.2.5.3",
+          "name": "세율 적용 및 세액 계산 모듈",
+          "description": "기본세율 + 중과세율 적용",
+          "complexity": "🟡 3.1 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.2.5.2"],
+          "acceptance_criteria": [
+            "기본세율 6-45% 누진 적용",
+            "다주택자 중과세율 10-20% 추가",
+            "조정대상지역 판단 로직",
+            "최종 양도소득세 산출",
+            "Unit 테스트 작성"
+          ]
+        },
+        {
+          "id": "M2.2.5.4",
+          "name": "1세대1주택 비과세 판단 모듈",
+          "description": "비과세 요건 검증 및 세액 조정",
+          "complexity": "🟡 3.0 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.2.5.3"],
+          "acceptance_criteria": [
+            "보유기간 2년 이상 검증",
+            "거주기간 검증 (해당 시)",
+            "9억 비과세 한도 적용",
+            "비과세 시 세액 = 0 처리",
+            "Integration 테스트 작성"
+          ]
+        }
+      ]
+    },
+    {
+      "original_id": "M2.5.2",
+      "original_name": "Unit 테스트 작성",
+      "original_complexity": "🔴 4.7 (Very High)",
+      "original_hours": 40,
+      "refinement_strategy": "도메인별 4개 모듈로 분리",
+      "subtasks": [
+        {
+          "id": "M2.5.2.1",
+          "name": "세금 계산 로직 Unit 테스트",
+          "description": "taxCalculator.js 전체 테스트",
+          "complexity": "🟡 3.2 (Medium)",
+          "estimated_hours": 12,
+          "assignee": "QA Engineer",
+          "dependencies": [],
+          "acceptance_criteria": [
+            "상속세 계산 테스트 (10+ 케이스)",
+            "증여세 계산 테스트 (10+ 케이스)",
+            "양도소득세 계산 테스트 (15+ 케이스)",
+            "엣지 케이스 테스트 (0원, 최대값 등)",
+            "커버리지 >90%"
+          ]
+        },
+        {
+          "id": "M2.5.2.2",
+          "name": "유틸리티 함수 Unit 테스트",
+          "description": "promptGenerator, validators, dataExporter 테스트",
+          "complexity": "🟡 2.7 (Medium)",
+          "estimated_hours": 10,
+          "assignee": "QA Engineer",
+          "dependencies": [],
+          "acceptance_criteria": [
+            "promptGenerator.js 테스트 (AI별 템플릿)",
+            "validators.js 테스트 (입력 검증)",
+            "dataExporter.js 테스트 (JSON 생성)",
+            "커버리지 >85%"
+          ]
+        },
+        {
+          "id": "M2.5.2.3",
+          "name": "React 컴포넌트 Unit 테스트",
+          "description": "주요 UI 컴포넌트 테스트",
+          "complexity": "🟡 3.1 (Medium)",
+          "estimated_hours": 10,
+          "assignee": "QA Engineer",
+          "dependencies": [],
+          "acceptance_criteria": [
+            "CaseInput 컴포넌트 테스트",
+            "NumericalInput 컴포넌트 테스트",
+            "ScenarioComparison 컴포넌트 테스트",
+            "React Testing Library 활용",
+            "커버리지 >80%"
+          ]
+        },
+        {
+          "id": "M2.5.2.4",
+          "name": "커버리지 검증 및 보완",
+          "description": "전체 커버리지 >80% 달성",
+          "complexity": "🟡 2.5 (Medium)",
+          "estimated_hours": 8,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.5.2.1", "M2.5.2.2", "M2.5.2.3"],
+          "acceptance_criteria": [
+            "Jest 커버리지 리포트 생성",
+            "커버리지 갭 분석",
+            "누락된 테스트 추가 작성",
+            "최종 커버리지 >80% 확인",
+            "CI/CD 파이프라인에 커버리지 체크 추가"
+          ]
+        }
+      ]
+    },
+    {
+      "original_id": "M2.3.3",
+      "original_name": "utils/pdfGenerator.js 구현",
+      "original_complexity": "🔴 4.6 (Very High)",
+      "original_hours": 24,
+      "refinement_strategy": "섹션별 4단계로 분리",
+      "subtasks": [
+        {
+          "id": "M2.3.3.1",
+          "name": "PDF 기본 구조 및 헤더 생성",
+          "description": "jsPDF 초기화 및 헤더 섹션",
+          "complexity": "🟡 2.6 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.3.1", "M2.3.2"],
+          "acceptance_criteria": [
+            "jsPDF 문서 초기화",
+            "A4 세로 레이아웃 설정",
+            "헤더: 로고, 제목, 날짜",
+            "한글 폰트 적용 (나눔고딕)",
+            "기본 PDF 생성 테스트"
+          ]
+        },
+        {
+          "id": "M2.3.3.2",
+          "name": "사례 요약 섹션 생성",
+          "description": "사용자 입력 사례 요약 표시",
+          "complexity": "🟡 2.7 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.3.3.1"],
+          "acceptance_criteria": [
+            "사례 내용 텍스트 렌더링",
+            "AI 분석 결과 요약",
+            "세목별 주요 이슈 표시",
+            "자동 줄바꿈 처리",
+            "여백 및 스타일 적용"
+          ]
+        },
+        {
+          "id": "M2.3.3.3",
+          "name": "시나리오 비교표 생성",
+          "description": "테이블 형식 시나리오 비교",
+          "complexity": "🟡 3.0 (Medium)",
+          "estimated_hours": 8,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.3.3.2"],
+          "acceptance_criteria": [
+            "테이블 헤더 (항목, 시나리오1, 2, 3...)",
+            "세목별 세액 표시",
+            "합계 및 최적 시나리오 표시",
+            "금액 천단위 콤마 포맷팅",
+            "테이블 스타일 (테두리, 배경색)"
+          ]
+        },
+        {
+          "id": "M2.3.3.4",
+          "name": "권고사항 및 페이지 번호",
+          "description": "마무리 섹션 및 페이지 관리",
+          "complexity": "🟡 2.3 (Medium)",
+          "estimated_hours": 4,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.3.3.3"],
+          "acceptance_criteria": [
+            "권고사항 섹션 렌더링",
+            "주의사항 표시",
+            "페이지 번호 자동 생성",
+            "다중 페이지 처리",
+            "PDF 저장 기능"
+          ]
+        }
+      ]
+    },
+    {
+      "original_id": "M2.5.5",
+      "original_name": "E2E 테스트 - 전체 워크플로우",
+      "original_complexity": "🟠 4.2 (High)",
+      "original_hours": 24,
+      "refinement_strategy": "워크플로우 단계별 3개로 분리",
+      "subtasks": [
+        {
+          "id": "M2.5.5.1",
+          "name": "Step 1-2 E2E 테스트 (입력 및 AI 분석)",
+          "description": "사례 입력 → AI 선택 → 자동 분석",
+          "complexity": "🟡 3.0 (Medium)",
+          "estimated_hours": 8,
+          "assignee": "QA Engineer",
+          "dependencies": [],
+          "acceptance_criteria": [
+            "사례 텍스트 입력 테스트",
+            "AI 선택 (Claude, ChatGPT, Perplexity)",
+            "다음 단계 버튼 클릭",
+            "AI 분석 완료 대기 (비동기)",
+            "분석 결과 표시 확인"
+          ]
+        },
+        {
+          "id": "M2.5.5.2",
+          "name": "Step 3-4 E2E 테스트 (계산 및 비교)",
+          "description": "수치 입력 → 계산 → 시나리오 비교",
+          "complexity": "🟡 3.1 (Medium)",
+          "estimated_hours": 8,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.5.5.1"],
+          "acceptance_criteria": [
+            "동적 폼 생성 확인",
+            "수치 입력 (상속재산, 채무, 상속인)",
+            "실시간 계산 결과 확인",
+            "시나리오 추가 테스트",
+            "비교표 표시 확인"
+          ]
+        },
+        {
+          "id": "M2.5.5.3",
+          "name": "다운로드 및 에러 복구 E2E 테스트",
+          "description": "JSON 다운로드 및 에러 시나리오",
+          "complexity": "🟡 2.8 (Medium)",
+          "estimated_hours": 8,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.5.5.2"],
+          "acceptance_criteria": [
+            "JSON 다운로드 버튼 클릭",
+            "파일 생성 확인 (Playwright download event)",
+            "API 실패 시나리오 (Mock)",
+            "네트워크 타임아웃 처리",
+            "에러 메시지 표시 확인"
+          ]
+        }
+      ]
+    },
+    {
+      "original_id": "M2.2.6",
+      "original_name": "양도소득세 UI 컴포넌트 개발",
+      "original_complexity": "🟠 4.0 (High)",
+      "original_hours": 20,
+      "refinement_strategy": "UI 영역별 3개로 분리",
+      "subtasks": [
+        {
+          "id": "M2.2.6.1",
+          "name": "기본 입력 폼 개발",
+          "description": "취득가액, 양도가액, 필요경비 입력",
+          "complexity": "🟡 2.6 (Medium)",
+          "estimated_hours": 7,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.2.1"],
+          "acceptance_criteria": [
+            "취득가액 입력 필드 (숫자, 콤마)",
+            "양도가액 입력 필드",
+            "필요경비 입력 필드 (선택)",
+            "입력 검증 (0 이상, 1조 이하)",
+            "반응형 레이아웃"
+          ]
+        },
+        {
+          "id": "M2.2.6.2",
+          "name": "보유기간 및 주택수 입력",
+          "description": "날짜 선택 및 다주택 여부",
+          "complexity": "🟡 2.7 (Medium)",
+          "estimated_hours": 7,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.2.6.1"],
+          "acceptance_criteria": [
+            "취득일 날짜 선택 (DatePicker)",
+            "양도일 날짜 선택",
+            "보유기간 자동 계산 표시",
+            "주택 수 선택 (1, 2, 3+)",
+            "조정대상지역 체크박스"
+          ]
+        },
+        {
+          "id": "M2.2.6.3",
+          "name": "실시간 계산 결과 표시",
+          "description": "계산 엔진 연동 및 결과 UI",
+          "complexity": "🟡 2.9 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.2.6.2", "M2.2.5"],
+          "parallel_with": ["M2.2.5"],
+          "acceptance_criteria": [
+            "입력 변경 시 자동 계산 (debounce 500ms)",
+            "양도차익 표시",
+            "장기보유특별공제 표시",
+            "세율 적용 과정 표시",
+            "최종 양도소득세 표시",
+            "로딩 인디케이터"
+          ]
+        }
+      ]
+    },
+    {
+      "original_id": "M2.4.4",
+      "original_name": "온보딩 튜토리얼 구현",
+      "original_complexity": "🟠 3.9 (High)",
+      "original_hours": 20,
+      "refinement_strategy": "기능별 3개로 분리",
+      "subtasks": [
+        {
+          "id": "M2.4.4.1",
+          "name": "튜토리얼 라이브러리 통합",
+          "description": "Intro.js 또는 Driver.js 설치 및 설정",
+          "complexity": "🟡 2.3 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.4.1"],
+          "acceptance_criteria": [
+            "npm install intro.js (또는 driver.js)",
+            "기본 설정 및 스타일 커스터마이징",
+            "4단계 워크플로우 하이라이트 정의",
+            "다음/이전/건너뛰기 버튼",
+            "데모 페이지 작성"
+          ]
+        },
+        {
+          "id": "M2.4.4.2",
+          "name": "워크플로우 가이드 콘텐츠 작성",
+          "description": "각 단계별 설명 및 샘플 데이터",
+          "complexity": "🟡 2.6 (Medium)",
+          "estimated_hours": 7,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.4.4.1"],
+          "acceptance_criteria": [
+            "Step 1: 사례 입력 가이드 (예시 포함)",
+            "Step 2: AI 선택 가이드",
+            "Step 3: 수치 입력 가이드 (샘플 데이터)",
+            "Step 4: 시나리오 비교 가이드",
+            "API 키 설정 안내",
+            "한글 콘텐츠 교정"
+          ]
+        },
+        {
+          "id": "M2.4.4.3",
+          "name": "튜토리얼 상태 관리 및 완료 처리",
+          "description": "첫 방문 감지 및 다시 보지 않기",
+          "complexity": "🟡 2.8 (Medium)",
+          "estimated_hours": 7,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.4.4.2"],
+          "acceptance_criteria": [
+            "첫 방문 감지 (localStorage)",
+            "튜토리얼 자동 실행",
+            "다시 보지 않기 체크박스",
+            "설정에서 튜토리얼 재실행 버튼",
+            "튜토리얼 완료 추적 (Analytics)"
+          ]
+        }
+      ]
+    },
+    {
+      "original_id": "M2.5.3",
+      "original_name": "Integration 테스트 - AI API",
+      "original_complexity": "🟠 3.8 (High)",
+      "original_hours": 20,
+      "refinement_strategy": "AI별 + 에러 처리로 3개 분리",
+      "subtasks": [
+        {
+          "id": "M2.5.3.1",
+          "name": "AI API Mock 및 테스트 환경 구축",
+          "description": "Mock 서버 및 테스트 데이터 준비",
+          "complexity": "🟡 2.5 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "QA Engineer",
+          "dependencies": [],
+          "acceptance_criteria": [
+            "Mock AI 응답 JSON 생성 (Claude, ChatGPT, Perplexity)",
+            "MSW (Mock Service Worker) 설정",
+            "테스트 케이스별 응답 정의",
+            "성공/실패 시나리오 Mock"
+          ]
+        },
+        {
+          "id": "M2.5.3.2",
+          "name": "AI API 호출 플로우 테스트",
+          "description": "정상 케이스 통합 테스트",
+          "complexity": "🟡 2.8 (Medium)",
+          "estimated_hours": 8,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.5.3.1"],
+          "acceptance_criteria": [
+            "Claude API 호출 및 응답 파싱 테스트",
+            "ChatGPT API 테스트",
+            "Perplexity API 테스트",
+            "프롬프트 생성 검증",
+            "JSON 응답 검증"
+          ]
+        },
+        {
+          "id": "M2.5.3.3",
+          "name": "AI API 에러 처리 테스트",
+          "description": "실패 시나리오 및 재시도 로직",
+          "complexity": "🟡 3.0 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.5.3.2"],
+          "acceptance_criteria": [
+            "401 (API 키 오류) 처리 테스트",
+            "429 (Rate Limit) 재시도 테스트",
+            "500 (Server Error) 처리 테스트",
+            "Timeout 재시도 테스트",
+            "수동 모드 전환 테스트"
+          ]
+        }
+      ]
+    },
+    {
+      "original_id": "M2.1.10",
+      "original_name": "자동 업데이트 시스템 조사",
+      "original_complexity": "🟠 3.7 (High)",
+      "original_hours": 16,
+      "refinement_strategy": "조사 영역별 3개로 분리",
+      "subtasks": [
+        {
+          "id": "M2.1.10.1",
+          "name": "국세청 OpenAPI 조사",
+          "description": "공공데이터 포털 API 가용성 확인",
+          "complexity": "🟡 2.4 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Backend Developer",
+          "dependencies": [],
+          "acceptance_criteria": [
+            "공공데이터 포털 검색 (data.go.kr)",
+            "세법 관련 API 목록 작성",
+            "API 제공 데이터 범위 확인",
+            "API 키 발급 절차 확인",
+            "업데이트 주기 확인"
+          ]
+        },
+        {
+          "id": "M2.1.10.2",
+          "name": "웹 크롤링 가능성 검토",
+          "description": "국세청/법제처 웹사이트 크롤링",
+          "complexity": "🟡 2.7 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Backend Developer",
+          "dependencies": ["M2.1.10.1"],
+          "acceptance_criteria": [
+            "국세청 사이트 구조 분석",
+            "법제처 세법 조문 크롤링 테스트",
+            "robots.txt 확인",
+            "법적 이슈 검토 (저작권, 이용약관)",
+            "크롤링 라이브러리 후보 (Cheerio, Puppeteer)"
+          ]
+        },
+        {
+          "id": "M2.1.10.3",
+          "name": "업데이트 알림 시스템 설계",
+          "description": "세법 변경 감지 및 알림",
+          "complexity": "🟡 2.8 (Medium)",
+          "estimated_hours": 4,
+          "assignee": "Backend Developer",
+          "dependencies": ["M2.1.10.1", "M2.1.10.2"],
+          "acceptance_criteria": [
+            "데이터 변경 감지 로직 설계",
+            "버전 관리 시스템 (v2024, v2025 등)",
+            "관리자 알림 방법 (이메일, Slack)",
+            "사용자 알림 방법 (앱 내 배너)",
+            "업데이트 주기 정의 (월 1회, 분기 1회 등)"
+          ]
+        }
+      ]
+    },
+    {
+      "original_id": "M2.4.1",
+      "original_name": "API 키 관리 UI 구현",
+      "original_complexity": "🟠 3.7 (High)",
+      "original_hours": 16,
+      "refinement_strategy": "기능별 3개로 분리",
+      "subtasks": [
+        {
+          "id": "M2.4.1.1",
+          "name": "설정 페이지 라우팅 및 레이아웃",
+          "description": "설정 페이지 기본 구조",
+          "complexity": "🟡 2.2 (Medium)",
+          "estimated_hours": 5,
+          "assignee": "Frontend Developer",
+          "dependencies": [],
+          "acceptance_criteria": [
+            "/settings 라우트 추가",
+            "설정 페이지 레이아웃 (사이드바 + 콘텐츠)",
+            "탭 메뉴 (API 키, 테마, 알림 등)",
+            "반응형 디자인",
+            "네비게이션 링크"
+          ]
+        },
+        {
+          "id": "M2.4.1.2",
+          "name": "API 키 입력 폼 개발",
+          "description": "3개 AI API 키 입력 및 마스킹",
+          "complexity": "🟡 2.8 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.4.1.1"],
+          "acceptance_criteria": [
+            "Claude API 키 입력 필드",
+            "ChatGPT API 키 입력 필드",
+            "Perplexity API 키 입력 필드",
+            "입력 시 마스킹 (••••••)",
+            "보기/숨기기 토글 버튼",
+            "저장 버튼 및 취소 버튼"
+          ]
+        },
+        {
+          "id": "M2.4.1.3",
+          "name": "키 검증 및 저장 기능",
+          "description": "유효성 테스트 및 암호화 저장",
+          "complexity": "🟡 3.1 (Medium)",
+          "estimated_hours": 5,
+          "assignee": "Frontend Developer",
+          "dependencies": ["M2.4.1.2", "M2.4.2"],
+          "acceptance_criteria": [
+            "키 유효성 테스트 버튼 (실제 API 호출)",
+            "테스트 결과 표시 (성공/실패)",
+            "localStorage 암호화 저장 (M2.4.2 연동)",
+            "키 삭제 기능",
+            "토스트 알림 (저장 완료, 오류)"
+          ]
+        }
+      ]
+    },
+    {
+      "original_id": "M2.5.1",
+      "original_name": "성능 최적화",
+      "original_complexity": "🟠 3.6 (High)",
+      "original_hours": 16,
+      "refinement_strategy": "최적화 영역별 3개로 분리",
+      "subtasks": [
+        {
+          "id": "M2.5.1.1",
+          "name": "번들 분석 및 Code Splitting",
+          "description": "Webpack Bundle Analyzer 및 라우트 분리",
+          "complexity": "🟡 2.7 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Full-stack Developer",
+          "dependencies": [],
+          "acceptance_criteria": [
+            "Webpack Bundle Analyzer 설치 및 실행",
+            "번들 사이즈 분석 리포트",
+            "React.lazy로 라우트별 코드 스플리팅",
+            "동적 import 적용 (PDF, Chart.js)",
+            "초기 번들 사이즈 <300KB 목표"
+          ]
+        },
+        {
+          "id": "M2.5.1.2",
+          "name": "Tree Shaking 및 의존성 최적화",
+          "description": "불필요한 코드 제거 및 경량 라이브러리",
+          "complexity": "🟡 2.8 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.5.1.1"],
+          "acceptance_criteria": [
+            "사용하지 않는 import 제거",
+            "Lodash → Lodash-es (Tree Shaking 지원)",
+            "Moment.js → date-fns (경량)",
+            "불필요한 의존성 제거",
+            "번들 사이즈 20% 감소"
+          ]
+        },
+        {
+          "id": "M2.5.1.3",
+          "name": "이미지 및 리소스 최적화",
+          "description": "Lazy Loading 및 압축",
+          "complexity": "🟡 2.5 (Medium)",
+          "estimated_hours": 4,
+          "assignee": "Full-stack Developer",
+          "dependencies": ["M2.5.1.2"],
+          "acceptance_criteria": [
+            "이미지 Lazy Loading (Intersection Observer)",
+            "이미지 WebP 포맷 변환",
+            "아이콘 SVG 최적화",
+            "폰트 서브셋팅",
+            "최종 번들 사이즈 <500KB 달성"
+          ]
+        }
+      ]
+    },
+    {
+      "original_id": "M2.5.6",
+      "original_name": "E2E 테스트 - 양도소득세",
+      "original_complexity": "🟠 3.6 (High)",
+      "original_hours": 16,
+      "refinement_strategy": "시나리오별 3개로 분리",
+      "subtasks": [
+        {
+          "id": "M2.5.6.1",
+          "name": "1세대1주택 비과세 시나리오 테스트",
+          "description": "비과세 요건 충족 케이스",
+          "complexity": "🟡 2.6 (Medium)",
+          "estimated_hours": 5,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.2.5", "M2.2.6"],
+          "acceptance_criteria": [
+            "보유기간 2년 이상 입력",
+            "1세대1주택 선택",
+            "양도가액 9억 이하",
+            "세액 = 0 확인",
+            "비과세 메시지 표시 확인"
+          ]
+        },
+        {
+          "id": "M2.5.6.2",
+          "name": "장기보유특별공제 시나리오 테스트",
+          "description": "보유기간별 공제율 적용",
+          "complexity": "🟡 2.7 (Medium)",
+          "estimated_hours": 6,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.2.5", "M2.2.6"],
+          "acceptance_criteria": [
+            "보유기간 3년, 5년, 10년, 15년 케이스",
+            "공제율 자동 적용 확인",
+            "공제 후 양도차익 계산 확인",
+            "세액 감소 확인",
+            "공제율 표시 확인"
+          ]
+        },
+        {
+          "id": "M2.5.6.3",
+          "name": "다주택자 중과세율 시나리오 테스트",
+          "description": "2주택, 3주택 이상 케이스",
+          "complexity": "🟡 2.8 (Medium)",
+          "estimated_hours": 5,
+          "assignee": "QA Engineer",
+          "dependencies": ["M2.2.5", "M2.2.6"],
+          "acceptance_criteria": [
+            "2주택 선택 → 중과세율 10% 추가 확인",
+            "3주택 이상 → 중과세율 20% 추가 확인",
+            "조정대상지역 체크 → 세액 증가 확인",
+            "중과세율 표시 확인",
+            "최종 세액 정확성 검증"
+          ]
+        }
+      ]
+    }
+  ]
+}

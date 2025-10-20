@@ -1,0 +1,449 @@
+{
+  "metadata": {
+    "dataType": "capitalGainsTaxRates",
+    "taxCategory": "양도소득세 (Capital Gains Tax)",
+    "fiscalYear": 2024,
+    "collectedDate": "2025-10-17",
+    "source": "소득세법 제104조 (양도소득 과세표준), 제104조의2 (세율)",
+    "legalReference": {
+      "law": "소득세법",
+      "article": "제94조 (양도소득), 제104조 (과세표준), 제104조의2 (세율)",
+      "lastRevision": "2024-01-01",
+      "url": "https://www.law.go.kr"
+    },
+    "validPeriod": {
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "notes": "2024년 과세기간 기준"
+    },
+    "collectedBy": "AI Tax Consultant Project - Phase 2",
+    "version": "1.0.0",
+    "complexity": "HIGH",
+    "notes": "양도소득세는 자산 유형, 보유기간, 주택 수, 거주 여부 등에 따라 세율이 달라짐"
+  },
+  "generalTaxRateStructure": {
+    "type": "progressive",
+    "description": "일반 부동산 양도소득세 누진세율 (8단계)",
+    "currency": "KRW",
+    "unit": "원 (Korean Won)",
+    "applicableTo": "일반 부동산, 다주택자",
+    "brackets": [
+      {
+        "bracketNumber": 1,
+        "taxBaseMin": 0,
+        "taxBaseMax": 14000000,
+        "taxBaseDescription": "1,400만원 이하",
+        "taxRate": 0.06,
+        "taxRatePercent": "6%",
+        "progressiveDeduction": 0,
+        "progressiveDeductionDescription": "0원",
+        "formula": "과세표준 × 6%"
+      },
+      {
+        "bracketNumber": 2,
+        "taxBaseMin": 14000001,
+        "taxBaseMax": 50000000,
+        "taxBaseDescription": "1,400만원 초과 5,000만원 이하",
+        "taxRate": 0.15,
+        "taxRatePercent": "15%",
+        "progressiveDeduction": 1260000,
+        "progressiveDeductionDescription": "126만원",
+        "formula": "과세표준 × 15% - 126만원"
+      },
+      {
+        "bracketNumber": 3,
+        "taxBaseMin": 50000001,
+        "taxBaseMax": 88000000,
+        "taxBaseDescription": "5,000만원 초과 8,800만원 이하",
+        "taxRate": 0.24,
+        "taxRatePercent": "24%",
+        "progressiveDeduction": 5760000,
+        "progressiveDeductionDescription": "576만원",
+        "formula": "과세표준 × 24% - 576만원"
+      },
+      {
+        "bracketNumber": 4,
+        "taxBaseMin": 88000001,
+        "taxBaseMax": 150000000,
+        "taxBaseDescription": "8,800만원 초과 1억5,000만원 이하",
+        "taxRate": 0.35,
+        "taxRatePercent": "35%",
+        "progressiveDeduction": 15440000,
+        "progressiveDeductionDescription": "1,544만원",
+        "formula": "과세표준 × 35% - 1,544만원"
+      },
+      {
+        "bracketNumber": 5,
+        "taxBaseMin": 150000001,
+        "taxBaseMax": 300000000,
+        "taxBaseDescription": "1억5,000만원 초과 3억원 이하",
+        "taxRate": 0.38,
+        "taxRatePercent": "38%",
+        "progressiveDeduction": 19940000,
+        "progressiveDeductionDescription": "1,994만원",
+        "formula": "과세표준 × 38% - 1,994만원"
+      },
+      {
+        "bracketNumber": 6,
+        "taxBaseMin": 300000001,
+        "taxBaseMax": 500000000,
+        "taxBaseDescription": "3억원 초과 5억원 이하",
+        "taxRate": 0.40,
+        "taxRatePercent": "40%",
+        "progressiveDeduction": 25940000,
+        "progressiveDeductionDescription": "2,594만원",
+        "formula": "과세표준 × 40% - 2,594만원"
+      },
+      {
+        "bracketNumber": 7,
+        "taxBaseMin": 500000001,
+        "taxBaseMax": 1000000000,
+        "taxBaseDescription": "5억원 초과 10억원 이하",
+        "taxRate": 0.42,
+        "taxRatePercent": "42%",
+        "progressiveDeduction": 35940000,
+        "progressiveDeductionDescription": "3,594만원",
+        "formula": "과세표준 × 42% - 3,594만원"
+      },
+      {
+        "bracketNumber": 8,
+        "taxBaseMin": 1000000001,
+        "taxBaseMax": null,
+        "taxBaseDescription": "10억원 초과",
+        "taxRate": 0.45,
+        "taxRatePercent": "45%",
+        "progressiveDeduction": 65940000,
+        "progressiveDeductionDescription": "6,594만원",
+        "formula": "과세표준 × 45% - 6,594만원",
+        "notes": "상한 없음"
+      }
+    ]
+  },
+  "oneHouseOneHouseholdExemption": {
+    "name": "1세대1주택 비과세",
+    "description": "1세대가 1주택을 2년 이상 보유하고 거주한 경우 비과세",
+    "legalBasis": "소득세법 제89조 제1항 제3호",
+    "requirements": [
+      "보유기간 2년 이상",
+      "거주기간 2년 이상 (비조정대상지역)",
+      "조정대상지역: 거주기간 2년 이상 추가 요구",
+      "양도가액 12억원 이하 (고가주택 기준)"
+    ],
+    "highValueHomeThreshold": 1200000000,
+    "highValueHomeTax": {
+      "description": "12억원 초과 주택은 초과분에 대해 과세",
+      "formula": "[(양도가액 - 12억) / 양도가액] × 양도차익 × 세율",
+      "applicableTaxRate": "일반세율 (8단계 누진세율)"
+    },
+    "exceptions": [
+      "일시적 2주택 (이사 등)",
+      "상속 주택",
+      "혼인합가 주택"
+    ]
+  },
+  "longTermHoldingDeduction": {
+    "name": "장기보유특별공제",
+    "description": "3년 이상 보유 시 보유기간에 따라 양도차익에서 공제",
+    "legalBasis": "소득세법 제95조",
+    "deductionRates": {
+      "oneHouseOneHousehold": {
+        "description": "1세대1주택 (거주 + 보유)",
+        "rates": [
+          { "years": "3년 이상 4년 미만", "rate": 0.12, "description": "12%" },
+          { "years": "4년 이상 5년 미만", "rate": 0.16, "description": "16%" },
+          { "years": "5년 이상 6년 미만", "rate": 0.20, "description": "20%" },
+          { "years": "6년 이상 7년 미만", "rate": 0.24, "description": "24%" },
+          { "years": "7년 이상 8년 미만", "rate": 0.28, "description": "28%" },
+          { "years": "8년 이상 9년 미만", "rate": 0.32, "description": "32%" },
+          { "years": "9년 이상 10년 미만", "rate": 0.36, "description": "36%" },
+          { "years": "10년 이상 11년 미만", "rate": 0.40, "description": "40%" },
+          { "years": "11년 이상 12년 미만", "rate": 0.48, "description": "48%" },
+          { "years": "12년 이상 13년 미만", "rate": 0.56, "description": "56%" },
+          { "years": "13년 이상 14년 미만", "rate": 0.64, "description": "64%" },
+          { "years": "14년 이상 15년 미만", "rate": 0.72, "description": "72%" },
+          { "years": "15년 이상", "rate": 0.80, "description": "80%" }
+        ],
+        "maxRate": 0.80,
+        "notes": "보유기간 + 거주기간을 합산하여 공제율 적용"
+      },
+      "generalRealEstate": {
+        "description": "일반 부동산",
+        "rates": [
+          { "years": "3년 이상 4년 미만", "rate": 0.06, "description": "6%" },
+          { "years": "4년 이상 5년 미만", "rate": 0.08, "description": "8%" },
+          { "years": "5년 이상 6년 미만", "rate": 0.10, "description": "10%" },
+          { "years": "6년 이상 7년 미만", "rate": 0.12, "description": "12%" },
+          { "years": "7년 이상 8년 미만", "rate": 0.14, "description": "14%" },
+          { "years": "8년 이상 9년 미만", "rate": 0.16, "description": "16%" },
+          { "years": "9년 이상 10년 미만", "rate": 0.18, "description": "18%" },
+          { "years": "10년 이상 11년 미만", "rate": 0.20, "description": "20%" },
+          { "years": "11년 이상 12년 미만", "rate": 0.24, "description": "24%" },
+          { "years": "12년 이상 13년 미만", "rate": 0.28, "description": "28%" },
+          { "years": "13년 이상 14년 미만", "rate": 0.32, "description": "32%" },
+          { "years": "14년 이상 15년 미만", "rate": 0.36, "description": "36%" },
+          { "years": "15년 이상", "rate": 0.40, "description": "40%" }
+        ],
+        "maxRate": 0.40,
+        "notes": "보유기간만 적용 (거주기간 불포함)"
+      }
+    }
+  },
+  "multipleHomeTaxRates": {
+    "name": "다주택자 중과세율",
+    "description": "2주택 이상 보유 시 중과세율 적용 (조정대상지역)",
+    "legalBasis": "소득세법 제104조의3",
+    "twoHomes": {
+      "description": "2주택자",
+      "additionalTaxRate": 0.20,
+      "notes": "기본세율 + 20%p (최고 62%)",
+      "example": {
+        "taxBase": 100000000,
+        "basicRate": 0.35,
+        "additionalRate": 0.20,
+        "totalRate": 0.55,
+        "calculation": "1억 × 55% = 5,500만원"
+      }
+    },
+    "threeOrMoreHomes": {
+      "description": "3주택 이상",
+      "additionalTaxRate": 0.30,
+      "notes": "기본세율 + 30%p (최고 72%)",
+      "example": {
+        "taxBase": 100000000,
+        "basicRate": 0.35,
+        "additionalRate": 0.30,
+        "totalRate": 0.65,
+        "calculation": "1억 × 65% = 6,500만원"
+      }
+    },
+    "applicableRegions": {
+      "description": "조정대상지역 내 주택에만 적용",
+      "checkRequired": "양도 시점 조정대상지역 여부 확인 필요",
+      "notes": "비조정대상지역 주택은 중과 배제"
+    }
+  },
+  "calculationFormula": {
+    "general": "양도소득세 = (양도차익 - 장기보유특별공제) × 세율 - 누진공제",
+    "steps": [
+      "1. 양도차익 계산 = 양도가액 - (취득가액 + 필요경비)",
+      "2. 장기보유특별공제 계산 (3년 이상 보유 시)",
+      "3. 과세표준 = 양도차익 - 장기보유특별공제 - 기본공제(250만원)",
+      "4. 세율 적용 (8단계 누진세율 또는 중과세율)",
+      "5. 산출세액 = 과세표준 × 세율 - 누진공제",
+      "6. 지방소득세 = 산출세액 × 10%"
+    ],
+    "detailedCalculation": {
+      "transferPrice": "양도가액 (실제 거래가격)",
+      "acquisitionCost": "취득가액 + 취득세 + 복비 등",
+      "necessaryExpenses": "자본적 지출, 양도비용 등",
+      "capitalGain": "양도차익 = 양도가액 - (취득가액 + 필요경비)",
+      "longTermDeduction": "장기보유특별공제 = 양도차익 × 공제율",
+      "basicDeduction": "기본공제 250만원 (1년 1회)",
+      "taxBase": "과세표준 = 양도차익 - 장기보유특별공제 - 기본공제",
+      "taxAmount": "산출세액 = 과세표준 × 세율 - 누진공제",
+      "localIncomeTax": "지방소득세 = 산출세액 × 10%",
+      "totalTax": "총 납부세액 = 산출세액 + 지방소득세"
+    }
+  },
+  "usageGuidelines": {
+    "implementationPath": "src/constants/taxRates.js",
+    "functionName": "calculateCapitalGainsTax(transferPrice, acquisitionCost, holdingYears, houseCount, isRegulatedArea)",
+    "inputValidation": [
+      "transferPrice must be > 0",
+      "acquisitionCost must be > 0",
+      "holdingYears must be >= 0",
+      "houseCount: 1 | 2 | 3+ (for multiple home surcharge)",
+      "isRegulatedArea: boolean (for surcharge application)"
+    ],
+    "outputFormat": {
+      "capitalGain": "number (양도차익)",
+      "longTermDeduction": "number (장기보유특별공제)",
+      "taxBase": "number (과세표준)",
+      "basicTaxRate": "number (기본세율)",
+      "additionalTaxRate": "number (중과세율, if applicable)",
+      "totalTaxRate": "number (총 세율)",
+      "taxAmount": "number (산출세액)",
+      "localIncomeTax": "number (지방소득세)",
+      "totalTax": "number (총 납부세액)",
+      "effectiveTaxRate": "number (실효세율)"
+    },
+    "testCases": [
+      {
+        "testId": "TC-CGT-001",
+        "description": "1세대1주택 비과세 (2년 이상 보유, 12억 이하)",
+        "input": {
+          "transferPrice": 1000000000,
+          "acquisitionCost": 600000000,
+          "holdingYears": 3,
+          "houseCount": 1,
+          "isOneHouseHold": true
+        },
+        "expectedOutput": {
+          "taxAmount": 0,
+          "exemptionReason": "1세대1주택 비과세 (12억 이하, 2년 이상 보유)"
+        }
+      },
+      {
+        "testId": "TC-CGT-002",
+        "description": "1세대1주택 고가주택 (12억 초과)",
+        "input": {
+          "transferPrice": 1500000000,
+          "acquisitionCost": 800000000,
+          "holdingYears": 5,
+          "houseCount": 1,
+          "isOneHouseHold": true
+        },
+        "calculation": {
+          "capitalGain": 700000000,
+          "taxableRatio": 0.20,
+          "taxableCapitalGain": 140000000,
+          "longTermDeduction": 28000000,
+          "taxBase": 109500000,
+          "taxRate": 0.35,
+          "progressiveDeduction": 15440000,
+          "taxAmount": 22885000,
+          "localIncomeTax": 2288500,
+          "totalTax": 25173500
+        }
+      },
+      {
+        "testId": "TC-CGT-003",
+        "description": "일반 부동산 (5년 보유)",
+        "input": {
+          "transferPrice": 500000000,
+          "acquisitionCost": 300000000,
+          "holdingYears": 5,
+          "houseCount": 1,
+          "isOneHouseHold": false
+        },
+        "calculation": {
+          "capitalGain": 200000000,
+          "longTermDeduction": 20000000,
+          "taxBase": 177500000,
+          "taxRate": 0.38,
+          "progressiveDeduction": 19940000,
+          "taxAmount": 47510000,
+          "localIncomeTax": 4751000,
+          "totalTax": 52261000
+        }
+      },
+      {
+        "testId": "TC-CGT-004",
+        "description": "2주택자 중과 (조정대상지역)",
+        "input": {
+          "transferPrice": 800000000,
+          "acquisitionCost": 500000000,
+          "holdingYears": 2,
+          "houseCount": 2,
+          "isRegulatedArea": true
+        },
+        "calculation": {
+          "capitalGain": 300000000,
+          "longTermDeduction": 0,
+          "taxBase": 297500000,
+          "basicTaxRate": 0.38,
+          "surchargeRate": 0.20,
+          "totalTaxRate": 0.58,
+          "taxAmount": 152590000,
+          "localIncomeTax": 15259000,
+          "totalTax": 167849000
+        }
+      },
+      {
+        "testId": "TC-CGT-005",
+        "description": "3주택 이상 중과 (조정대상지역)",
+        "input": {
+          "transferPrice": 1000000000,
+          "acquisitionCost": 600000000,
+          "holdingYears": 1,
+          "houseCount": 3,
+          "isRegulatedArea": true
+        },
+        "calculation": {
+          "capitalGain": 400000000,
+          "longTermDeduction": 0,
+          "taxBase": 397500000,
+          "basicTaxRate": 0.40,
+          "surchargeRate": 0.30,
+          "totalTaxRate": 0.70,
+          "taxAmount": 252310000,
+          "localIncomeTax": 25231000,
+          "totalTax": 277541000
+        }
+      }
+    ]
+  },
+  "specialConsiderations": {
+    "necessaryExpenses": {
+      "acquisitionCosts": [
+        "취득세",
+        "등록세",
+        "부동산 중개수수료",
+        "법무사 수수료",
+        "인지대"
+      ],
+      "improvementCosts": [
+        "자본적 지출 (증축, 개축, 개량)",
+        "시설비용 (단, 수선비는 불포함)"
+      ],
+      "transferCosts": [
+        "양도 시 부동산 중개수수료",
+        "인지대",
+        "법무사 수수료"
+      ]
+    },
+    "adjustedRegions": {
+      "description": "조정대상지역 주택은 중과세 및 특별규정 적용",
+      "checkRequired": "국토교통부 조정대상지역 고시 확인 필요",
+      "changeFrequency": "수시 변경 가능",
+      "notes": "양도 시점 기준으로 판단"
+    },
+    "localIncomeTax": {
+      "rate": 0.10,
+      "description": "양도소득세의 10%를 지방소득세로 납부",
+      "separateFiling": "별도 신고 및 납부"
+    }
+  },
+  "integrationNotes": {
+    "phase2Tasks": [
+      "M2.1.1: 상속세 세율 데이터 수집 ✅",
+      "M2.1.2: 증여세 세율 데이터 수집 ✅",
+      "M2.1.3: 양도소득세 세율 데이터 수집 ✅ (현재 작업)",
+      "M2.1.6: 양도소득세 공제 데이터 수집 (장기보유특별공제 상세)",
+      "M2.2: 양도소득세 계산 엔진 구현 (6주 예상)",
+      "M2.2.5: 양도소득세 계산 엔진 완성"
+    ],
+    "implementationComplexity": {
+      "high": [
+        "다주택자 판단 로직 (시점별 보유 주택 수 추적)",
+        "조정대상지역 여부 확인 (시점별 변동 반영)",
+        "1세대1주택 비과세 요건 검증 (보유기간, 거주기간)",
+        "장기보유특별공제 계산 (보유기간 + 거주기간 합산)",
+        "필요경비 상세 계산 (취득/개량/양도비용)"
+      ]
+    },
+    "dataRequirements": [
+      "부동산 거래 이력 (취득일, 양도일)",
+      "보유 주택 수 변동 이력",
+      "거주 이력 (1세대1주택 판단)",
+      "조정대상지역 고시 이력",
+      "필요경비 상세 내역"
+    ],
+    "nextSteps": [
+      "1. 이 JSON 데이터를 검증",
+      "2. 공제 한도 데이터 수집 시작 (M2.1.4~M2.1.6)",
+      "3. 양도소득세 상세 계산 로직 설계",
+      "4. 조정대상지역 데이터베이스 구축 방안 검토"
+    ]
+  },
+  "qualityAssurance": {
+    "dataAccuracy": "소득세법 제104조 기준으로 정확히 수집됨",
+    "rateStructure": "8단계 누진세율 구조 완전 반영",
+    "specialProvisions": "1세대1주택 비과세, 장기보유특별공제, 중과세율 모두 포함",
+    "completeness": "양도소득세 계산에 필요한 모든 세율 정보 포함",
+    "structuredFormat": "JSON 형식으로 구조화 완료",
+    "documentation": "출처, 유효기간, 계산 예시, 특별 규정 모두 포함",
+    "testCoverage": "5개 테스트 케이스 (비과세, 고가주택, 일반, 2주택, 3주택 이상) 정의",
+    "implementation": "계산 로직, 입력 검증, 특별 고려사항 포함"
+  }
+}
