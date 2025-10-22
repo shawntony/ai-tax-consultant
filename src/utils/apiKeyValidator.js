@@ -9,7 +9,7 @@
  */
 
 /**
- * Claude API 키 테스트
+ * Claude API 키 테스트 (프록시 서버 사용)
  * @param {string} apiKey - Anthropic Claude API 키
  * @returns {Promise<{valid: boolean, message: string}>}
  */
@@ -22,54 +22,26 @@ export async function validateClaudeKey(apiKey) {
   }
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('http://localhost:3001/api/validate/claude', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        model: 'claude-3-haiku-20240307',
-        max_tokens: 10,
-        messages: [{
-          role: 'user',
-          content: 'test'
-        }]
-      })
+      body: JSON.stringify({ apiKey })
     });
 
-    if (response.ok) {
-      return {
-        valid: true,
-        message: 'Claude API 키가 유효합니다'
-      };
-    } else if (response.status === 401) {
-      return {
-        valid: false,
-        message: 'API 키가 유효하지 않습니다 (401 Unauthorized)'
-      };
-    } else if (response.status === 429) {
-      return {
-        valid: true,
-        message: 'API 키는 유효하지만 요청 한도를 초과했습니다 (429)'
-      };
-    } else {
-      return {
-        valid: false,
-        message: `API 오류 (${response.status})`
-      };
-    }
+    const result = await response.json();
+    return result;
   } catch (error) {
     return {
       valid: false,
-      message: `네트워크 오류: ${error.message}`
+      message: `프록시 서버 연결 오류: ${error.message}. 프록시 서버가 실행 중인지 확인하세요.`
     };
   }
 }
 
 /**
- * ChatGPT (OpenAI) API 키 테스트
+ * ChatGPT (OpenAI) API 키 테스트 (프록시 서버 사용)
  * @param {string} apiKey - OpenAI API 키
  * @returns {Promise<{valid: boolean, message: string}>}
  */
@@ -82,44 +54,26 @@ export async function validateChatGPTKey(apiKey) {
   }
 
   try {
-    const response = await fetch('https://api.openai.com/v1/models', {
-      method: 'GET',
+    const response = await fetch('http://localhost:3001/api/validate/chatgpt', {
+      method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`
-      }
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ apiKey })
     });
 
-    if (response.ok) {
-      return {
-        valid: true,
-        message: 'ChatGPT API 키가 유효합니다'
-      };
-    } else if (response.status === 401) {
-      return {
-        valid: false,
-        message: 'API 키가 유효하지 않습니다 (401 Unauthorized)'
-      };
-    } else if (response.status === 429) {
-      return {
-        valid: true,
-        message: 'API 키는 유효하지만 요청 한도를 초과했습니다 (429)'
-      };
-    } else {
-      return {
-        valid: false,
-        message: `API 오류 (${response.status})`
-      };
-    }
+    const result = await response.json();
+    return result;
   } catch (error) {
     return {
       valid: false,
-      message: `네트워크 오류: ${error.message}`
+      message: `프록시 서버 연결 오류: ${error.message}. 프록시 서버가 실행 중인지 확인하세요.`
     };
   }
 }
 
 /**
- * Perplexity AI API 키 테스트
+ * Perplexity AI API 키 테스트 (프록시 서버 사용)
  * @param {string} apiKey - Perplexity API 키
  * @returns {Promise<{valid: boolean, message: string}>}
  */
@@ -132,47 +86,20 @@ export async function validatePerplexityKey(apiKey) {
   }
 
   try {
-    const response = await fetch('https://api.perplexity.ai/chat/completions', {
+    const response = await fetch('http://localhost:3001/api/validate/perplexity', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        model: 'llama-3.1-sonar-small-128k-online',
-        messages: [{
-          role: 'user',
-          content: 'test'
-        }],
-        max_tokens: 10
-      })
+      body: JSON.stringify({ apiKey })
     });
 
-    if (response.ok) {
-      return {
-        valid: true,
-        message: 'Perplexity API 키가 유효합니다'
-      };
-    } else if (response.status === 401) {
-      return {
-        valid: false,
-        message: 'API 키가 유효하지 않습니다 (401 Unauthorized)'
-      };
-    } else if (response.status === 429) {
-      return {
-        valid: true,
-        message: 'API 키는 유효하지만 요청 한도를 초과했습니다 (429)'
-      };
-    } else {
-      return {
-        valid: false,
-        message: `API 오류 (${response.status})`
-      };
-    }
+    const result = await response.json();
+    return result;
   } catch (error) {
     return {
       valid: false,
-      message: `네트워크 오류: ${error.message}`
+      message: `프록시 서버 연결 오류: ${error.message}. 프록시 서버가 실행 중인지 확인하세요.`
     };
   }
 }

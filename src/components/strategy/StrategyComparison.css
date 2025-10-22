@@ -1,0 +1,339 @@
+/* StrategyComparison.css */
+
+.strategy-comparison {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.strategy-comparison.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: #94a3b8;
+}
+
+/* 헤더 */
+.comparison-header {
+  margin-bottom: 24px;
+}
+
+.comparison-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+}
+
+.comparison-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 1px solid #e2e8f0;
+}
+
+.legend-color.recommended {
+  background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 100%);
+}
+
+.legend-color.low {
+  background: #10b981;
+}
+
+.legend-color.medium {
+  background: #f59e0b;
+}
+
+.legend-color.high {
+  background: #ef4444;
+}
+
+/* 테이블 래퍼 */
+.comparison-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 32px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+/* 테이블 */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.comparison-table thead {
+  background: #f8fafc;
+}
+
+.comparison-table th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 2px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.comparison-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.comparison-table th.sortable:hover {
+  background: #f1f5f9;
+}
+
+.comparison-table td {
+  padding: 16px;
+  font-size: 14px;
+  color: #1e293b;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.comparison-table tbody tr {
+  transition: background 0.2s;
+}
+
+.comparison-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.comparison-table tbody tr.recommended-row {
+  background: linear-gradient(90deg, #fef3c7 0%, #ffffff 100%);
+}
+
+.comparison-table tbody tr.recommended-row:hover {
+  background: linear-gradient(90deg, #fef3c7 0%, #fef9e7 100%);
+}
+
+/* 컬럼 스타일 */
+.col-scenario {
+  width: 180px;
+  min-width: 180px;
+}
+
+.col-description {
+  min-width: 250px;
+}
+
+.col-tax {
+  text-align: right;
+  width: 130px;
+  min-width: 130px;
+}
+
+.col-tax.total-tax {
+  background: #f8fafc;
+  font-weight: 600;
+}
+
+.col-complexity {
+  width: 100px;
+  text-align: center;
+}
+
+.col-timeframe {
+  width: 120px;
+  text-align: center;
+}
+
+/* 시나리오명 */
+.scenario-name {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scenario-name .name {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* 배지 */
+.badge-recommended {
+  display: inline-block;
+  padding: 4px 10px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-complexity {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+.badge-complexity.complexity-low {
+  background: #10b981;
+}
+
+.badge-complexity.complexity-medium {
+  background: #f59e0b;
+}
+
+.badge-complexity.complexity-high {
+  background: #ef4444;
+}
+
+/* 설명 텍스트 */
+.description-text {
+  margin: 0;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+/* 시나리오 상세 */
+.scenario-details {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.scenario-details h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 20px 0;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.detail-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.2s;
+}
+
+.detail-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.detail-card.recommended-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%);
+  border-color: #fbbf24;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.detail-header h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.badge-small {
+  padding: 3px 8px;
+  background: #fbbf24;
+  color: white;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.detail-section {
+  margin-bottom: 16px;
+}
+
+.detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.detail-section h5 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+  margin: 0 0 8px 0;
+}
+
+.detail-section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.detail-section li {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.8;
+  margin-bottom: 4px;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .details-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .comparison-legend {
+    font-size: 12px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .col-scenario {
+    width: 140px;
+    min-width: 140px;
+  }
+
+  .col-description {
+    min-width: 200px;
+  }
+
+  .col-tax {
+    width: 110px;
+    min-width: 110px;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}

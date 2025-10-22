@@ -1,0 +1,161 @@
+/**
+ * Step Indicator Styles
+ */
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  padding: 2rem 1rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.step.clickable {
+  cursor: pointer;
+}
+
+.step.clickable:hover .step-circle {
+  transform: scale(1.1);
+}
+
+.step-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.3s;
+  border: 3px solid #e2e8f0;
+  background: white;
+}
+
+.step.pending .step-circle {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.step.current .step-circle {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.step.current .step-icon {
+  filter: brightness(0) invert(1);
+}
+
+.step.completed .step-circle {
+  background: #10b981;
+  border-color: #10b981;
+}
+
+.step-check {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.step-icon {
+  font-size: 1.75rem;
+}
+
+.step-label {
+  text-align: center;
+  min-width: 100px;
+}
+
+.step-number {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.step.current .step-number {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.step-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.step.current .step-title {
+  color: #1a202c;
+}
+
+.step.completed .step-title {
+  color: #10b981;
+}
+
+/* Connector Line */
+.step-connector {
+  flex: 1;
+  height: 3px;
+  background: #e2e8f0;
+  margin: 0 -1rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.step-connector.completed {
+  background: linear-gradient(90deg, #10b981 0%, #3b82f6 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .step-indicator {
+    padding: 1.5rem 0.5rem;
+    overflow-x: auto;
+  }
+
+  .step-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+
+  .step-label {
+    min-width: 80px;
+  }
+
+  .step-number {
+    font-size: 0.6875rem;
+  }
+
+  .step-title {
+    font-size: 0.75rem;
+  }
+
+  .step-connector {
+    margin: 0 -0.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-label {
+    min-width: 60px;
+  }
+
+  .step-title {
+    font-size: 0.6875rem;
+  }
+}

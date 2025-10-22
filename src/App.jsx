@@ -17,6 +17,7 @@ import './App.css';
 const Home = lazy(() => import('./pages/Home'));
 const Settings = lazy(() => import('./pages/Settings'));
 const CapitalGainsTaxForm = lazy(() => import('./components/CapitalGainsTaxForm'));
+const TaxOptimizationWorkflow = lazy(() => import('./pages/TaxOptimizationWorkflow'));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -45,6 +46,9 @@ function App() {
 
             {/* 양도소득세 계산기 */}
             <Route path="/capital-gains" element={<CapitalGainsTaxForm />} />
+
+            {/* 노드 기반 세무 최적화 워크플로우 */}
+            <Route path="/node-workflow" element={<TaxOptimizationWorkflow />} />
 
             {/* 설정 페이지 */}
             <Route path="/settings" element={<Settings />} />

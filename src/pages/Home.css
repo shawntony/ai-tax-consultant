@@ -1,345 +1,464 @@
 /**
- * Home Page Styles
- * @version 1.0.0
+ * Home Page - Chrome Style Search UI
+ * Clean, Minimal, Search-Centered Design
+ * @version 3.0.0
  */
 
+/* ============================================
+   Page Layout
+   ============================================ */
 .home-page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--white);
 }
 
-/* ==================== */
-/* Header */
-/* ==================== */
-
-.app-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 2rem 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* ============================================
+   Settings Icon (Top Right)
+   ============================================ */
+.settings-container {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 100;
 }
 
-.container {
-  max-width: 1200px;
+.settings-icon {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.settings-icon:hover {
+  background-color: var(--gray-100);
+}
+
+.settings-icon:active {
+  background-color: var(--gray-200);
+}
+
+/* ============================================
+   Chrome Style Main Content
+   ============================================ */
+.chrome-style-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-6);
+}
+
+.chrome-container {
+  max-width: 720px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 2rem;
+}
+
+/* ============================================
+   Logo & Title Section
+   ============================================ */
+.logo-section {
+  text-align: center;
+  margin-bottom: var(--space-12);
+  animation: fadeIn 0.6s ease-out;
+}
+
+.app-logo {
+  font-size: 5rem;
+  margin-bottom: var(--space-4);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .app-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
-  text-align: center;
+  font-size: var(--text-5xl);
+  font-weight: var(--font-normal);
+  color: var(--gray-900);
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.02em;
 }
 
-.app-subtitle {
-  font-size: 1.125rem;
-  margin: 0 0 1.5rem 0;
-  text-align: center;
-  opacity: 0.9;
+.app-tagline {
+  font-size: var(--text-lg);
+  color: var(--gray-600);
+  font-weight: var(--font-normal);
 }
 
-.app-nav {
+/* ============================================
+   Search Section - Chrome Style
+   ============================================ */
+.search-section {
+  margin-bottom: var(--space-8);
+  animation: slideUp 0.6s ease-out 0.2s backwards;
+}
+
+.search-bar {
+  position: relative;
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  background: var(--white);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-full);
+  padding: 0 var(--space-4);
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
 }
 
-.nav-link {
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.2s;
+.search-bar:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-color: var(--gray-400);
 }
 
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+.search-bar:focus-within {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent-blue);
 }
 
-/* ==================== */
-/* Main Content */
-/* ==================== */
+.search-icon {
+  flex-shrink: 0;
+  font-size: var(--text-xl);
+  color: var(--gray-500);
+  margin-right: var(--space-3);
+}
 
-.main-content {
+.search-input {
   flex: 1;
-  padding: 3rem 0;
-  background-color: #f7fafc;
-}
-
-.hero-section {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.hero-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin-bottom: 1rem;
-}
-
-.hero-description {
-  font-size: 1.25rem;
-  color: #718096;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.section-title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-/* ==================== */
-/* Tax Types Cards */
-/* ==================== */
-
-.tax-types {
-  margin-bottom: 4rem;
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.tax-card {
-  background: white;
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  text-align: center;
-  opacity: 0.6;
-}
-
-.tax-card.active {
-  opacity: 1;
-  border: 2px solid #667eea;
-}
-
-.tax-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-}
-
-.card-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.card-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 0.5rem;
-}
-
-.card-description {
-  font-size: 1rem;
-  color: #718096;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.card-button {
-  display: inline-block;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
+  height: 100%;
   border: none;
+  outline: none;
+  font-size: var(--text-base);
+  color: var(--gray-900);
+  background: transparent;
+  font-family: var(--font-sans);
+}
+
+.search-input::placeholder {
+  color: var(--gray-400);
+}
+
+.clear-button {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--gray-500);
+  font-size: var(--text-lg);
   cursor: pointer;
-  transition: all 0.2s;
-  background-color: #e2e8f0;
-  color: #718096;
-}
-
-.card-button.primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.card-button.primary:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-}
-
-.card-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-/* ==================== */
-/* Features */
-/* ==================== */
-
-.features {
-  margin-bottom: 4rem;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.feature-item {
-  text-align: center;
-  padding: 1.5rem;
-}
-
-.feature-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.feature-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 0.5rem;
-}
-
-.feature-description {
-  font-size: 1rem;
-  color: #718096;
-  line-height: 1.6;
-}
-
-/* ==================== */
-/* CTA Section */
-/* ==================== */
-
-.cta-section {
-  background: white;
-  border-radius: 1rem;
-  padding: 3rem;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 3rem;
-}
-
-.cta-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #2d3748;
-  margin-bottom: 1rem;
-}
-
-.cta-description {
-  font-size: 1.125rem;
-  color: #718096;
-  margin-bottom: 2rem;
-}
-
-.cta-buttons {
+  border-radius: 50%;
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 1rem;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.clear-button:hover {
+  background-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+/* ============================================
+   Search Buttons
+   ============================================ */
+.search-buttons {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-top: var(--space-6);
+}
+
+.search-submit-btn,
+.search-lucky-btn {
+  padding: var(--space-2) var(--space-6);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-sans);
+}
+
+.search-submit-btn {
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+  border: 1px solid var(--gray-100);
+}
+
+.search-submit-btn:hover {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-lucky-btn {
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+  border: 1px solid var(--gray-100);
+}
+
+.search-lucky-btn:hover {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   Quick Access Section
+   ============================================ */
+.quick-access-section {
+  margin-top: var(--space-12);
+  animation: slideUp 0.6s ease-out 0.4s backwards;
+}
+
+.quick-access-label {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  margin-bottom: var(--space-4);
+  font-weight: var(--font-medium);
+}
+
+.quick-access-grid {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
   flex-wrap: wrap;
 }
 
-.cta-button {
-  display: inline-block;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  font-size: 1.125rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s;
+.quick-access-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-6);
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-width: 120px;
 }
 
-.cta-button.primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.cta-button.primary:hover {
+.quick-access-item:hover:not(.disabled) {
+  background-color: var(--gray-50);
+  border-color: var(--accent-blue);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
 }
 
-.cta-button.secondary {
-  background: white;
-  color: #667eea;
-  border: 2px solid #667eea;
+.quick-access-item.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--gray-200);
 }
 
-.cta-button.secondary:hover {
-  background: #667eea;
-  color: white;
+.quick-icon {
+  font-size: 2rem;
 }
 
-/* ==================== */
-/* Footer */
-/* ==================== */
-
-.app-footer {
-  background: #2d3748;
-  color: white;
-  padding: 2rem 0;
-  margin-top: auto;
+.quick-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--gray-800);
 }
 
-.footer-text {
-  text-align: center;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
+/* ============================================
+   Footer - Chrome Style
+   ============================================ */
+.chrome-footer {
+  padding: var(--space-6) 0;
+  background-color: var(--gray-50);
+  border-top: 1px solid var(--gray-200);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-6);
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  background: none;
+  border: none;
+  color: var(--gray-600);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  padding: var(--space-1) 0;
+  transition: color var(--transition-fast);
+  font-family: var(--font-sans);
+}
+
+.footer-link:hover {
+  color: var(--gray-900);
+  text-decoration: underline;
 }
 
 .footer-disclaimer {
   text-align: center;
-  font-size: 0.75rem;
-  opacity: 0.7;
+  font-size: var(--text-xs);
+  color: var(--gray-500);
   max-width: 800px;
   margin: 0 auto;
-  line-height: 1.6;
+  padding: var(--space-3);
+  background-color: var(--gray-100);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
 }
 
-/* ==================== */
-/* Responsive */
-/* ==================== */
-
+/* ============================================
+   Responsive Design
+   ============================================ */
 @media (max-width: 768px) {
+  .chrome-style-main {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .chrome-container {
+    max-width: 100%;
+  }
+
+  .app-logo {
+    font-size: 4rem;
+  }
+
   .app-title {
-    font-size: 2rem;
+    font-size: var(--text-3xl);
   }
 
-  .hero-title {
-    font-size: 2rem;
+  .app-tagline {
+    font-size: var(--text-base);
   }
 
-  .hero-description {
-    font-size: 1rem;
+  .search-bar {
+    height: 44px;
   }
 
-  .section-title {
-    font-size: 1.5rem;
+  .search-input {
+    font-size: var(--text-sm);
   }
 
-  .cards-grid,
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cta-section {
-    padding: 2rem 1rem;
-  }
-
-  .cta-buttons {
+  .search-buttons {
     flex-direction: column;
+    gap: var(--space-2);
   }
 
-  .cta-button {
+  .search-submit-btn,
+  .search-lucky-btn {
     width: 100%;
+  }
+
+  .quick-access-grid {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .quick-access-item {
+    width: 100%;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: var(--space-2);
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .app-logo {
+    font-size: 3rem;
+  }
+
+  .app-title {
+    font-size: var(--text-2xl);
+  }
+
+  .app-tagline {
+    font-size: var(--text-sm);
+  }
+
+  .search-input::placeholder {
+    font-size: var(--text-xs);
+  }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Focus States for Accessibility
+   ============================================ */
+.search-submit-btn:focus,
+.search-lucky-btn:focus,
+.quick-access-item:focus,
+.footer-link:focus,
+.settings-icon:focus {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  .settings-container,
+  .search-buttons,
+  .quick-access-section,
+  .chrome-footer {
+    display: none;
   }
 }

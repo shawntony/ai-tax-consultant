@@ -1,0 +1,25 @@
+{
+  "agents": {
+    "ui-ux-designer": {
+      "description": "UI/UX design specialist for user-centered design and interface systems",
+      "enabled": true
+    }
+  },
+  "mcpServers": {
+    "github": {
+      "enabled": true
+    },
+    "context7": {
+      "enabled": true
+    },
+    "playwright": {
+      "enabled": true
+    },
+    "supabase": {
+      "enabled": true
+    },
+    "serena": {
+      "enabled": true
+    }
+  }
+}

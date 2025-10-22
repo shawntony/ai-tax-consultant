@@ -7,19 +7,25 @@
 
 | 항목 | 내용 |
 |------|------|
-| **프로젝트명** | AI Tax Consulting Automation Workflow |
-| **버전** | 1.0.0 |
+| **프로젝트명** | AI Tax Consulting Automation Workflow with Knowledge Graph |
+| **버전** | 2.0.0 |
 | **작성일** | 2024-10-17 |
-| **문서 상태** | Approved |
+| **문서 상태** | In Development |
 | **담당자** | Product Team |
-| **최종 수정일** | 2024-10-17 |
+| **최종 수정일** | 2025-10-20 |
+| **주요 변경** | 지식 그래프 기반 노드 시스템 추가 |
 
 ---
 
 ## 1. Executive Summary
 
 ### 1.1 프로젝트 개요
-세무 컨설팅 자동화 워크플로우는 AI 기술을 활용하여 상속세, 증여세, 양도소득세, 법인세, 소득세 관련 세무 상담을 체계적으로 처리하고, 여러 시나리오를 비교 분석할 수 있는 통합 솔루션입니다.
+**지식 그래프 기반 AI 세무 컨설팅 시스템**은 AI 전문가가 고객의 상황을 분석하여 세무상의 이슈를 노드로 추출하고, 각 이슈에 대한 해결 방안을 연결된 노드로 생성합니다. 이러한 노드들의 실행 순서를 변경함으로써 세금이 어떻게 달라지는지 시뮬레이션하고, 여러 솔루션 대안을 비교하여 최적의 절세 전략을 제시하는 혁신적인 시스템입니다.
+
+**핵심 차별점:**
+- **노드 기반 의사결정**: 이슈와 해결방안을 그래프 구조로 시각화
+- **순서 최적화**: 실행 순서 변경을 통한 절세 효과 자동 계산
+- **지능형 추론**: AI가 복잡한 세무 관계를 자동으로 파악하고 최적 전략 제시
 
 ### 1.2 비즈니스 목표
 - **효율성 향상**: 세무 분석 시간 90% 단축 (2분 → 10초)
@@ -28,10 +34,186 @@
 - **비용 절감**: 반복 작업 자동화를 통한 운영 비용 절감
 
 ### 1.3 핵심 가치 제안
-- **완전 자동화**: API 키만 설정하면 원클릭으로 AI 분석 완료
-- **멀티 AI 지원**: Claude, ChatGPT, Perplexity 3개 AI 엔진 선택 가능
-- **실시간 계산**: 여러 시나리오 동시 계산 및 비교
-- **데이터 관리**: JSON 형식으로 결과 저장 및 재사용
+- **지식 그래프 기반 분석**: 세무 이슈와 해결방안을 노드로 시각화하여 직관적 이해
+- **순서 최적화 엔진**: 실행 순서를 자동으로 최적화하여 최대 절세 효과 도출
+- **AI 전문가 시스템**: Claude/ChatGPT가 국내 최고 세무 전문가처럼 분석
+- **솔루션 비교**: 여러 대안을 자동 생성하고 세금 영향을 한눈에 비교
+- **실행 가능한 보고서**: 단계별 실행 계획과 예상 세금을 포함한 컨설팅 보고서 자동 생성
+- **데이터 관리**: 노드 그래프와 솔루션을 JSON/PDF로 저장 및 재사용
+
+---
+
+## 1.4 혁신적 노드 시스템 아키텍처
+
+### 1.4.1 지식 그래프 개념
+
+본 시스템은 세무 컨설팅을 **이슈 노드(Issue Nodes)**와 **해결 노드(Solution Nodes)**로 구조화하여, 복잡한 세무 상황을 직관적으로 시각화하고 최적화합니다.
+
+```
+고객 상황 입력
+    ↓
+AI 전문가 분석
+    ↓
+┌─────────────────────────────────┐
+│  이슈 노드 추출 (Issue Nodes)   │
+│  • 상속세 과세 대상             │
+│  • 배우자 공제 적용 여부         │
+│  • 일괄공제 vs 개별공제 선택    │
+└────────────┬────────────────────┘
+             ↓
+┌─────────────────────────────────┐
+│  해결 노드 생성 (Solution Nodes)│
+│  • 배우자 선상속 (1.5억 절세)   │
+│  • 일괄공제 선택 (8천만 절세)   │
+│  • 사전증여 활용 (1억 절세)     │
+└────────────┬────────────────────┘
+             ↓
+┌─────────────────────────────────┐
+│  노드 연결 + 실행 순서 정의     │
+│  이슈 A → 해결 A1, A2           │
+│  이슈 B → 해결 B1, B2           │
+└────────────┬────────────────────┘
+             ↓
+┌─────────────────────────────────┐
+│  순서 조합 생성 (Solutions)     │
+│  대안 1: A1→B1→A2 (총 3억 절세)│
+│  대안 2: B1→A1→A2 (총 3.5억)   │
+│  대안 3: A2→A1→B1 (총 2.8억)   │
+└────────────┬────────────────────┘
+             ↓
+┌─────────────────────────────────┐
+│  최적 솔루션 추천 + 비교 보고서 │
+└─────────────────────────────────┘
+```
+
+### 1.4.2 노드 데이터 구조
+
+**이슈 노드 (Issue Node)**
+```javascript
+{
+  id: "issue-001",
+  type: "ISSUE",
+  title: "상속세 과세 대상 판정",
+  description: "10억원 상속재산의 과세 여부 및 공제 적용 검토 필요",
+  category: "상속세", // 상속세, 증여세, 양도소득세
+  relatedLaw: ["상속세법 제1조", "제13조", "제18조"],
+  priority: "HIGH", // HIGH, MEDIUM, LOW
+  taxImpact: null, // 이슈 자체는 세금 영향 없음
+  connectedSolutions: ["solution-001", "solution-002"],
+  createdBy: "AI",
+  createdAt: "2025-10-20T10:00:00Z"
+}
+```
+
+**해결 노드 (Solution Node)**
+```javascript
+{
+  id: "solution-001",
+  type: "SOLUTION",
+  title: "배우자 공제 적용",
+  description: "최대 30억원 한도 내 배우자 공제를 활용하여 상속세 절감",
+  category: "공제 활용",
+  taxImpact: -150000000, // 음수는 절세, 양수는 과세
+  taxImpactPercentage: 35, // 전체 세금 대비 비율
+  requirements: [
+    "배우자가 생존해 있어야 함",
+    "법정상속분 이내에서 적용",
+    "실제 상속받는 재산이 있어야 함"
+  ],
+  risks: [
+    "배우자 사망 시 2차 상속세 발생 가능",
+    "상속재산분할협의서 작성 필요"
+  ],
+  dependencies: [], // 선행 조건 (다른 Solution ID)
+  executionOrder: 1, // 실행 순서 (동적으로 변경 가능)
+  estimatedTime: "7일", // 실행 소요 시간
+  complexity: "MEDIUM", // LOW, MEDIUM, HIGH
+  legalBasis: ["상속세법 제19조", "제19조의2"],
+  relatedIssues: ["issue-001"],
+  createdBy: "AI",
+  createdAt: "2025-10-20T10:01:00Z"
+}
+```
+
+**노드 간 연결 (Edge)**
+```javascript
+{
+  id: "edge-001",
+  type: "ISSUE_TO_SOLUTION", // ISSUE_TO_SOLUTION, SOLUTION_DEPENDENCY
+  from: "issue-001",
+  to: "solution-001",
+  strength: 0.9, // 관련성 강도 (0~1)
+  reasoning: "상속세 과세 대상에 대한 직접적인 해결 방안"
+}
+```
+
+### 1.4.3 솔루션 대안 (Solution Alternative)
+
+```javascript
+{
+  id: "alternative-A",
+  name: "배우자 우선 전략",
+  description: "배우자 공제를 최대한 활용한 후 나머지 공제 적용",
+  executionPlan: [
+    {
+      step: 1,
+      solutionId: "solution-001",
+      solutionTitle: "배우자 공제 적용",
+      taxImpact: -150000000,
+      cumulativeTax: 200000000
+    },
+    {
+      step: 2,
+      solutionId: "solution-002",
+      solutionTitle: "일괄공제 적용",
+      taxImpact: -80000000,
+      cumulativeTax: 120000000
+    },
+    {
+      step: 3,
+      solutionId: "solution-003",
+      solutionTitle: "자녀 공제 적용",
+      taxImpact: -50000000,
+      cumulativeTax: 70000000
+    }
+  ],
+  totalTaxBefore: 350000000,
+  totalTaxAfter: 70000000,
+  totalSavings: 280000000,
+  savingsPercentage: 80,
+  pros: [
+    "최대 절세 효과",
+    "법적 안정성 높음",
+    "실행 난이도 낮음"
+  ],
+  cons: [
+    "2차 상속세 고려 필요",
+    "배우자 의사 확인 필수"
+  ],
+  recommendationScore: 95, // AI 추천 점수 (0~100)
+  estimatedDuration: "2주",
+  complexity: "MEDIUM"
+}
+```
+
+### 1.4.4 실행 순서 최적화 알고리즘
+
+시스템은 다음 알고리즘을 사용하여 최적 실행 순서를 자동으로 도출합니다:
+
+1. **순열 생성**: 모든 가능한 해결 노드 순서 조합 생성
+2. **종속성 검증**: 선행 조건(dependencies)이 있는 노드는 순서 제약 적용
+3. **세금 계산**: 각 순서 조합마다 누적 세금 계산
+4. **최적화 평가**:
+   - 총 절세 금액
+   - 실행 난이도
+   - 법적 리스크
+   - 소요 시간
+5. **상위 N개 추천**: 종합 점수 기준 상위 3~5개 대안 제시
+
+**최적화 수식**:
+```
+점수 = (절세금액 × 0.5) + (100 - 난이도 × 0.2) + (100 - 리스크 × 0.2) + (100 - 시간/일 × 0.1)
+```
 
 ---
 
@@ -58,6 +240,17 @@
 - **문제**: 계산 결과를 체계적으로 저장하고 공유하기 어려움
 - **영향**: 후속 상담 시 이전 데이터 재활용 불가
 - **비용**: 동일 고객 재상담 시 처음부터 다시 시작
+
+#### 2.1.5 **NEW** 순서 최적화의 부재
+- **문제**: 여러 세무 전략을 어떤 순서로 실행해야 최적인지 알 수 없음
+- **영향**: 순서만 바꿔도 수천만원~수억원 절세 가능하지만 수동으로 모든 경우의 수 계산 불가능
+- **비용**: 최적화 분석에 전문가 시간 3~5시간 소요, 복잡한 경우 정확한 최적화 자체가 불가능
+- **예시**: 배우자 공제 → 일괄공제 → 사전증여 (5천만원 세금) vs 사전증여 → 배우자 공제 → 일괄공제 (3천만원 세금)
+
+#### 2.1.6 **NEW** 시각화 및 의사결정 지원 부족
+- **문제**: 복잡한 세무 이슈와 해결방안의 관계를 한눈에 파악하기 어려움
+- **영향**: 고객에게 설명하기 어렵고, 전문가도 전체 구조를 놓치기 쉬움
+- **비용**: 고객 설명 시간 30분~1시간, 오해로 인한 재상담 발생
 
 ### 2.2 타겟 사용자
 
@@ -201,50 +394,274 @@
 
 ### 4.2 Use Cases
 
-#### Use Case 1: 부동산 상속 상담
+#### Use Case 1: 부동산 상속 상담 (노드 기반 워크플로우)
 **Actor:** 세무사
-**Goal:** 10억원 부동산 상속 시 세금 계산 및 절세 방안 제시
+**Goal:** 10억원 부동산 상속 시 최적 실행 순서를 통한 최대 절세 방안 제시
 
 **Preconditions:**
 - 사용자가 로그인되어 있음
 - API 키가 설정되어 있음
 
 **Main Flow:**
-1. 세무사가 "부동산 10억, 현금 2억, 배우자+자녀2명" 입력
+
+**Phase 1: 사례 입력 및 AI 분석**
+1. 세무사가 자유 텍스트로 상황 입력:
+   ```
+   "부친께서 보유하신 서울 강남구 아파트(시가 10억원)와
+   현금 2억원을 상속받을 예정입니다. 상속인은 배우자(모친)와
+   자녀 2명(본인 포함)이며, 부채는 1억원 있습니다."
+   ```
 2. Claude AI 선택
-3. 시스템이 자동으로 AI 분석 수행 (10초)
-4. AI가 상속세 관련 이슈 및 필요 데이터 추출
-5. 세무사가 구체적인 수치 입력 (상속재산 12억, 채무 1억)
-6. 시스템이 상속세 자동 계산 (과세표준, 공제액, 산출세액)
-7. 세무사가 다른 시나리오 추가 (배우자 선상속, 사전증여 등)
-8. 시스템이 모든 시나리오 비교표 제공
-9. 세무사가 최적 시나리오 선택 및 JSON 다운로드
+3. 시스템이 AI 초기 분석 수행 (10초)
+
+**Phase 2a: 정보 충분성 분석 및 추가 질의** 🆕
+4. AI가 초기 입력의 정보 충분성 평가:
+   ```json
+   {
+     "completenessScore": 60,
+     "missingCritical": [
+       "배우자 생존 여부 불명확",
+       "동거주택 여부 및 기간 미제시",
+       "정확한 부동산 시가 (10억 상당이 모호함)"
+     ]
+   }
+   ```
+
+5. 시스템이 추가 질의 UI 표시 (충분도 < 80%):
+   ```
+   💡 추가 정보가 필요합니다 (현재 충분도: 60%)
+
+   Q1. [재산 정보] 부동산의 정확한 시가는 얼마입니까? (필수)
+       입력: __________ 원
+       💡 '10억 상당'을 구체적 금액으로 확인합니다
+
+   Q2. [관계 정보] 상속인 중 배우자가 계십니까? (필수)
+       [○ 예, 생존]  [○ 아니오]
+       💡 배우자 공제(최대 30억) 적용 판단에 필요
+
+   Q3. [법적 상황] 동거한 주택입니까? (필수)
+       [○ 예]  [○ 아니오]
+       💡 동거주택 상속공제 6억 적용 가능성 검토
+
+   Q4. [타이밍] 동거 기간은 얼마나 됩니까?
+       [○ 10년 이상]  [○ 5~10년]  [○ 5년 미만]
+   ```
+
+6. 세무사가 추가 정보 응답:
+   - 부동산 시가: 10억원 (정확한 금액)
+   - 배우자: 예, 생존
+   - 동거주택: 예
+   - 동거 기간: 15년 (10년 이상)
+
+**Phase 2b: 노드 그래프 자동 생성 (보강된 정보 기반)**
+7. AI가 보강된 정보로 세무 이슈 노드 자동 추출:
+   - Issue-001: 상속세 과세 대상 판정 (12억 - 1억 = 11억)
+   - Issue-002: 배우자 공제 적용 가능 여부 ✅ 확정 (배우자 생존)
+   - Issue-003: 일괄공제 vs 법정공제 선택
+   - Issue-004: 동거주택 상속공제 적용 가능성 ✅ 확정 (15년 동거)
+
+8. AI가 해결 노드 자동 생성:
+   - Solution-001: 배우자 공제 적용 (최대 5억, 절세 1.5억)
+   - Solution-002: 일괄공제 5억 적용 (절세 1억)
+   - Solution-003: 동거주택 공제 6억 적용 (절세 1.8억) ✅ 적용 가능 확정
+   - Solution-004: 금융재산 공제 2천만원 (절세 400만원)
+
+9. 시스템이 노드 간 연결 관계 시각화 (React Flow)
+   ```
+   Issue-001 ⟶ Solution-001 (배우자 공제)
+            ⟶ Solution-002 (일괄공제)
+   Issue-002 ⟶ Solution-003 (동거주택 공제) ✅
+   Issue-003 ⟶ Solution-004 (금융재산 공제)
+   ```
+
+**Phase 3: 실행 순서 최적화**
+10. 시스템이 모든 가능한 실행 순서 조합 생성 (4! = 24가지)
+   - 배우자 생존 여부: 예
+   - 동거 여부: 예 (10년)
+   - 1세대 1주택 해당: 예
+
+8. 시스템이 모든 가능한 실행 순서 조합 생성 (4! = 24가지)
+
+9. 시스템이 각 조합에 대해 세금 자동 계산:
+   - Alternative 1: Sol-003 → Sol-001 → Sol-002 → Sol-004 = **총 세금 0.8억**
+   - Alternative 2: Sol-001 → Sol-003 → Sol-002 → Sol-004 = **총 세금 1.2억**
+   - Alternative 3: Sol-002 → Sol-001 → Sol-003 → Sol-004 = **총 세금 1.5억**
+   - ... (24가지 조합)
+
+10. 시스템이 최적화 알고리즘으로 상위 3개 대안 추천:
+    ```
+    🥇 추천 1위: 동거주택 공제 → 배우자 공제 → 금융재산 공제 → 일괄공제
+       - 절세액: 3.2억 (73% 절감)
+       - 난이도: 중 (5/10)
+       - 리스크: 낮음 (2/10)
+       - 소요기간: 30일
+       - 종합점수: 92/100
+
+    🥈 추천 2위: 배우자 공제 → 동거주택 공제 → 금융재산 공제 → 일괄공제
+       - 절세액: 2.8억 (64% 절감)
+       - 난이도: 낮음 (3/10)
+       - 리스크: 낮음 (1/10)
+       - 소요기간: 20일
+       - 종합점수: 88/100
+    ```
+
+**Phase 4: 비교 분석 및 보고서**
+11. 세무사가 비교 분석 리포트 확인:
+    - 노드 그래프 시각화 (Interactive)
+    - 실행 순서별 세금 변화 차트
+    - 각 대안별 장단점 분석
+    - 법적 근거 및 주의사항
+
+12. 세무사가 "추천 1위" 선택 및 JSON/PDF 다운로드
 
 **Postconditions:**
-- 계산 결과가 JSON 파일로 저장됨
-- 고객 상담 자료로 활용 가능
+- 노드 그래프와 최적 실행 순서가 JSON으로 저장
+- 고객 상담용 PDF 보고서 생성 (그래프 포함)
+- 실행 체크리스트 자동 생성
 
 **Alternative Flows:**
-- 3a. API 호출 실패 → 자동 재시도 → 수동 모드 제안
-- 6a. 계산 오류 발견 → 입력값 수정 → 재계산
+- 4a. AI가 추가 정보 필요 판단 → 동적 입력 폼 생성 → 사용자 입력 후 재분석
+- 9a. 법적 종속성 위반 감지 → 해당 조합 자동 제외 → 유효한 조합만 계산
+- 10a. 모든 대안이 비슷한 점수 → 리스크가 가장 낮은 대안 1순위 추천
 
-#### Use Case 2: 주식 증여 시뮬레이션
+**Key Differentiator:**
+- 기존: 수동으로 시나리오 하나씩 계산 → 3-4개만 비교 → 최적 순서 발견 어려움
+- 신규: 자동으로 24가지 조합 계산 → 최적화 알고리즘으로 최상위 대안 발견 → 수억원 추가 절세
+
+#### Use Case 2: 주식 증여 시뮬레이션 (복잡한 순서 최적화)
 **Actor:** 기업 경리팀
-**Goal:** 법인 주식 증여 시 세금 사전 계산
+**Goal:** 법인 주식 10억 증여 시 다단계 증여 순서 최적화로 세금 최소화
+
+**Preconditions:**
+- API 키 설정됨
+- 주식 평가 데이터 보유
 
 **Main Flow:**
-1. 경리팀장이 "법인 주식 5억 증여 예정" 입력
-2. Perplexity 선택 (최신 주식 평가 기준 확인)
-3. AI가 주식 평가 방법 및 증여세 계산 방법 제시
-4. 팀장이 주식 평가액 및 증여자 관계 입력
-5. 여러 지분 비율로 시나리오 생성 (10%, 20%, 30%)
-6. 각 시나리오별 증여세 비교
-7. 최적 지분 비율 확인
-8. 결과를 세무사에게 공유
+
+**Phase 1: 복잡한 상황 입력**
+1. 경리팀장이 상세 상황 입력:
+   ```
+   "대표이사(60세)가 보유한 비상장 법인 주식(평가액 10억원)을
+   자녀 3명에게 나눠서 증여하려 합니다. 자녀들은 각각 30세, 28세, 25세이며,
+   향후 5년간 단계적으로 증여할 계획입니다. 증여재산공제를 최대한 활용하고,
+   세대생략 증여 시 할증도 고려해야 합니다."
+   ```
+2. Perplexity AI 선택 (최신 주식 평가 및 증여세법 확인)
+
+**Phase 2: AI의 복잡한 노드 그래프 생성**
+3. AI가 9개 이슈 노드 추출:
+   - Issue-001: 증여재산공제 활용 (자녀당 5천만원)
+   - Issue-002: 세대생략 증여 할증 여부
+   - Issue-003: 최대주주 할증 적용 여부
+   - Issue-004: 단계적 증여 시기 최적화
+   - Issue-005: 자녀 간 지분 배분 비율
+   - Issue-006: 경영권 프리미엄 평가
+   - Issue-007: 향후 주가 상승 리스크
+   - Issue-008: 증여 후 양도세 고려
+   - Issue-009: 상속세와의 비교 필요
+
+4. AI가 12개 해결 노드 생성:
+   - Sol-001: 1차 증여 - 자녀1에게 3억 (2025년)
+   - Sol-002: 1차 증여 - 자녀2에게 2억 (2025년)
+   - Sol-003: 1차 증여 - 자녀3에게 2억 (2025년)
+   - Sol-004: 2차 증여 - 자녀1에게 1억 (2028년)
+   - Sol-005: 2차 증여 - 자녀2에게 1억 (2028년)
+   - Sol-006: 2차 증여 - 자녀3에게 1억 (2028년)
+   - Sol-007: 증여재산공제 5천만원 × 3명 적용
+   - Sol-008: 최대주주 할증 20% 적용 조정
+   - Sol-009: 경영권 프리미엄 10% 할인
+   - Sol-010: 단계적 증여로 누진세 회피
+   - Sol-011: 합병 전 증여 타이밍 활용
+   - Sol-012: 사전 배당으로 주가 조정
+
+5. 시스템이 복잡한 의존 관계 시각화:
+   ```
+   Issue-001 ⟶ Sol-007 (증여재산공제)
+            ⟶ Sol-010 (단계적 증여)
+
+   Issue-003 ⟶ Sol-008 (최대주주 할증)
+            ⟶ Sol-009 (경영권 할인)
+
+   Sol-001, Sol-002, Sol-003 → [3년 후] → Sol-004, Sol-005, Sol-006
+   (종속성: 1차 증여 완료 후에만 2차 증여 가능)
+   ```
+
+**Phase 3: 순서 조합 폭발 및 최적화**
+6. 경리팀장이 추가 데이터 입력:
+   - 현재 지분율: 80%
+   - 예상 주가 상승률: 연 10%
+   - 합병 계획: 2027년 예정
+
+7. 시스템이 유효한 실행 순서 조합 생성:
+   - 단순 계산: 12! = 479,001,600가지
+   - 종속성 필터링: 248가지 유효 조합으로 축소
+   - 타이밍 제약: 72가지 실현 가능 조합
+
+8. 시스템이 72가지 조합 자동 계산 (30초 소요):
+   ```
+   대안 A: Sol-012 → Sol-007 → Sol-001~003 → [3년] → Sol-004~006 → Sol-008
+          총 증여세: 1.8억 (18%)
+
+   대안 B: Sol-007 → Sol-001~003 → Sol-010 → [3년] → Sol-011 → Sol-004~006
+          총 증여세: 2.3억 (23%)
+
+   대안 C: Sol-009 → Sol-001~003 → Sol-007 → [3년] → Sol-008 → Sol-004~006
+          총 증여세: 2.1억 (21%)
+
+   ... (72가지)
+   ```
+
+9. 최적화 알고리즘이 상위 5개 추천:
+   ```
+   🥇 최적 순서 (절세 2.7억):
+      2024년: 사전 배당 → 경영권 할인 평가
+      2025년: 증여재산공제 → 1차 증여 (자녀당 2.3억)
+      2027년: 합병 직전 타이밍 활용
+      2028년: 2차 증여 (자녀당 1.1억) → 최대주주 할증 회피
+
+      세금: 1.8억 (기본 대비 60% 절감)
+      리스크: 중 (합병 일정 변동 가능)
+      복잡도: 높음 (8/10)
+
+   🥈 안정적 대안 (절세 2.2억):
+      2025년: 증여재산공제 → 1차 증여
+      2028년: 2차 증여 → 단계적 공제 활용
+
+      세금: 2.3억 (기본 대비 48% 절감)
+      리스크: 낮음
+      복잡도: 중간 (5/10)
+   ```
+
+**Phase 4: 실행 계획 및 시뮬레이션**
+10. 경리팀장이 "최적 순서" 시뮬레이션 실행:
+    - 타임라인 차트: 2024~2028년 단계별 액션 시각화
+    - 누적 세금 그래프: 각 단계에서 발생하는 세금 누적
+    - 대안 간 비교표: 5가지 대안 병렬 비교
+    - 리스크 분석: "합병 일정 1년 지연 시" 시뮬레이션
+
+11. 민감도 분석:
+    - 주가 상승률 15% 가정 시: 절세액 3.2억으로 증가
+    - 합병 취소 시: 대안 B로 자동 전환 추천
+
+12. 결과를 세무사와 공유 (JSON + PDF):
+    - 인터랙티브 노드 그래프
+    - 5년 실행 타임라인
+    - 단계별 체크리스트
+    - 법적 근거 및 판례
 
 **Postconditions:**
-- 사전 시뮬레이션 완료
-- 세무사 상담 준비 자료 확보
+- 5년간의 최적 증여 실행 계획 확보
+- 72가지 대안 중 최적안 식별
+- 세무사 상담 시 구체적 질문 리스트 준비
+
+**Alternative Flows:**
+- 7a. 조합 수가 너무 많음 (>500) → 사용자에게 제약 조건 추가 입력 요청
+- 10a. "합병 일정 변동" 시나리오 → 시스템이 자동으로 대안 재계산 및 추천
+- 11a. 민감도 분석에서 리스크 높음 감지 → 보수적 대안 우선 추천
+
+**Key Differentiator:**
+- 기존: 단순 지분 배분만 고려 → 3-4가지 시나리오 비교 → 순서/타이밍 최적화 불가
+- 신규: 72가지 복잡한 조합 자동 계산 → 시간축 고려한 최적 순서 발견 → 수억원 추가 절세
 
 #### Use Case 3: 배치 처리 (고급 사용자)
 **Actor:** 대형 세무법인 시스템 관리자
@@ -304,11 +721,231 @@
   - 뒤로가기 시 데이터 보존
   - 자동 임시 저장 (30초마다)
 
-#### 5.1.2 AI 자동 분석 (Step 2)
+#### 5.1.2 🆕 AI 초기 분석 및 추가 질의 (Step 2)
 
-**FR-2.1: 프롬프트 자동 생성**
+**FR-2.0: 정보 충분성 판단 및 추가 질의 생성** 🔥
 - **Priority:** P0 (Critical)
-- **Description:** 입력 사례를 기반으로 AI별 최적 프롬프트 생성
+- **Description:** 초기 입력 분석 후 불충분한 정보 식별 및 추가 질문 자동 생성
+- **Requirements:**
+  - AI가 초기 입력 분석 (Information Completeness Check)
+  - 필수 정보 누락 항목 식별
+  - 모호한 표현 식별
+  - 타겟팅된 추가 질문 자동 생성 (2~7개)
+  - 사용자 친화적 인터페이스로 응답 수집
+  - 응답 기반 컨텍스트 보강
+
+**Information Completeness Analysis:**
+```javascript
+// AI 프롬프트: 정보 충분성 분석
+const analysisPrompt = `
+다음 세무 상담 사례를 분석하여 정보 충분성을 평가하세요:
+
+사례: ${userInput}
+
+다음 관점에서 분석하세요:
+1. **필수 정보 누락**: 세금 계산에 반드시 필요한 정보가 빠졌는가?
+2. **모호한 표현**: 해석이 여러 가지로 가능한 애매한 표현이 있는가?
+3. **숨겨진 이슈**: 언급되지 않았지만 중요할 수 있는 사항은?
+4. **타이밍 정보**: 거래 시점, 보유 기간 등 시간 관련 정보 부족?
+5. **관계 정보**: 상속인/증여자 관계가 명확한가?
+
+응답 형식:
+{
+  "completenessScore": 0-100,  // 100 = 완전, 0 = 매우 불충분
+  "missingCritical": ["필수 누락 항목들"],
+  "ambiguities": ["모호한 표현들"],
+  "followUpQuestions": [
+    {
+      "id": "q1",
+      "category": "재산 정보|관계 정보|타이밍|법적 상황",
+      "question": "구체적 질문",
+      "type": "text|number|date|select|multiselect",
+      "options": ["옵션1", "옵션2"],  // type이 select일 때만
+      "required": true|false,
+      "placeholder": "입력 예시",
+      "helpText": "이 정보가 필요한 이유"
+    }
+  ],
+  "reasoning": "왜 이 질문들이 필요한지 설명"
+}
+`;
+```
+
+**Follow-up Question UI:**
+```javascript
+// FollowUpQuestions.jsx
+const FollowUpQuestionsComponent = ({ questions, onSubmit }) => {
+  const [answers, setAnswers] = useState({});
+
+  return (
+    <div className="followup-container">
+      <div className="followup-header">
+        <h2>💡 추가 정보가 필요합니다</h2>
+        <p className="followup-description">
+          보다 정확한 분석을 위해 몇 가지 추가 정보를 알려주세요.
+        </p>
+        <div className="completeness-indicator">
+          <span>현재 정보 충분도: {completenessScore}%</span>
+          <div className="progress-bar">
+            <div className="progress-fill" style={{ width: `${completenessScore}%` }} />
+          </div>
+        </div>
+      </div>
+
+      <div className="followup-questions">
+        {questions.map((q, index) => (
+          <div key={q.id} className={`question-card ${q.required ? 'required' : ''}`}>
+            <div className="question-header">
+              <span className="question-number">Q{index + 1}</span>
+              <span className="question-category">{q.category}</span>
+              {q.required && <span className="required-badge">필수</span>}
+            </div>
+
+            <label className="question-text">
+              {q.question}
+            </label>
+
+            {q.type === 'text' && (
+              <input
+                type="text"
+                value={answers[q.id] || ''}
+                onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })}
+                placeholder={q.placeholder}
+                required={q.required}
+              />
+            )}
+
+            {q.type === 'number' && (
+              <input
+                type="number"
+                value={answers[q.id] || ''}
+                onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })}
+                placeholder={q.placeholder}
+                required={q.required}
+              />
+            )}
+
+            {q.type === 'select' && (
+              <select
+                value={answers[q.id] || ''}
+                onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })}
+                required={q.required}
+              >
+                <option value="">선택하세요</option>
+                {q.options.map(opt => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
+            )}
+
+            {q.helpText && (
+              <div className="help-text">
+                <span className="help-icon">💡</span>
+                {q.helpText}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="followup-actions">
+        <button
+          onClick={() => onSubmit(answers)}
+          className="btn-submit"
+          disabled={!areRequiredAnswered(questions, answers)}
+        >
+          추가 정보 제출하고 분석 진행
+        </button>
+        <button
+          onClick={() => onSubmit(null)}
+          className="btn-skip"
+        >
+          건너뛰고 분석 진행 (정확도 낮을 수 있음)
+        </button>
+      </div>
+    </div>
+  );
+};
+```
+
+**Workflow Integration:**
+```
+Step 1: 사례 입력
+    ↓
+Step 2a: AI 초기 분석 (정보 충분성 판단)
+    ↓
+    ├─ 충분도 ≥ 80% → 즉시 Step 2b (노드 추출)
+    └─ 충분도 < 80% → 추가 질의 UI 표시
+         ↓
+         사용자 응답 수집
+         ↓
+         컨텍스트 보강 (원본 + 추가 정보)
+         ↓
+Step 2b: 노드 자동 추출 (Issue & Solution Nodes)
+    ↓
+Step 3: 노드 그래프 최적화
+    ↓
+Step 4: 결과 비교
+```
+
+**Example Follow-up Questions:**
+```json
+{
+  "completenessScore": 65,
+  "followUpQuestions": [
+    {
+      "id": "q1",
+      "category": "재산 정보",
+      "question": "상속재산 중 부동산의 정확한 시가는 얼마입니까?",
+      "type": "number",
+      "placeholder": "예: 1000000000",
+      "required": true,
+      "helpText": "공시지가가 아닌 실제 거래가 기준 시가를 입력해주세요"
+    },
+    {
+      "id": "q2",
+      "category": "관계 정보",
+      "question": "상속인 중 배우자가 계십니까?",
+      "type": "select",
+      "options": ["예, 있습니다", "아니오, 없습니다"],
+      "required": true,
+      "helpText": "배우자 공제(최대 30억) 적용 여부 판단에 필요합니다"
+    },
+    {
+      "id": "q3",
+      "category": "타이밍",
+      "question": "상속 개시일은 언제입니까?",
+      "type": "date",
+      "placeholder": "2024-01-01",
+      "required": true,
+      "helpText": "공제 한도 및 세율 결정에 필요합니다"
+    },
+    {
+      "id": "q4",
+      "category": "법적 상황",
+      "question": "피상속인이 5년 이내 증여한 재산이 있습니까?",
+      "type": "select",
+      "options": ["예, 있습니다", "아니오, 없습니다", "잘 모르겠습니다"],
+      "required": false,
+      "helpText": "사전증여재산 합산 검토가 필요할 수 있습니다"
+    }
+  ],
+  "reasoning": "상속세 계산에는 정확한 재산가액, 상속인 구성, 시점 정보가 필수입니다. 현재 입력에서는 '10억 상당'이라는 모호한 표현과 배우자 존재 여부가 명확하지 않아 추가 정보가 필요합니다."
+}
+```
+
+**Benefits:**
+- ✅ **정확도 향상**: 불충분한 정보로 인한 오류 방지
+- ✅ **사용자 교육**: 왜 이 정보가 필요한지 설명 → 세무 이해도 증가
+- ✅ **프로 느낌**: 전문가가 꼼꼼하게 질문하는 것처럼 느껴짐
+- ✅ **유연성**: 필수 질문만 강제, 나머지는 선택 가능
+- ✅ **스킵 가능**: 사용자가 원하면 바로 진행 (정확도 낮을 수 있다는 경고)
+
+---
+
+**FR-2.1: 프롬프트 자동 생성 (보강된 컨텍스트 기반)**
+- **Priority:** P0 (Critical)
+- **Description:** 초기 입력 + 추가 질의 응답을 결합하여 AI별 최적 프롬프트 생성
 - **Requirements:**
   - AI별 맞춤형 프롬프트 템플릿
   - JSON 응답 형식 가이드 포함
@@ -646,6 +1283,287 @@ maxRetries = 3
   - 제목 및 메시지 커스터마이징
   - PDF 첨부
   - 전송 상태 확인
+
+#### 5.1.6 **NEW** 노드 그래프 시스템 (Knowledge Graph System)
+
+**FR-NODE-1: 노드 자동 추출**
+- **Priority:** P0 (Critical)
+- **Description:** AI가 사례 분석 결과를 Issue/Solution 노드로 자동 변환
+- **Requirements:**
+  - AI 응답에서 세무 이슈 자동 식별 및 노드화
+  - 각 이슈에 대한 해결 방안을 Solution 노드로 생성
+  - 노드 간 연결 관계 (Edge) 자동 생성
+  - 법적 종속성 (dependencies) 자동 추출
+- **AI Prompt Engineering:**
+```
+"다음 세무 상황을 분석하여 JSON 형식으로 반환하세요:
+1. Issue Nodes: 식별된 세무 이슈들 (id, title, description, priority)
+2. Solution Nodes: 각 이슈에 대한 해결 방안들 (id, title, taxImpact, dependencies)
+3. Edges: 이슈와 해결방안 간의 연결 (from, to, strength)
+4. 법적 종속성: 어떤 해결방안이 다른 해결방안보다 먼저 실행되어야 하는지"
+```
+- **Output Schema:** Section 1.4.2 참조 (Issue Node, Solution Node, Edge 구조)
+- **Validation:**
+  - 최소 1개 이상의 Issue Node 필수
+  - 각 Issue는 최소 1개 이상의 Solution 연결 필요
+  - 순환 종속성(Circular Dependency) 자동 감지 및 경고
+
+**FR-NODE-2: 노드 그래프 시각화**
+- **Priority:** P0 (Critical)
+- **Description:** React Flow를 사용한 인터랙티브 노드 그래프 표시
+- **Requirements:**
+  - Issue 노드 (빨간색 원형)와 Solution 노드 (파란색 사각형) 구분
+  - 엣지(Edge)로 노드 간 연결 표시
+  - 노드 클릭 시 상세 정보 표시 (툴팁 또는 사이드 패널)
+  - 노드 드래그로 레이아웃 조정 가능
+  - 줌 인/아웃 및 패닝 지원
+- **React Flow Configuration:**
+```javascript
+const nodeTypes = {
+  issue: IssueNode,      // 빨간색 원형, 이슈 아이콘
+  solution: SolutionNode // 파란색 사각형, 절세액 표시
+};
+
+const edgeTypes = {
+  issue_to_solution: CustomEdge, // 실선
+  dependency: DependencyEdge     // 점선 (순서 종속성)
+};
+```
+- **Interactive Features:**
+  - 노드 hover 시 연결된 노드 하이라이트
+  - Solution 노드에 절세액 배지 표시 (예: "-1.5억")
+  - 종속성 엣지는 화살표로 방향 표시
+- **Auto-Layout:** Dagre 알고리즘으로 노드 자동 배치
+
+**FR-NODE-3: 실행 순서 조합 생성**
+- **Priority:** P0 (Critical)
+- **Description:** 모든 가능한 Solution 노드 실행 순서 조합 자동 생성
+- **Requirements:**
+  - 법적 종속성(dependencies)을 만족하는 모든 순열 생성
+  - 조합 수 제한 (최대 500개, 초과 시 사용자에게 제약 추가 요청)
+  - 무효한 조합 자동 필터링 (종속성 위반, 상호 배타적 솔루션)
+  - 생성 과정을 진행 바로 표시 (대량 조합 시)
+- **Algorithm:**
+```javascript
+function generateValidCombinations(solutionNodes, dependencies) {
+  // 1. 모든 순열 생성
+  let allPermutations = permute(solutionNodes);
+
+  // 2. 종속성 필터링
+  let validCombinations = allPermutations.filter(combo => {
+    return dependencies.every(dep => {
+      let depIndex = combo.findIndex(n => n.id === dep.dependsOn);
+      let nodeIndex = combo.findIndex(n => n.id === dep.nodeId);
+      return depIndex < nodeIndex; // 종속성 노드가 먼저 실행되어야 함
+    });
+  });
+
+  // 3. 상호 배타적 솔루션 필터링
+  validCombinations = validCombinations.filter(combo => {
+    return !hasConflictingSolutions(combo);
+  });
+
+  // 4. 조합 수 제한
+  if (validCombinations.length > 500) {
+    return validCombinations.slice(0, 500); // 상위 500개만
+  }
+
+  return validCombinations;
+}
+```
+- **Performance:** 12개 노드 기준 479M 조합 → 종속성 필터링 → 248개 유효 조합 (30초 이내)
+
+**FR-NODE-4: 최적화 알고리즘**
+- **Priority:** P0 (Critical)
+- **Description:** Section 1.4.4 최적화 알고리즘으로 최상위 대안 추천
+- **Requirements:**
+  - 각 조합에 대해 종합 점수 계산
+  - 상위 3-5개 대안 자동 추천
+  - 점수 구성 요소별 가중치 표시
+- **Scoring Formula:**
+```javascript
+function calculateScore(alternative) {
+  const savingsScore = (alternative.totalSavings / 1000000000) * 0.5; // 절세액 (10억 단위)
+  const complexityScore = (100 - alternative.complexity * 10) * 0.2;  // 난이도 (10점 척도)
+  const riskScore = (100 - alternative.risk * 10) * 0.2;             // 리스크 (10점 척도)
+  const timeScore = (100 - alternative.days / 10) * 0.1;             // 소요일 (최대 1000일)
+
+  return savingsScore + complexityScore + riskScore + timeScore;
+}
+
+// 점수 = (절세액 × 0.5) + (100 - 난이도 × 0.2) + (100 - 리스크 × 0.2) + (100 - 시간/일 × 0.1)
+```
+- **Recommendation Output:**
+```javascript
+{
+  rank: 1,
+  score: 92,
+  executionOrder: [
+    {nodeId: "sol-003", name: "동거주택 공제", taxImpact: -180000000},
+    {nodeId: "sol-001", name: "배우자 공제", taxImpact: -150000000},
+    ...
+  ],
+  totalTax: 80000000,      // 총 세금
+  totalSavings: 320000000, // 총 절세액
+  savingsRate: 80,         // 절세율 (%)
+  complexity: 5,           // 난이도 (10점 척도)
+  risk: 2,                 // 리스크 (10점 척도)
+  estimatedDays: 30,       // 예상 소요일
+  legalBasis: ["상속세법 제23조", ...], // 법적 근거
+  warnings: ["배우자 사망 시 2차 상속세 발생 가능"]
+}
+```
+- **Visual Display:** 금/은/동 메달 아이콘, 점수 바 차트, 비교표
+
+**FR-NODE-5: 대안별 세금 시뮬레이션**
+- **Priority:** P0 (Critical)
+- **Description:** 각 실행 순서 조합에 대해 세금을 단계별로 계산
+- **Requirements:**
+  - 노드 실행 순서대로 순차적 세금 계산
+  - 이전 단계의 공제가 다음 단계에 영향 반영
+  - 각 단계별 중간 결과 저장 (디버깅/설명 용도)
+  - 최종 총 세금 계산
+- **Calculation Logic:**
+```javascript
+function simulateTaxByExecutionOrder(executionOrder, initialTaxBase) {
+  let remainingTaxBase = initialTaxBase; // 초기 과세표준
+  let totalTax = 0;
+  let steps = [];
+
+  for (let solution of executionOrder) {
+    // 1. 이 솔루션 적용
+    let deduction = calculateDeduction(solution, remainingTaxBase);
+    remainingTaxBase -= deduction;
+
+    // 2. 현재 과세표준에서 세금 계산
+    let stepTax = calculateTax(remainingTaxBase);
+    totalTax += stepTax;
+
+    // 3. 중간 결과 저장
+    steps.push({
+      solutionId: solution.id,
+      solutionName: solution.title,
+      deduction: deduction,
+      remainingBase: remainingTaxBase,
+      stepTax: stepTax,
+      cumulativeTax: totalTax
+    });
+  }
+
+  return {totalTax, steps};
+}
+```
+- **Output:** 단계별 계산 과정과 최종 세금
+
+**FR-NODE-6: 대안 비교 리포트**
+- **Priority:** P1 (High)
+- **Description:** 최적화된 대안들을 시각적으로 비교
+- **Requirements:**
+  - 상위 3-5개 대안을 테이블로 병렬 비교
+  - 타임라인 차트: 시간축에 따른 실행 순서 시각화
+  - 누적 세금 그래프: 각 단계에서 발생하는 세금 누적 표시
+  - 절세액 비교 막대 차트
+  - 대안별 장단점 표 (리스크, 난이도, 소요 시간)
+- **Comparison Table:**
+```
+| 순위 | 실행 순서 | 총 세금 | 절세액 | 난이도 | 리스크 | 소요일 | 점수 |
+|------|----------|---------|--------|--------|--------|--------|------|
+| 🥇 1 | Sol-3 → Sol-1 → Sol-4 → Sol-2 | 0.8억 | 3.2억 (80%) | 5/10 | 2/10 | 30일 | 92 |
+| 🥈 2 | Sol-1 → Sol-3 → Sol-4 → Sol-2 | 1.2억 | 2.8억 (70%) | 3/10 | 1/10 | 20일 | 88 |
+| 🥉 3 | Sol-2 → Sol-1 → Sol-3 → Sol-4 | 1.5억 | 2.5억 (63%) | 4/10 | 3/10 | 25일 | 82 |
+```
+- **Timeline Chart:** Gantt 차트 형식으로 각 솔루션 실행 시점 표시
+- **Interactive:** 대안 클릭 시 상세 단계별 계산 과정 표시
+
+**FR-NODE-7: 민감도 분석**
+- **Priority:** P2 (Medium)
+- **Description:** 변수 변경 시 최적 순서가 어떻게 달라지는지 분석
+- **Requirements:**
+  - 주요 변수 선택 (예: 주가 상승률, 공제 한도 변경)
+  - 변수값 범위 입력 (예: 10% → 15%)
+  - 시스템이 자동으로 재계산 및 대안 재정렬
+  - 민감도가 높은 변수 하이라이트
+- **Example:**
+```
+변수: 주가 상승률
+- 10% (현재): 추천 1위 = Sol-3 → Sol-1 → ...
+- 15% (가정): 추천 1위 = Sol-1 → Sol-3 → ... (순서 변경!)
+- 민감도: 높음 ⚠️ (5% 변동으로 최적 순서 변경)
+```
+- **Display:** Before/After 비교표, 민감도 차트
+
+**FR-NODE-8: 노드 수동 편집**
+- **Priority:** P2 (Medium)
+- **Description:** 사용자가 AI 생성 노드를 수정/추가/삭제 가능
+- **Requirements:**
+  - 노드 추가 버튼 (Issue 또는 Solution)
+  - 노드 편집 모달 (title, description, taxImpact 수정)
+  - 노드 삭제 (연결된 엣지도 함께 삭제)
+  - 엣지 추가/삭제 (연결 관계 수정)
+  - 종속성(dependencies) 수동 지정
+- **Validation:**
+  - 삭제 시 영향받는 대안 수 경고
+  - 순환 종속성 감지 및 차단
+  - 변경 후 자동으로 조합 재생성 및 재계산
+
+**FR-NODE-9: 노드 그래프 저장/로드**
+- **Priority:** P1 (High)
+- **Description:** 노드 그래프와 대안을 JSON으로 저장/복원
+- **Requirements:**
+  - JSON 다운로드 시 노드 그래프 포함
+  - JSON 로드 시 그래프 복원 및 재시각화
+  - 버전 호환성 확인
+- **JSON Structure Extension:**
+```json
+{
+  "version": "2.0.0",
+  "exportDate": "2025-10-20T10:00:00Z",
+  "case": {...},
+  "nodeGraph": {
+    "issueNodes": [...],
+    "solutionNodes": [...],
+    "edges": [...],
+    "dependencies": [...]
+  },
+  "alternatives": [
+    {
+      "rank": 1,
+      "score": 92,
+      "executionOrder": [...],
+      "totalTax": 80000000,
+      "simulationSteps": [...]
+    }
+  ],
+  "metadata": {...}
+}
+```
+
+**FR-NODE-10: 체크리스트 자동 생성**
+- **Priority:** P2 (Medium)
+- **Description:** 선택한 대안의 실행 순서를 체크리스트로 변환
+- **Requirements:**
+  - 단계별 액션 아이템 생성
+  - 각 단계의 마감일 제안
+  - 필요 서류 목록
+  - 진행 상황 체크박스
+- **Example Output:**
+```markdown
+# 실행 계획 (추천 1위)
+
+## Phase 1: 사전 준비 (2025-01-01 ~ 2025-01-15)
+- [ ] 동거주택 상속공제 요건 확인
+  - 필요 서류: 주민등록등본, 재산세 납부 확인서
+- [ ] 배우자 공제 서류 준비
+  - 필요 서류: 가족관계증명서, 혼인관계증명서
+
+## Phase 2: 1차 공제 적용 (2025-01-16 ~ 2025-02-15)
+- [ ] 동거주택 공제 신청 (최대 6억)
+- [ ] 세무서 제출 및 확인
+
+## Phase 3: 2차 공제 적용 (2025-02-16 ~ 2025-03-15)
+- [ ] 배우자 공제 적용 (최대 5억)
+- [ ] 최종 상속세 신고
+```
 
 ### 5.2 Supporting Features
 
@@ -1058,11 +1976,614 @@ src/
 5. Update Comparison Table (비교표 업데이트)
 ```
 
-### 7.3 Technology Stack
+### 7.3 **NEW** Node Graph System Architecture
 
-#### 7.3.1 Frontend
+#### 7.3.1 Graph Data Structures
+
+**Core Data Models:**
+```javascript
+// src/models/NodeGraph.js
+
+class IssueNode {
+  constructor(data) {
+    this.id = data.id || `issue-${Date.now()}`;
+    this.type = 'ISSUE';
+    this.title = data.title;
+    this.description = data.description;
+    this.category = data.category;
+    this.relatedLaw = data.relatedLaw || [];
+    this.priority = data.priority || 'MEDIUM';
+    this.taxImpact = null; // Issues don't have direct tax impact
+    this.connectedSolutions = data.connectedSolutions || [];
+    this.createdBy = data.createdBy || 'AI';
+    this.createdAt = new Date().toISOString();
+  }
+}
+
+class SolutionNode {
+  constructor(data) {
+    this.id = data.id || `solution-${Date.now()}`;
+    this.type = 'SOLUTION';
+    this.title = data.title;
+    this.description = data.description;
+    this.category = data.category;
+    this.taxImpact = data.taxImpact; // 절세액 (음수) or 추가 세금 (양수)
+    this.taxImpactPercentage = data.taxImpactPercentage;
+    this.requirements = data.requirements || [];
+    this.risks = data.risks || [];
+    this.dependencies = data.dependencies || []; // [solutionId1, solutionId2]
+    this.executionOrder = data.executionOrder || null;
+    this.estimatedTime = data.estimatedTime; // "30일"
+    this.complexity = data.complexity || 'MEDIUM'; // LOW/MEDIUM/HIGH
+    this.legalBasis = data.legalBasis || [];
+    this.relatedIssues = data.relatedIssues || [];
+    this.createdBy = data.createdBy || 'AI';
+    this.createdAt = new Date().toISOString();
+  }
+}
+
+class Edge {
+  constructor(from, to, type, strength = 1.0, reasoning = '') {
+    this.id = `edge-${from}-${to}`;
+    this.type = type; // 'ISSUE_TO_SOLUTION' | 'DEPENDENCY' | 'CONFLICT'
+    this.from = from;
+    this.to = to;
+    this.strength = strength; // 0.0 ~ 1.0 (연관도)
+    this.reasoning = reasoning;
+  }
+}
+
+class NodeGraph {
+  constructor() {
+    this.issueNodes = new Map(); // id -> IssueNode
+    this.solutionNodes = new Map(); // id -> SolutionNode
+    this.edges = new Map(); // edgeId -> Edge
+  }
+
+  addIssueNode(node) {
+    this.issueNodes.set(node.id, node);
+  }
+
+  addSolutionNode(node) {
+    this.solutionNodes.set(node.id, node);
+  }
+
+  addEdge(edge) {
+    this.edges.set(edge.id, edge);
+  }
+
+  getSolutionsByIssue(issueId) {
+    return Array.from(this.edges.values())
+      .filter(e => e.type === 'ISSUE_TO_SOLUTION' && e.from === issueId)
+      .map(e => this.solutionNodes.get(e.to));
+  }
+
+  getDependencies(solutionId) {
+    const solution = this.solutionNodes.get(solutionId);
+    return solution?.dependencies.map(id => this.solutionNodes.get(id)) || [];
+  }
+
+  // 순환 종속성 감지
+  detectCircularDependency(solutionId, visited = new Set()) {
+    if (visited.has(solutionId)) return true; // 순환 발견
+    visited.add(solutionId);
+
+    const solution = this.solutionNodes.get(solutionId);
+    if (!solution) return false;
+
+    for (let depId of solution.dependencies) {
+      if (this.detectCircularDependency(depId, visited)) return true;
+    }
+
+    return false;
+  }
+
+  toJSON() {
+    return {
+      issues: Array.from(this.issueNodes.values()),
+      solutions: Array.from(this.solutionNodes.values()),
+      edges: Array.from(this.edges.values())
+    };
+  }
+
+  static fromJSON(json) {
+    const graph = new NodeGraph();
+    json.issues.forEach(i => graph.addIssueNode(new IssueNode(i)));
+    json.solutions.forEach(s => graph.addSolutionNode(new SolutionNode(s)));
+    json.edges.forEach(e => graph.addEdge(new Edge(e.from, e.to, e.type, e.strength, e.reasoning)));
+    return graph;
+  }
+}
+```
+
+#### 7.3.2 Optimization Engine
+
+**Combination Generator & Optimizer:**
+```javascript
+// src/engines/OptimizationEngine.js
+
+class OptimizationEngine {
+  constructor(nodeGraph, taxCalculator) {
+    this.graph = nodeGraph;
+    this.calculator = taxCalculator;
+  }
+
+  // 모든 유효한 실행 순서 조합 생성
+  generateValidCombinations(maxCombinations = 500) {
+    const solutions = Array.from(this.graph.solutionNodes.values());
+
+    // 1. 모든 순열 생성
+    const allPermutations = this.permute(solutions);
+
+    // 2. 종속성 필터링
+    const validCombos = allPermutations.filter(combo =>
+      this.validateDependencies(combo)
+    );
+
+    // 3. 상호 배타적 솔루션 필터링
+    const finalCombos = validCombos.filter(combo =>
+      !this.hasConflictingSolutions(combo)
+    );
+
+    // 4. 최대 개수 제한
+    return finalCombos.slice(0, maxCombinations);
+  }
+
+  // 순열 생성 (재귀)
+  permute(arr) {
+    if (arr.length <= 1) return [arr];
+
+    const result = [];
+    for (let i = 0; i < arr.length; i++) {
+      const current = arr[i];
+      const remaining = arr.slice(0, i).concat(arr.slice(i + 1));
+      const remainingPermuted = this.permute(remaining);
+
+      for (let perm of remainingPermuted) {
+        result.push([current, ...perm]);
+      }
+    }
+    return result;
+  }
+
+  // 종속성 검증
+  validateDependencies(combination) {
+    for (let i = 0; i < combination.length; i++) {
+      const solution = combination[i];
+
+      // 이 솔루션의 종속성들이 모두 앞에 나왔는지 확인
+      for (let depId of solution.dependencies) {
+        const depIndex = combination.findIndex(s => s.id === depId);
+        if (depIndex === -1 || depIndex > i) {
+          return false; // 종속성 위반
+        }
+      }
+    }
+    return true;
+  }
+
+  // 상호 배타적 솔루션 체크
+  hasConflictingSolutions(combination) {
+    const conflicts = [
+      ['solution-002', 'solution-008'], // 일괄공제 vs 법정공제 (둘 중 하나만)
+      // 추가 충돌 정의...
+    ];
+
+    for (let [sol1, sol2] of conflicts) {
+      const has1 = combination.some(s => s.id === sol1);
+      const has2 = combination.some(s => s.id === sol2);
+      if (has1 && has2) return true; // 충돌 발견
+    }
+    return false;
+  }
+
+  // 최적화 점수 계산
+  calculateScore(alternative) {
+    const savingsScore = (alternative.totalSavings / 1_000_000_000) * 0.5;
+    const complexityScore = (100 - this.getComplexityScore(alternative) * 10) * 0.2;
+    const riskScore = (100 - this.getRiskScore(alternative) * 10) * 0.2;
+    const timeScore = (100 - alternative.estimatedDays / 10) * 0.1;
+
+    return savingsScore + complexityScore + riskScore + timeScore;
+  }
+
+  getComplexityScore(alternative) {
+    // 솔루션들의 평균 복잡도 (1-10)
+    const complexityMap = { 'LOW': 3, 'MEDIUM': 5, 'HIGH': 8 };
+    const scores = alternative.executionOrder.map(s => complexityMap[s.complexity]);
+    return scores.reduce((a, b) => a + b, 0) / scores.length;
+  }
+
+  getRiskScore(alternative) {
+    // 솔루션들의 최대 리스크 (1-10)
+    const riskMap = { 'LOW': 2, 'MEDIUM': 5, 'HIGH': 9 };
+    const scores = alternative.executionOrder.map(s =>
+      Math.max(...s.risks.map(r => riskMap[r.level] || 5))
+    );
+    return Math.max(...scores);
+  }
+
+  // 실행 순서별 세금 시뮬레이션
+  simulateTaxByExecutionOrder(executionOrder, initialTaxBase) {
+    let remainingBase = initialTaxBase;
+    let totalTax = 0;
+    let steps = [];
+
+    for (let solution of executionOrder) {
+      // 공제 적용
+      const deduction = this.calculator.calculateDeduction(solution, remainingBase);
+      remainingBase -= deduction;
+
+      // 세금 계산
+      const stepTax = this.calculator.calculateTax(remainingBase);
+      totalTax += stepTax;
+
+      steps.push({
+        solutionId: solution.id,
+        solutionName: solution.title,
+        deduction,
+        remainingBase,
+        stepTax,
+        cumulativeTax: totalTax
+      });
+    }
+
+    return { totalTax, steps };
+  }
+
+  // 전체 최적화 프로세스
+  async optimize(initialTaxBase, topN = 3) {
+    // 1. 유효한 조합 생성
+    const combinations = this.generateValidCombinations();
+
+    // 2. 각 조합에 대해 세금 시뮬레이션
+    const alternatives = combinations.map((combo, index) => {
+      const {totalTax, steps} = this.simulateTaxByExecutionOrder(combo, initialTaxBase);
+
+      const estimatedDays = combo.reduce((sum, s) =>
+        sum + parseInt(s.estimatedTime), 0
+      );
+
+      const totalSavings = initialTaxBase * 0.3 - totalTax; // 기본 세율 30% 가정
+
+      return {
+        id: `alt-${index}`,
+        executionOrder: combo,
+        totalTax,
+        totalSavings,
+        savingsRate: (totalSavings / (initialTaxBase * 0.3)) * 100,
+        estimatedDays,
+        steps,
+        score: 0 // 나중에 계산
+      };
+    });
+
+    // 3. 점수 계산
+    alternatives.forEach(alt => {
+      alt.score = this.calculateScore(alt);
+      alt.rank = 0; // 나중에 정렬 후 부여
+    });
+
+    // 4. 점수 기준 정렬
+    alternatives.sort((a, b) => b.score - a.score);
+
+    // 5. 순위 부여
+    alternatives.forEach((alt, index) => {
+      alt.rank = index + 1;
+    });
+
+    // 6. 상위 N개 반환
+    return alternatives.slice(0, topN);
+  }
+}
+```
+
+#### 7.3.3 React Flow Integration
+
+**Graph Visualization Component:**
+```javascript
+// src/components/NodeGraphVisualization.jsx
+
+import React, { useCallback, useMemo } from 'react';
+import ReactFlow, {
+  MiniMap,
+  Controls,
+  Background,
+  useNodesState,
+  useEdgesState,
+} from 'reactflow';
+import 'reactflow/dist/style.css';
+import dagre from 'dagre';
+
+// Custom Node Components
+const IssueNodeComponent = ({ data }) => (
+  <div className="issue-node">
+    <div className="node-icon">⚠️</div>
+    <div className="node-title">{data.title}</div>
+    <div className="node-priority">{data.priority}</div>
+  </div>
+);
+
+const SolutionNodeComponent = ({ data }) => (
+  <div className="solution-node">
+    <div className="node-icon">💡</div>
+    <div className="node-title">{data.title}</div>
+    <div className="tax-impact">
+      {data.taxImpact > 0 ? '+' : ''}{(data.taxImpact / 100000000).toFixed(1)}억
+    </div>
+    <div className="node-complexity">{data.complexity}</div>
+  </div>
+);
+
+const nodeTypes = {
+  issue: IssueNodeComponent,
+  solution: SolutionNodeComponent,
+};
+
+// Auto-layout using Dagre
+const getLayoutedElements = (nodes, edges, direction = 'TB') => {
+  const dagreGraph = new dagre.graphlib.Graph();
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
+  dagreGraph.setGraph({ rankdir: direction });
+
+  nodes.forEach((node) => {
+    dagreGraph.setNode(node.id, { width: 150, height: 100 });
+  });
+
+  edges.forEach((edge) => {
+    dagreGraph.setEdge(edge.source, edge.target);
+  });
+
+  dagre.layout(dagreGraph);
+
+  nodes.forEach((node) => {
+    const nodeWithPosition = dagreGraph.node(node.id);
+    node.targetPosition = 'top';
+    node.sourcePosition = 'bottom';
+    node.position = {
+      x: nodeWithPosition.x - 75,
+      y: nodeWithPosition.y - 50,
+    };
+  });
+
+  return { nodes, edges };
+};
+
+export default function NodeGraphVisualization({ nodeGraph }) {
+  // Convert NodeGraph to ReactFlow format
+  const initialNodes = useMemo(() => {
+    const issueNodes = Array.from(nodeGraph.issueNodes.values()).map(node => ({
+      id: node.id,
+      type: 'issue',
+      data: node,
+      position: { x: 0, y: 0 }, // Will be set by layout
+    }));
+
+    const solutionNodes = Array.from(nodeGraph.solutionNodes.values()).map(node => ({
+      id: node.id,
+      type: 'solution',
+      data: node,
+      position: { x: 0, y: 0 },
+    }));
+
+    return [...issueNodes, ...solutionNodes];
+  }, [nodeGraph]);
+
+  const initialEdges = useMemo(() => {
+    return Array.from(nodeGraph.edges.values()).map(edge => ({
+      id: edge.id,
+      source: edge.from,
+      target: edge.to,
+      type: edge.type === 'DEPENDENCY' ? 'step' : 'default',
+      animated: edge.type === 'DEPENDENCY',
+      style: {
+        stroke: edge.type === 'DEPENDENCY' ? '#f59e0b' : '#3b82f6',
+        strokeWidth: 2,
+      },
+      label: edge.reasoning,
+    }));
+  }, [nodeGraph]);
+
+  const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+    initialNodes,
+    initialEdges
+  );
+
+  const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
+
+  const onNodeClick = useCallback((event, node) => {
+    console.log('Node clicked:', node);
+    // Show details in sidebar or modal
+  }, []);
+
+  return (
+    <div style={{ width: '100%', height: '600px' }}>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onNodeClick={onNodeClick}
+        nodeTypes={nodeTypes}
+        fitView
+      >
+        <Controls />
+        <MiniMap />
+        <Background variant="dots" gap={12} size={1} />
+      </ReactFlow>
+    </div>
+  );
+}
+```
+
+#### 7.3.4 State Management for Node System
+
+**Node Graph Store:**
+```javascript
+// src/stores/useNodeGraphStore.js
+
+import { create } from 'zustand';
+import { NodeGraph } from '../models/NodeGraph';
+import { OptimizationEngine } from '../engines/OptimizationEngine';
+
+export const useNodeGraphStore = create((set, get) => ({
+  // State
+  nodeGraph: new NodeGraph(),
+  alternatives: [],
+  selectedAlternative: null,
+  isOptimizing: false,
+  optimizationProgress: 0,
+
+  // Actions
+  setNodeGraph: (graph) => set({ nodeGraph: graph }),
+
+  addIssueNode: (node) => {
+    const graph = get().nodeGraph;
+    graph.addIssueNode(node);
+    set({ nodeGraph: graph });
+  },
+
+  addSolutionNode: (node) => {
+    const graph = get().nodeGraph;
+    graph.addSolutionNode(node);
+    set({ nodeGraph: graph });
+  },
+
+  addEdge: (edge) => {
+    const graph = get().nodeGraph;
+    graph.addEdge(edge);
+    set({ nodeGraph: graph });
+  },
+
+  runOptimization: async (initialTaxBase) => {
+    set({ isOptimizing: true, optimizationProgress: 0 });
+
+    try {
+      const engine = new OptimizationEngine(get().nodeGraph, get().taxCalculator);
+
+      // Progress simulation
+      const progressInterval = setInterval(() => {
+        set((state) => ({
+          optimizationProgress: Math.min(state.optimizationProgress + 10, 90)
+        }));
+      }, 500);
+
+      const alternatives = await engine.optimize(initialTaxBase, 5);
+
+      clearInterval(progressInterval);
+
+      set({
+        alternatives,
+        selectedAlternative: alternatives[0],
+        isOptimizing: false,
+        optimizationProgress: 100
+      });
+    } catch (error) {
+      console.error('Optimization failed:', error);
+      set({ isOptimizing: false });
+    }
+  },
+
+  selectAlternative: (alternativeId) => {
+    const alternative = get().alternatives.find(alt => alt.id === alternativeId);
+    set({ selectedAlternative: alternative });
+  },
+
+  exportNodeGraph: () => {
+    return {
+      nodeGraph: get().nodeGraph.toJSON(),
+      alternatives: get().alternatives,
+    };
+  },
+
+  importNodeGraph: (data) => {
+    const graph = NodeGraph.fromJSON(data.nodeGraph);
+    set({
+      nodeGraph: graph,
+      alternatives: data.alternatives || [],
+    });
+  },
+}));
+```
+
+#### 7.3.5 Performance Optimizations
+
+**Optimization Strategies:**
+
+1. **Web Workers for Heavy Computation:**
+```javascript
+// src/workers/optimizationWorker.js
+self.addEventListener('message', (e) => {
+  const { combinations, initialTaxBase } = e.data;
+
+  // Run heavy computation in worker thread
+  const results = combinations.map(combo => {
+    return simulateTaxInWorker(combo, initialTaxBase);
+  });
+
+  self.postMessage({ results });
+});
+```
+
+2. **Memoization for Repeated Calculations:**
+```javascript
+import memoize from 'lodash/memoize';
+
+const memoizedTaxCalc = memoize(
+  (taxBase, solutionId) => calculateTax(taxBase, solutionId),
+  (taxBase, solutionId) => `${taxBase}-${solutionId}` // cache key
+);
+```
+
+3. **Virtual Scrolling for Large Node Graphs:**
+```javascript
+// Use react-window for rendering large lists of alternatives
+import { FixedSizeList } from 'react-window';
+
+const AlternativesList = ({ alternatives }) => (
+  <FixedSizeList
+    height={600}
+    itemCount={alternatives.length}
+    itemSize={100}
+    width="100%"
+  >
+    {({ index, style }) => (
+      <div style={style}>
+        <AlternativeCard alternative={alternatives[index]} />
+      </div>
+    )}
+  </FixedSizeList>
+);
+```
+
+4. **Progressive Loading:**
+```javascript
+// Load and optimize in chunks
+async function optimizeInChunks(combinations, chunkSize = 50) {
+  const results = [];
+
+  for (let i = 0; i < combinations.length; i += chunkSize) {
+    const chunk = combinations.slice(i, i + chunkSize);
+    const chunkResults = await optimizeChunk(chunk);
+    results.push(...chunkResults);
+
+    // Update progress
+    updateProgress((i + chunkSize) / combinations.length * 100);
+  }
+
+  return results;
+}
+```
+
+### 7.4 Technology Stack
+
+#### 7.4.1 Frontend
 | Category | Technology | Version | Purpose |
 |----------|-----------|---------|---------|
+| **Visualization** | React Flow | 11.x | Node graph visualization |
+| **Graph Layout** | Dagre | Latest | Auto-layout algorithm |
+| **State Management** | Zustand | 4.x | Node graph state |
 | **Framework** | React | 18.x | UI 라이브러리 |
 | **Language** | JavaScript | ES2022 | 프로그래밍 언어 |
 | **Styling** | Tailwind CSS | 3.x | 유틸리티 CSS |
@@ -1348,31 +2869,87 @@ Response:
 - 사용자 가이드 문서
 - API 키 설정 가이드
 
-#### Phase 2: Early Adoption (3개월)
-**Duration:** 3개월
-**Target:** 2025 Q1
+#### Phase 2: Early Adoption (5개월) 🆕 NODE SYSTEM
+**Duration:** 5개월 (기존 3개월 + 노드 시스템 2개월)
+**Target:** 2025 Q1-Q2
 
 **Milestones:**
-- M2.1: 세법 DB 구축
-  - Week 1-2: 세율 테이블 데이터 수집
-  - Week 3-4: DB 설계 및 구축
-  - Week 5-6: 자동 업데이트 시스템
-- M2.2: 양도소득세 계산 추가
-  - Week 1-2: 요구사항 분석
-  - Week 3-4: 계산 로직 구현
-  - Week 5-6: UI 통합 및 테스트
-- M2.3: PDF 보고서 생성
-  - Week 1-2: 템플릿 디자인
-  - Week 3-4: jsPDF 통합
-  - Week 5-6: 차트 생성 및 최적화
-- M2.4: 100명 베타 사용자 확보
-  - 사용자 피드백 수집
-  - 주간 업데이트 배포
+
+**M2.0: Node System Core (노드 시스템 핵심 - 우선 구현)** 🔥
+- **Week 1-2: Data Structures & Graph Engine**
+  - IssueNode, SolutionNode, Edge, NodeGraph 클래스 구현
+  - 순환 종속성 감지 알고리즘
+  - JSON 직렬화/역직렬화
+  - Unit tests: 노드 생성, 엣지 추가, 종속성 검증
+
+- **Week 3-4: Optimization Engine**
+  - 순열 생성 알고리즘 (Heap's algorithm)
+  - 종속성 필터링 로직
+  - 상호 배타적 솔루션 필터링
+  - 점수 계산 공식 구현
+  - Unit tests: 조합 생성 (24개, 72개 케이스)
+
+- **Week 5-6: React Flow Integration**
+  - React Flow 11.x 설치 및 설정
+  - IssueNodeComponent, SolutionNodeComponent 구현
+  - Dagre auto-layout 통합
+  - 노드 드래그, 줌, 패닝 기능
+  - 미니맵, 배경 그리드
+
+- **Week 7-8: Optimization UI & State Management**
+  - Zustand store (useNodeGraphStore) 구현
+  - 대안 비교 테이블 컴포넌트
+  - 타임라인 차트 (Recharts)
+  - 진행 상태 표시 (Progress bar)
+  - 실행 순서 선택 인터페이스
+
+- **Week 9: Performance Optimization**
+  - Web Workers for permutation generation
+  - Memoization with lodash (세금 계산 캐싱)
+  - React-window for virtual scrolling (500+ 대안)
+  - Progressive loading (50개씩 청크)
+  - Performance testing: 10+ 노드 시나리오
+
+- **Week 10: Integration & Testing**
+  - 기존 워크플로우와 통합 (Step 2-3 사이에 삽입)
+  - AI 프롬프트 엔지니어링 (노드 자동 추출)
+  - End-to-end tests: 전체 노드 워크플로우
+  - 사용자 시나리오 테스트 (부동산 상속, 주식 증여)
+
+**M2.0 Deliverables:**
+- ✅ 완전한 노드 그래프 시스템 (IssueNode, SolutionNode, Edge, NodeGraph)
+- ✅ 최적화 엔진 (순열 생성, 종속성 필터링, 점수 계산)
+- ✅ React Flow 시각화 (인터랙티브 그래프)
+- ✅ 대안 비교 UI (테이블, 타임라인 차트)
+- ✅ 성능 최적화 (Web Workers, memoization, virtual scrolling)
+- ✅ 테스트 커버리지 >80% (unit + integration)
+
+---
+
+**M2.1: 세법 DB 구축**
+- Week 11-12: 세율 테이블 데이터 수집
+- Week 13-14: DB 설계 및 구축
+- Week 15-16: 자동 업데이트 시스템
+
+**M2.2: 양도소득세 계산 추가**
+- Week 17-18: 요구사항 분석
+- Week 19-20: 계산 로직 구현
+- Week 21-22: UI 통합 및 테스트
+
+**M2.3: PDF 보고서 생성 (노드 그래프 포함)**
+- Week 23-24: 템플릿 디자인 (노드 다이어그램 추가)
+- Week 25-26: jsPDF 통합 + html2canvas (그래프 이미지)
+- Week 27-28: 차트 생성 및 최적화
+
+**M2.4: 100명 베타 사용자 확보**
+- 사용자 피드백 수집 (특히 노드 시스템 UX)
+- 주간 업데이트 배포
 
 **Deliverables:**
+- 🆕 **노드 기반 최적화 시스템** (핵심 차별화 기능)
 - 세법 DB 시스템
 - 양도소득세 계산 기능
-- PDF 보고서 기능
+- PDF 보고서 기능 (노드 다이어그램 포함)
 - 사용자 피드백 리포트
 
 #### Phase 3: Growth (6개월)
@@ -1416,12 +2993,24 @@ Response:
 
 #### 9.2.1 Team Structure
 
-**Phase 1 (MVP):**
+**Phase 1 (MVP):** ✅ 완료
 - 1 Full-stack Developer
 - 1 Product Manager
 - 1 QA Tester (part-time)
 
-**Phase 2-3 (Growth):**
+**Phase 2 (Node System + Early Adoption):** 🆕
+- **2 Frontend Developers** (1명 노드 시스템 전담)
+  - Developer 1: React Flow, Zustand, Optimization UI
+  - Developer 2: 세법 DB, 양도세 계산, PDF 리포트
+- **1 Algorithm Engineer** (노드 최적화 엔진 전담)
+  - 순열 생성, 종속성 필터링, 점수 계산 알고리즘
+  - 성능 최적화 (Web Workers, memoization)
+- 1 Backend Developer
+- 1 Product Manager
+- 1 Designer (노드 UX/UI 전담)
+- 1 QA Tester
+
+**Phase 3 (Growth):**
 - 2 Frontend Developers
 - 1 Backend Developer
 - 1 Mobile Developer
@@ -1441,13 +3030,21 @@ Response:
 
 #### 9.2.2 Budget Estimate (연간)
 
-| Category | Phase 1 | Phase 2-3 | Phase 4 |
-|----------|---------|-----------|---------|
-| **Personnel** | ₩100M | ₩300M | ₩600M |
-| **Infrastructure** | ₩5M | ₩20M | ₩50M |
-| **AI API Costs** | ₩10M | ₩30M | ₩100M |
-| **Marketing** | ₩10M | ₩50M | ₩200M |
-| **Total** | ₩125M | ₩400M | ₩950M |
+| Category | Phase 1 | Phase 2 (Node System) | Phase 3 | Phase 4 |
+|----------|---------|----------------------|---------|---------|
+| **Personnel** | ₩100M | ₩350M (+알고리즘 엔지니어) | ₩300M | ₩600M |
+| **Infrastructure** | ₩5M | ₩25M (+Web Workers, CDN) | ₩20M | ₩50M |
+| **AI API Costs** | ₩10M | ₩40M (+노드 추출) | ₩30M | ₩100M |
+| **Libraries** | ₩0 | ₩5M (React Flow, Dagre) | ₩3M | ₩5M |
+| **Marketing** | ₩10M | ₩60M (+노드 차별화) | ₩50M | ₩200M |
+| **Total** | ₩125M | ₩480M | ₩403M | ₩955M |
+
+**Phase 2 추가 비용 상세:**
+- Algorithm Engineer 인건비: +₩50M
+- React Flow Pro License (팀): ₩3M
+- AI 노드 추출 API 호출량 증가: +₩10M
+- CDN & Web Workers 인프라: +₩5M
+- 노드 시스템 마케팅 캠페인: +₩10M
 
 ### 9.3 Risk Management
 
@@ -1459,6 +3056,17 @@ Response:
 | **계산 오류** | Low | Critical | 철저한 테스트, 전문가 검증 |
 | **성능 문제** | Low | Medium | 최적화, CDN 사용 |
 | **보안 취약점** | Medium | High | 정기 감사, HTTPS, 암호화 |
+| **🆕 노드 조합 폭발** | High | High | 최대 500개 제한, Progressive loading |
+| **🆕 최적화 알고리즘 정확도** | Medium | High | 전문가 검증, A/B 테스트 |
+| **🆕 React Flow 성능 저하** | Medium | Medium | Virtual rendering, 노드 개수 제한 |
+| **🆕 순환 종속성 버그** | Low | Critical | 자동 감지 알고리즘, Unit tests |
+| **🆕 Web Worker 호환성** | Low | Medium | Fallback to main thread |
+
+**노드 시스템 특화 위험 관리:**
+- **조합 폭발 대응**: 10개 노드 → 3.6M 조합 → 500개로 조기 차단
+- **알고리즘 검증**: 세무사 3명 × 10개 시나리오 × 교차 검증
+- **성능 모니터링**: Lighthouse CI, Core Web Vitals 추적
+- **점진적 롤아웃**: 베타 사용자 10명 → 50명 → 100명
 
 #### 9.3.2 Business Risks
 
@@ -1484,15 +3092,106 @@ Response:
 ### 10.1 Testing Levels
 
 #### 10.1.1 Unit Testing
-- **Coverage Target:** >80%
+- **Coverage Target:** >80% (노드 시스템 >85%)
 - **Framework:** Jest + React Testing Library
 - **Scope:**
   - 세금 계산 로직
   - 입력 검증 함수
   - 유틸리티 함수
   - React 컴포넌트
+  - 🆕 **노드 시스템 핵심 모듈**
 
-**Example:**
+**🆕 Node System Unit Tests:**
+```javascript
+// NodeGraph.test.js
+describe('NodeGraph', () => {
+  test('노드 추가 및 엣지 생성', () => {
+    const graph = new NodeGraph();
+    const issue = new IssueNode({ title: '상속세 과세' });
+    const solution = new SolutionNode({ title: '배우자 공제', taxImpact: -150000000 });
+
+    graph.addIssueNode(issue);
+    graph.addSolutionNode(solution);
+    graph.addEdge(new Edge(issue.id, solution.id, 'SOLVES'));
+
+    expect(graph.issueNodes.size).toBe(1);
+    expect(graph.solutionNodes.size).toBe(1);
+    expect(graph.edges.size).toBe(1);
+  });
+
+  test('순환 종속성 감지', () => {
+    const graph = new NodeGraph();
+    const sol1 = new SolutionNode({ id: 'sol-1', dependencies: ['sol-2'] });
+    const sol2 = new SolutionNode({ id: 'sol-2', dependencies: ['sol-1'] });
+
+    graph.addSolutionNode(sol1);
+    graph.addSolutionNode(sol2);
+
+    expect(graph.detectCircularDependency('sol-1')).toBe(true);
+  });
+
+  test('JSON 직렬화/역직렬화', () => {
+    const graph = new NodeGraph();
+    graph.addIssueNode(new IssueNode({ title: 'Test Issue' }));
+
+    const json = graph.toJSON();
+    const restored = NodeGraph.fromJSON(json);
+
+    expect(restored.issueNodes.size).toBe(1);
+    expect(Array.from(restored.issueNodes.values())[0].title).toBe('Test Issue');
+  });
+});
+
+// OptimizationEngine.test.js
+describe('OptimizationEngine', () => {
+  test('순열 생성 - 4개 노드', () => {
+    const engine = new OptimizationEngine(new NodeGraph(), mockCalculator);
+    const solutions = [
+      new SolutionNode({ id: 's1' }),
+      new SolutionNode({ id: 's2' }),
+      new SolutionNode({ id: 's3' }),
+      new SolutionNode({ id: 's4' })
+    ];
+
+    const perms = engine.permute(solutions);
+    expect(perms.length).toBe(24); // 4! = 24
+  });
+
+  test('종속성 필터링', () => {
+    const sol1 = new SolutionNode({ id: 's1', dependencies: [] });
+    const sol2 = new SolutionNode({ id: 's2', dependencies: ['s1'] });
+    const sol3 = new SolutionNode({ id: 's3', dependencies: ['s2'] });
+
+    const validCombo = [sol1, sol2, sol3];
+    const invalidCombo = [sol2, sol1, sol3]; // s2 before s1 (invalid)
+
+    expect(engine.validateDependencies(validCombo)).toBe(true);
+    expect(engine.validateDependencies(invalidCombo)).toBe(false);
+  });
+
+  test('점수 계산 공식', () => {
+    const alt = {
+      totalSavings: 300000000, // 3억
+      estimatedDays: 30,
+      complexity: 5,
+      risk: 3
+    };
+
+    const score = engine.calculateScore(alt);
+    expect(score).toBeGreaterThan(0);
+    expect(score).toBeLessThanOrEqual(100);
+  });
+
+  test('최적화 - 상위 3개 추출', async () => {
+    const alternatives = await engine.optimize(1000000000, 3);
+    expect(alternatives.length).toBeLessThanOrEqual(3);
+    expect(alternatives[0].score).toBeGreaterThanOrEqual(alternatives[1].score);
+    expect(alternatives[1].score).toBeGreaterThanOrEqual(alternatives[2].score);
+  });
+});
+```
+
+**기존 계산 로직 테스트:**
 ```javascript
 describe('taxCalculator', () => {
   test('상속세 계산 - 기본 시나리오', () => {
@@ -1513,8 +3212,114 @@ describe('taxCalculator', () => {
   - localStorage 저장/로드
   - 워크플로우 단계 전환
   - 시나리오 추가/삭제
+  - 🆕 **노드 그래프 시스템 통합**
 
-**Example:**
+**🆕 Node System Integration Tests:**
+```javascript
+// NodeWorkflow.integration.test.jsx
+describe('Node Workflow Integration', () => {
+  test('전체 노드 워크플로우: 입력 → AI 추출 → 최적화 → 결과', async () => {
+    const { getByText, getByLabelText } = render(<TaxWorkflow />);
+
+    // Step 1: 사례 입력
+    const input = getByLabelText('상담 사례');
+    fireEvent.change(input, { target: { value: mockCaseDescription } });
+    fireEvent.click(getByText('다음 단계로'));
+
+    // Step 2: AI가 노드 자동 추출
+    await waitFor(() => {
+      expect(getByText('Issue-001: 상속세 과세 대상 판정')).toBeInTheDocument();
+      expect(getByText('Solution-001: 배우자 공제 적용')).toBeInTheDocument();
+    });
+
+    // 노드 그래프 시각화 확인
+    expect(screen.queryByTestId('react-flow-graph')).toBeInTheDocument();
+
+    // Step 3: 최적화 실행
+    fireEvent.click(getByText('최적화 실행'));
+
+    await waitFor(() => {
+      expect(getByText('24가지 실행 순서 조합 생성')).toBeInTheDocument();
+    });
+
+    // Step 4: 대안 비교 결과 확인
+    await waitFor(() => {
+      expect(getByText('추천 1위')).toBeInTheDocument();
+      expect(getByText('절세액: 3.2억')).toBeInTheDocument();
+    });
+  });
+
+  test('노드 수동 편집 및 재최적화', async () => {
+    const { getByText, getByTestId } = render(<NodeGraphEditor />);
+
+    // 솔루션 노드 추가
+    fireEvent.click(getByText('솔루션 추가'));
+    fireEvent.change(getByTestId('solution-title'), {
+      target: { value: '신규 공제' }
+    });
+    fireEvent.click(getByText('저장'));
+
+    // 종속성 추가
+    await userEvent.click(getByTestId('add-dependency-btn'));
+
+    // 재최적화
+    fireEvent.click(getByText('재최적화'));
+
+    await waitFor(() => {
+      expect(getByText(/새로운 조합/)).toBeInTheDocument();
+    });
+  });
+
+  test('노드 그래프 저장 및 로드', async () => {
+    const { getByText } = render(<NodeGraphVisualization />);
+
+    // 그래프 저장
+    fireEvent.click(getByText('그래프 저장'));
+    await waitFor(() => {
+      expect(localStorage.getItem('nodeGraph')).toBeTruthy();
+    });
+
+    // 페이지 새로고침 시뮬레이션
+    cleanup();
+    const { getByTestId } = render(<NodeGraphVisualization />);
+
+    // 자동 로드 확인
+    await waitFor(() => {
+      expect(getByTestId('node-issue-001')).toBeInTheDocument();
+      expect(getByTestId('node-solution-001')).toBeInTheDocument();
+    });
+  });
+
+  test('성능: 10개 노드 최적화 (500개 조합)', async () => {
+    const startTime = performance.now();
+
+    const graph = createMockGraphWith10Nodes();
+    const engine = new OptimizationEngine(graph, mockCalculator);
+    const alternatives = await engine.optimize(1000000000, 5);
+
+    const endTime = performance.now();
+    const duration = endTime - startTime;
+
+    expect(alternatives.length).toBeLessThanOrEqual(5);
+    expect(duration).toBeLessThan(5000); // 5초 이내
+  });
+
+  test('Web Worker 최적화 실행', async () => {
+    const workerSpy = jest.spyOn(window, 'Worker');
+
+    const { getByText } = render(<OptimizationEngine />);
+    fireEvent.click(getByText('최적화 실행'));
+
+    await waitFor(() => {
+      expect(workerSpy).toHaveBeenCalled();
+    });
+
+    expect(getByText(/진행 중/)).toBeInTheDocument();
+  });
+});
+```
+
+**기존 워크플로우 테스트:**
 ```javascript
 test('AI 분석 플로우', async () => {
   const { getByText, getByRole } = render(<TaxWorkflow />);

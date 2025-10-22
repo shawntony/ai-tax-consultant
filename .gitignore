@@ -58,3 +58,5 @@ typings/
 # Windows special files
 nul
 NUL
+
+.vercel

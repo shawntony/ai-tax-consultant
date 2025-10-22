@@ -1,0 +1,392 @@
+/* TaxSimulator.css */
+
+.tax-simulator {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* 탭 메뉴 */
+.simulator-tabs {
+  display: flex;
+  border-bottom: 2px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+}
+
+.tab-btn:hover {
+  background: white;
+  color: #1e293b;
+}
+
+.tab-btn.active {
+  background: white;
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+}
+
+/* 입력 섹션 */
+.simulator-inputs {
+  padding: 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.simulator-inputs h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 20px 0;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.input-with-unit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: white;
+  transition: all 0.2s;
+}
+
+.input-with-unit:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input-with-unit input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.input-with-unit .unit {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.input-group input[type="number"],
+.input-group select {
+  padding: 10px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #1e293b;
+  transition: all 0.2s;
+}
+
+.input-group input[type="number"]:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 슬라이더 */
+.slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #e2e8f0;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.slider-value {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* 결과 섹션 */
+.simulator-results {
+  padding: 24px;
+  min-height: 300px;
+}
+
+.no-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+/* 일반 세금 결과 */
+.tax-results {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.result-summary {
+  display: flex;
+  justify-content: center;
+}
+
+.summary-card {
+  padding: 24px 40px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  min-width: 300px;
+}
+
+.card-label {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card-rate {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.result-breakdown {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.result-breakdown h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+}
+
+.breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.breakdown-label {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.breakdown-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* 부담부증여 최적화 결과 */
+.optimization-results {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.optimal-strategy h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+}
+
+.optimal-card {
+  padding: 24px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 12px;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.optimal-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.optimal-savings {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.optimal-savings .highlight {
+  font-size: 28px;
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+.optimal-rate {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.recommendation {
+  padding: 16px;
+  background: #f0fdf4;
+  border-left: 4px solid #10b981;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #065f46;
+  margin: 0;
+}
+
+.scenarios-comparison h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-table thead {
+  background: #f8fafc;
+}
+
+.comparison-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.comparison-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #475569;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.comparison-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.comparison-table .optimal-row {
+  background: #f0fdf4;
+  font-weight: 600;
+}
+
+.comparison-table .optimal-row td {
+  color: #065f46;
+}
+
+.comparison-table .total {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .simulator-tabs {
+    flex-direction: column;
+  }
+
+  .tab-btn {
+    border-bottom: none;
+    border-left: 3px solid transparent;
+  }
+
+  .tab-btn.active {
+    border-left-color: #3b82f6;
+    border-bottom-color: transparent;
+  }
+
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-card {
+    min-width: 100%;
+  }
+
+  .comparison-table {
+    font-size: 12px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 8px 10px;
+  }
+}
